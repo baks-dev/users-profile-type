@@ -1,0 +1,140 @@
+<?php
+/*
+ *  Copyright 2023.  Baks.dev <admin@baks.dev>
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is furnished
+ *  to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ *  THE SOFTWARE.
+ *
+ *
+ */
+
+namespace BaksDev\Users\Profile\Type\UseCase;
+
+use App\Module\Files\Res\Upload\Image\ImageUploadInterface;
+
+use BaksDev\Users\Profile\Type\Entity;
+use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEventInterface;
+use BaksDev\Core\Type\Modify\ModifyActionEnum;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+final class ProfileTypeAggregate
+{
+    private EntityManagerInterface $entityManager;
+    //private ImageUploadInterface $imageUpload;
+    
+    public function __construct(
+      EntityManagerInterface $entityManager,
+      //ImageUploadInterface $imageUpload,
+    
+    )
+    {
+        $this->entityManager = $entityManager;
+        //$this->imageUpload = $imageUpload;
+    }
+    
+    public function handle(
+      TypeProfileEventInterface $command,
+      //?UploadedFile $cover = null
+    ) : bool|string
+    {
+
+        if($command->getEvent())
+        {
+            $Event = $this->entityManager->getRepository(\BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEvent::class)->find($command->getEvent());
+            
+            //$EventRepo = $this->entityManager->getRepository(Entity\Event\Event::class)->find($command->getEvent());
+            //$Event = $EventRepo->cloneEntity();
+        }
+        else
+        {
+            $Event = new \BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEvent();
+            $this->entityManager->persist($Event);
+        }
+    
+        $Event->setEntity($command);
+    
+
+        //dump($EventRepo);
+        //dd($Event);
+        
+        //$Event->updCategoryEvent($command);
+        
+        /* Загрузка файла изображения */
+//        if(!empty($cover))
+//        {
+//            $command->getCover()->setCdn(false);
+//            $this->imageUpload->upload('category_cover_dir', $command->getCover()->file, $Event->getUploadCover());
+//        }
+        
+        //dump($command);
+        //dd($Event);
+        
+        //$this->entityManager->clear();
+        //$this->entityManager->persist($Event);
+        
+        /** @var \BaksDev\Users\Profile\Type\Entity\TypeProfile $TypeProfile */
+        if($Event->getProfile())
+        {
+            /* Восстанавливаем из корзины */
+            if($Event->isModifyActionEquals(ModifyActionEnum::RESTORE))
+            {
+                $TypeProfile = new \BaksDev\Users\Profile\Type\Entity\TypeProfile();
+                $TypeProfile->setId($Event->getProfile());
+                $this->entityManager->persist($TypeProfile);
+                
+                $remove = $this->entityManager->getRepository(\BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEvent::class)
+                  ->find($command->getEvent());
+                $this->entityManager->remove($remove);
+                
+            }
+            else
+            {
+                $TypeProfile = $this->entityManager->getRepository(
+					\BaksDev\Users\Profile\Type\Entity\TypeProfile::class)->findOneBy(
+                  ['event' => $command->getEvent()]);
+            }
+            
+            if(empty($TypeProfile))
+            {
+                return false;
+            }
+        }
+        else
+        {
+            $TypeProfile = new \BaksDev\Users\Profile\Type\Entity\TypeProfile();
+            $this->entityManager->persist($TypeProfile);
+            
+            $Event->setProfile($TypeProfile);
+            
+        }
+        
+        $TypeProfile->setEvent($Event);
+        
+        /* Удаляем категорию */
+        if($Event->isModifyActionEquals(ModifyActionEnum::DELETE))
+        {
+            $this->entityManager->remove($TypeProfile);
+        }
+        
+        $this->entityManager->flush();
+        
+        return true;
+    }
+    
+}

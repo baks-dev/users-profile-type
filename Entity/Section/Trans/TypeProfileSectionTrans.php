@@ -1,0 +1,114 @@
+<?php
+/*
+ *  Copyright 2023.  Baks.dev <admin@baks.dev>
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is furnished
+ *  to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ *  THE SOFTWARE.
+ *
+ *
+ */
+
+namespace BaksDev\Users\Profile\Type\Entity\Section\Trans;
+
+
+use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEventInterface;
+use BaksDev\Users\Profile\Type\Entity\Section\TypeProfileSection;
+use BaksDev\Users\Profile\Type\Entity\Section\Trans\TypeProfileSectionTransInterface;
+use BaksDev\Core\Entity\EntityEvent;
+use BaksDev\Core\Type\Locale\Locale;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use Exception;
+use InvalidArgumentException;
+
+/* Перевод Section */
+
+#[ORM\Entity]
+#[ORM\Table(name: 'type_users_profile_section_trans')]
+class TypeProfileSectionTrans extends EntityEvent
+{
+    const TABLE = 'type_users_profile_section_trans';
+    
+    /** Связь на секцию */
+    #[ORM\Id]
+    #[ORM\ManyToOne(targetEntity: TypeProfileSection::class, cascade: ["remove", "persist"], inversedBy: "translate")]
+    #[ORM\JoinColumn(name: 'section', referencedColumnName: "id", nullable: true)]
+    protected ?TypeProfileSection $section;
+    
+    /** Локаль */
+    #[ORM\Id]
+    #[ORM\Column(name: 'local', type: Locale::TYPE, length: 2, nullable: false)]
+    protected Locale $local;
+    
+    /** Название */
+    #[ORM\Column(name: 'name', type: Types::STRING, length: 100, nullable: false)]
+    protected string $name;
+    
+    /** Описание */
+    #[ORM\Column(name: 'description', type: Types::TEXT, nullable: true)]
+    protected ?string $description;
+    
+    /**
+     * @param TypeProfileSection|null $section
+     */
+    public function __construct(TypeProfileSection $section) { $this->section = $section; }
+    
+    /**
+     * @param $dto
+     * @return mixed
+     * @throws Exception
+     */
+    public function getDto($dto) : mixed
+    {
+        if($dto instanceof TypeProfileSectionTransInterface)
+        {
+            return parent::getDto($dto);
+        }
+        
+        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+    }
+    
+    /**
+     * @param $dto
+     * @return mixed
+     * @throws Exception
+     */
+    public function setEntity($dto) : mixed
+    {
+        
+        if($dto instanceof TypeProfileSectionTransInterface)
+        {
+            return parent::setEntity($dto);
+        }
+        
+        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+    }
+    
+    
+    public function equals($dto) : bool
+    {
+        if($dto instanceof TypeProfileSectionTransInterface)
+        {
+            return  ($this->section->getId() === $dto->getEquals() &&
+              $dto->getLocal()->getValue() === $this->local->getValue());
+            
+        }
+        
+        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+    }
+}
