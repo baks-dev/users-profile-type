@@ -24,13 +24,13 @@
 
   "autoload": {
     "psr-4": {
-      "BaksDev\\Users\\Profile\\Type\\": ""
+      "BaksDev\\Users\\Profile\\TypeProfile\\": ""
     }
   },
 
   "autoload-dev": {
     "psr-4": {
-      "BaksDev\\Users\\Profile\\Type\\Tests\\": "Tests/"
+      "BaksDev\\Users\\Profile\\TypeProfile\\Tests\\": "Tests/"
     }
   },
 

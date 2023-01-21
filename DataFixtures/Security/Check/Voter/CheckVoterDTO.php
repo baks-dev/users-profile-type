@@ -16,7 +16,7 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\DataFixtures\Security\Check\Voter;
+namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\Security\Check\Voter;
 
 use BaksDev\Users\Groups\Group\Entity\CheckRole\CheckVoter\CheckVoterInterface;
 use BaksDev\Users\Groups\Role\Type\VoterPrefix\VoterPrefix;

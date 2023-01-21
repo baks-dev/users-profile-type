@@ -16,7 +16,7 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity\Modify;
+namespace BaksDev\Users\Profile\TypeProfile\Entity\Modify;
 
 interface TypeProfileModifyInterface
 {

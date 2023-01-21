@@ -23,9 +23,9 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\EntityListeners;
+namespace BaksDev\Users\Profile\TypeProfile\EntityListeners;
 
-use BaksDev\Users\Profile\Type\Entity\Modify\TypeProfileModify;
+use BaksDev\Users\Profile\TypeProfile\Entity\Modify\TypeProfileModify;
 use BaksDev\Core\Type\Ip\IpAddress;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\HttpFoundation\RequestStack;

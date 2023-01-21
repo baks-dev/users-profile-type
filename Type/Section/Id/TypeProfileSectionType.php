@@ -23,9 +23,9 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Type\Section\Id;
+namespace BaksDev\Users\Profile\TypeProfile\Type\Section\Id;
 
-use BaksDev\Users\Profile\Type\Type\Section\Id\TypeProfileSectionUid;
+use BaksDev\Users\Profile\TypeProfile\Type\Section\Id\TypeProfileSectionUid;
 use BaksDev\Core\Type\UidType\UidType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;

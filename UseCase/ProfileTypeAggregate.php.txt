@@ -23,12 +23,12 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\UseCase;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase;
 
 use App\Module\Files\Res\Upload\Image\ImageUploadInterface;
 
-use BaksDev\Users\Profile\Type\Entity;
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEventInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
 use BaksDev\Core\Type\Modify\ModifyActionEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -56,14 +56,14 @@ final class ProfileTypeAggregate
 
         if($command->getEvent())
         {
-            $Event = $this->entityManager->getRepository(\BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEvent::class)->find($command->getEvent());
+            $Event = $this->entityManager->getRepository(\BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent::class)->find($command->getEvent());
             
             //$EventRepo = $this->entityManager->getRepository(Entity\Event\Event::class)->find($command->getEvent());
             //$Event = $EventRepo->cloneEntity();
         }
         else
         {
-            $Event = new \BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEvent();
+            $Event = new \BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent();
             $this->entityManager->persist($Event);
         }
     
@@ -88,17 +88,17 @@ final class ProfileTypeAggregate
         //$this->entityManager->clear();
         //$this->entityManager->persist($Event);
         
-        /** @var \BaksDev\Users\Profile\Type\Entity\TypeProfile $TypeProfile */
+        /** @var \BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile $TypeProfile */
         if($Event->getProfile())
         {
             /* Восстанавливаем из корзины */
             if($Event->isModifyActionEquals(ModifyActionEnum::RESTORE))
             {
-                $TypeProfile = new \BaksDev\Users\Profile\Type\Entity\TypeProfile();
+                $TypeProfile = new \BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile();
                 $TypeProfile->setId($Event->getProfile());
                 $this->entityManager->persist($TypeProfile);
                 
-                $remove = $this->entityManager->getRepository(\BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEvent::class)
+                $remove = $this->entityManager->getRepository(\BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent::class)
                   ->find($command->getEvent());
                 $this->entityManager->remove($remove);
                 
@@ -106,7 +106,7 @@ final class ProfileTypeAggregate
             else
             {
                 $TypeProfile = $this->entityManager->getRepository(
-					\BaksDev\Users\Profile\Type\Entity\TypeProfile::class)->findOneBy(
+					\BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile::class)->findOneBy(
                   ['event' => $command->getEvent()]);
             }
             
@@ -117,7 +117,7 @@ final class ProfileTypeAggregate
         }
         else
         {
-            $TypeProfile = new \BaksDev\Users\Profile\Type\Entity\TypeProfile();
+            $TypeProfile = new \BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile();
             $this->entityManager->persist($TypeProfile);
             
             $Event->setProfile($TypeProfile);

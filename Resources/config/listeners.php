@@ -18,8 +18,8 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use BaksDev\Users\Profile\Type\Entity;
-use BaksDev\Users\Profile\Type\EntityListeners;
+use BaksDev\Users\Profile\TypeProfile\Entity;
+use BaksDev\Users\Profile\TypeProfile\EntityListeners;
 
 return static function (ContainerConfigurator $configurator)
 {

@@ -23,10 +23,10 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity\Trans;
+namespace BaksDev\Users\Profile\TypeProfile\Entity\Trans;
 
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEvent;
-use BaksDev\Users\Profile\Type\Entity\Trans\TypeProfileTransInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
+use BaksDev\Users\Profile\TypeProfile\Entity\Trans\TypeProfileTransInterface;
 use BaksDev\Core\Entity\EntityEvent;
 use BaksDev\Core\Type\Locale\Locale;
 use Doctrine\DBAL\Types\Types;

@@ -16,9 +16,9 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit;
 
-use BaksDev\Users\Profile\Type\Entity;
+use BaksDev\Users\Profile\TypeProfile\Entity;
 use BaksDev\Core\Type\Modify\ModifyActionEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;

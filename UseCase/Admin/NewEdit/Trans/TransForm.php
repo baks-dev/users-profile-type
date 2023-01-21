@@ -17,7 +17,7 @@
 *
 */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Trans;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Trans;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;

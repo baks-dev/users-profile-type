@@ -23,11 +23,11 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity\Modify;
+namespace BaksDev\Users\Profile\TypeProfile\Entity\Modify;
 
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEvent;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
 
-use BaksDev\Users\Profile\Type\Entity\Modify\TypeProfileModifyInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Modify\TypeProfileModifyInterface;
 use BaksDev\Users\User\Entity\User;
 use BaksDev\Users\User\Type\Id\UserUid;
 use BaksDev\Core\Entity\EntityEvent;

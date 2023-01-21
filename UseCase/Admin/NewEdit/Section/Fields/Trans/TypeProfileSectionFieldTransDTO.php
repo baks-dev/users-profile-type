@@ -23,11 +23,11 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section\Fields\Trans;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields\Trans;
 
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\TypeProfileSectionField;
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\Trans\TypeProfileSectionFieldTransInterface;
-use BaksDev\Users\Profile\Type\Type\Section\Field\Id\TypeProfileSectionFieldUid;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionField;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans\TypeProfileSectionFieldTransInterface;
+use BaksDev\Users\Profile\TypeProfile\Type\Section\Field\Id\TypeProfileSectionFieldUid;
 use BaksDev\Core\Type\Locale\Locale;
 use Symfony\Component\Validator\Constraints as Assert;
 

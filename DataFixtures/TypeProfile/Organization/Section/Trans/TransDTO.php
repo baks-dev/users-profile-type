@@ -16,14 +16,14 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\DataFixtures\TypeProfile\Organization\Section\Trans;
+namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\TypeProfile\Organization\Section\Trans;
 
 
-use BaksDev\Users\Profile\Type\Entity\Section\Section;
-use BaksDev\Users\Profile\Type\Entity\Section\Trans\TransInterface;
-use BaksDev\Users\Profile\Type\Entity\Section\Trans\TypeProfileSectionTransInterface;
-use BaksDev\Users\Profile\Type\Entity\Section\TypeProfileSection;
-use BaksDev\Users\Profile\Type\Type\Section\Id\SectionUid;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Section;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans\TransInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans\TypeProfileSectionTransInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSection;
+use BaksDev\Users\Profile\TypeProfile\Type\Section\Id\SectionUid;
 use BaksDev\Core\Type\Locale\Locale;
 use Symfony\Component\Validator\Constraints as Assert;
 

@@ -16,9 +16,9 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\DataFixtures\Security\Role;
+namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\Security\Role;
 
-use BaksDev\Users\Profile\Type\DataFixtures\Security\Role;
+use BaksDev\Users\Profile\TypeProfile\DataFixtures\Security\Role;
 use BaksDev\Users\Groups\Role\Entity\Event\RoleEventInterface;
 use BaksDev\Users\Groups\Role\Type\Event\RoleEventUid;
 use BaksDev\Users\Groups\Role\Type\RolePrefix\RolePrefix;

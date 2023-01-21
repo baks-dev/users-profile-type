@@ -23,10 +23,10 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity;
+namespace BaksDev\Users\Profile\TypeProfile\Entity;
 
 
-use BaksDev\Users\Profile\Type\Type\Settings\TypeProfileSettingsIdentifier;
+use BaksDev\Users\Profile\TypeProfile\Type\Settings\TypeProfileSettingsIdentifier;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 

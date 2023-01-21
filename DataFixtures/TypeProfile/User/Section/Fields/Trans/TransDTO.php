@@ -16,13 +16,13 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\DataFixtures\TypeProfile\User\Section\Fields\Trans;
+namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\TypeProfile\User\Section\Fields\Trans;
 
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\Field;
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\Trans\TransInterface;
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\Trans\TypeProfileSectionFieldsTransInterface;
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\TypeProfileSectionField;
-use BaksDev\Users\Profile\Type\Type\Section\Field\Id\FieldUid;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Field;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans\TransInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans\TypeProfileSectionFieldsTransInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionField;
+use BaksDev\Users\Profile\TypeProfile\Type\Section\Field\Id\FieldUid;
 use BaksDev\Core\Type\Locale\Locale;
 use Symfony\Component\Validator\Constraints as Assert;
 

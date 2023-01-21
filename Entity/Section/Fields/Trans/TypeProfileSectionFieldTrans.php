@@ -23,11 +23,11 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity\Section\Fields\Trans;
+namespace BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans;
 
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEventInterface;
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\TypeProfileSectionField;
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\Trans\TypeProfileSectionFieldTransInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionField;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans\TypeProfileSectionFieldTransInterface;
 use BaksDev\Core\Entity\EntityEvent;
 use BaksDev\Core\Type\Locale\Locale;
 use Doctrine\DBAL\Types\Types;

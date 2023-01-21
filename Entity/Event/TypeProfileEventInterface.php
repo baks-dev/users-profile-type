@@ -23,11 +23,11 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity\Event;
+namespace BaksDev\Users\Profile\TypeProfile\Entity\Event;
 
 
 
-use BaksDev\Users\Profile\Type\Type\Event\TypeProfileEventUid;
+use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventUid;
 
 interface TypeProfileEventInterface
 {

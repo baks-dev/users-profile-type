@@ -23,9 +23,9 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Type\Event;
+namespace BaksDev\Users\Profile\TypeProfile\Type\Event;
 
-use BaksDev\Users\Profile\Type\Type\Event\TypeProfileEventUid;
+use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventUid;
 use BaksDev\Core\Type\UidType\UidType;
 
 final class TypeProfileEventType extends UidType

@@ -16,7 +16,7 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\DataFixtures\Security\Check;
+namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\Security\Check;
 
 use BaksDev\Users\Groups\Group\Entity\CheckRole\CheckRoleInterface;
 use BaksDev\Users\Groups\Group\Entity\Event\GroupEvent;

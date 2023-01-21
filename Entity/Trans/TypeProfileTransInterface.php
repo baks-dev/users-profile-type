@@ -16,7 +16,7 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity\Trans;
+namespace BaksDev\Users\Profile\TypeProfile\Entity\Trans;
 
 interface TypeProfileTransInterface
 {

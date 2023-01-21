@@ -16,7 +16,7 @@
 *
 */
 
-namespace BaksDev\Users\Profile\Type\Type\Event;
+namespace BaksDev\Users\Profile\TypeProfile\Type\Event;
 
 use BaksDev\Core\Type\UidType\Uid;
 use Symfony\Component\Uid\AbstractUid;

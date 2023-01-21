@@ -16,16 +16,16 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section;
 
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\FieldInterface;
-use BaksDev\Users\Profile\Type\Entity\Section\SectionInterface;
-use BaksDev\Users\Profile\Type\Entity\Section\Trans\TransInterface;
-use BaksDev\Users\Profile\Type\Entity\Section\TypeProfileSectionInterface;
-use BaksDev\Users\Profile\Type\Type\Section\Id\SectionUid;
-use BaksDev\Users\Profile\Type\Type\Section\Id\TypeProfileSectionUid;
-use BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section\Fields\FieldDTO;
-use BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section\Trans\TransDTO;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\FieldInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\SectionInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans\TransInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSectionInterface;
+use BaksDev\Users\Profile\TypeProfile\Type\Section\Id\SectionUid;
+use BaksDev\Users\Profile\TypeProfile\Type\Section\Id\TypeProfileSectionUid;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields\FieldDTO;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Trans\TransDTO;
 use BaksDev\Core\Type\Locale\Locale;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;

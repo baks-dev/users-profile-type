@@ -16,9 +16,9 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Controller\Admin;
+namespace BaksDev\Users\Profile\TypeProfile\Controller\Admin;
 
-use BaksDev\Users\Profile\Type\Repository\AllProfileType\AllProfileTypeInterface;
+use BaksDev\Users\Profile\TypeProfile\Repository\AllProfileType\AllProfileTypeInterface;
 use BaksDev\Core\Controller\AbstractController;
 use BaksDev\Core\Form\Search;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;

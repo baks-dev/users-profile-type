@@ -23,15 +23,15 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity\Event;
+namespace BaksDev\Users\Profile\TypeProfile\Entity\Event;
 
-use BaksDev\Users\Profile\Type\Entity\Modify\TypeProfileModify;
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEventInterface;
-use BaksDev\Users\Profile\Type\Entity\Section\TypeProfileSection;
-use BaksDev\Users\Profile\Type\Entity\Trans\TypeProfileTrans;
-use BaksDev\Users\Profile\Type\Entity\TypeProfile;
-use BaksDev\Users\Profile\Type\Type\Event\TypeProfileEventUid;
-use BaksDev\Users\Profile\Type\Type\Id\TypeProfileUid;
+use BaksDev\Users\Profile\TypeProfile\Entity\Modify\TypeProfileModify;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSection;
+use BaksDev\Users\Profile\TypeProfile\Entity\Trans\TypeProfileTrans;
+use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
+use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventUid;
+use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 //use BaksDev\Core\Entity\EntityEvent;
 use BaksDev\Core\Entity\EntityEvent;
 use BaksDev\Core\Type\Locale\Locale;

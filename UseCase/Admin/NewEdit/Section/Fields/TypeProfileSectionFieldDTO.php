@@ -23,12 +23,12 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section\Fields;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields;
 
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\TypeProfileSectionFieldInterface;
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\Trans\TypeProfileSectionFieldTransInterface;
-use BaksDev\Users\Profile\Type\Type\Section\Field\Id\TypeProfileSectionFieldUid;
-use BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section\Fields\Trans\TypeProfileSectionFieldTransDTO;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionFieldInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans\TypeProfileSectionFieldTransInterface;
+use BaksDev\Users\Profile\TypeProfile\Type\Section\Field\Id\TypeProfileSectionFieldUid;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields\Trans\TypeProfileSectionFieldTransDTO;
 use BaksDev\Core\Type\Field\InputField;
 use BaksDev\Core\Type\Locale\Locale;
 use Doctrine\Common\Collections\ArrayCollection;

@@ -24,11 +24,11 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity;
+namespace BaksDev\Users\Profile\TypeProfile\Entity;
 
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEvent;
-use BaksDev\Users\Profile\Type\Type\Event\TypeProfileEventUid;
-use BaksDev\Users\Profile\Type\Type\Id\TypeProfileUid;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
+use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventUid;
+use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 use Doctrine\ORM\Mapping as ORM;
 
 

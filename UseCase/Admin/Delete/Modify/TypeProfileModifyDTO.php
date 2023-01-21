@@ -23,9 +23,9 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\Delete\Modify;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\Delete\Modify;
 
-use BaksDev\Users\Profile\Type\Entity\Modify\TypeProfileModifyInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Modify\TypeProfileModifyInterface;
 use BaksDev\Core\Type\Modify\ModifyAction;
 use BaksDev\Core\Type\Modify\ModifyActionEnum;
 

@@ -23,14 +23,14 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity\Section;
+namespace BaksDev\Users\Profile\TypeProfile\Entity\Section;
 
 
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEvent;
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\TypeProfileSectionField;
-use BaksDev\Users\Profile\Type\Entity\Section\Trans\TypeProfileSectionTrans;
-use BaksDev\Users\Profile\Type\Type\Section\Id\TypeProfileSectionUid;
-use BaksDev\Users\Profile\Type\Entity\Section\TypeProfileSectionInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionField;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans\TypeProfileSectionTrans;
+use BaksDev\Users\Profile\TypeProfile\Type\Section\Id\TypeProfileSectionUid;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSectionInterface;
 use BaksDev\Core\Entity\EntityEvent;
 use BaksDev\Core\Type\Locale\Locale;
 use Doctrine\Common\Collections\ArrayCollection;

@@ -16,11 +16,11 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\DataFixtures\TypeProfile\User;
+namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\TypeProfile\User;
 
 
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEventInterface;
-use BaksDev\Users\Profile\Type\Type\Event\TypeProfileEventUid;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
+use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventUid;
 use BaksDev\Core\Type\Locale\Locale;
 use Doctrine\Common\Collections\ArrayCollection;
 

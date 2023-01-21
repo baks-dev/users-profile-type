@@ -16,7 +16,7 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\DataFixtures\Security\Role\Trans;
+namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\Security\Role\Trans;
 
 use BaksDev\Users\Groups\Role\Entity\Trans\RoleTransInterface;
 use BaksDev\Core\Type\Locale\Locale;

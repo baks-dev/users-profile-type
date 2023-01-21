@@ -23,14 +23,14 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Controller\Admin;
+namespace BaksDev\Users\Profile\TypeProfile\Controller\Admin;
 
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEvent;
-use BaksDev\Users\Profile\Type\Entity\TypeProfile;
-use BaksDev\Users\Profile\Type\UseCase\Admin\Delete\DeleteTypeProfileDTO;
-use BaksDev\Users\Profile\Type\UseCase\Admin\Delete\DeleteTypeProfileForm;
-use BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\TypeProfileHandler;
-use BaksDev\Users\Profile\Type\UseCase\ProfileTypeAggregate;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
+use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\Delete\DeleteTypeProfileDTO;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\Delete\DeleteTypeProfileForm;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\TypeProfileHandler;
+use BaksDev\Users\Profile\TypeProfile\UseCase\ProfileTypeAggregate;
 use BaksDev\Core\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;

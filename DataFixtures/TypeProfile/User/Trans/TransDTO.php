@@ -16,13 +16,13 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\DataFixtures\TypeProfile\User\Trans;
+namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\TypeProfile\User\Trans;
 
-use BaksDev\Users\Profile\Type\Entity\Event\Event;
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEvent;
-use BaksDev\Users\Profile\Type\Entity\Trans\TransInterface;
-use BaksDev\Users\Profile\Type\Entity\Trans\TypeProfileTransInterface;
-use BaksDev\Users\Profile\Type\Type\Event\ProfileEvent;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\Event;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
+use BaksDev\Users\Profile\TypeProfile\Entity\Trans\TransInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Trans\TypeProfileTransInterface;
+use BaksDev\Users\Profile\TypeProfile\Type\Event\ProfileEvent;
 use BaksDev\Core\Type\Locale\Locale;
 use Symfony\Component\Validator\Constraints as Assert;
 

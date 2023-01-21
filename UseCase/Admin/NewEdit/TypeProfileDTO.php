@@ -16,13 +16,13 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit;
 
 
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEventInterface;
-use BaksDev\Users\Profile\Type\Type\Event\TypeProfileEventUid;
-use BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section\SectionDTO;
-use BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Trans\TransDTO;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
+use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventUid;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\SectionDTO;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Trans\TransDTO;
 use BaksDev\Core\Type\Locale\Locale;
 use Doctrine\Common\Collections\ArrayCollection;
 

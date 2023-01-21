@@ -23,10 +23,10 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Repository\AllProfileType;
+namespace BaksDev\Users\Profile\TypeProfile\Repository\AllProfileType;
 
-use BaksDev\Users\Profile\Type\Entity as TypeProfileEntity;
-use BaksDev\Users\Profile\Type\Repository\AllProfileType\AllProfileTypeInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity as TypeProfileEntity;
+use BaksDev\Users\Profile\TypeProfile\Repository\AllProfileType\AllProfileTypeInterface;
 
 use BaksDev\Core\Form\Search\SearchDTO;
 use BaksDev\Core\Services\Paginator\PaginatorInterface;

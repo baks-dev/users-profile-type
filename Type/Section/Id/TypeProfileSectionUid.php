@@ -16,7 +16,7 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Type\Section\Id;
+namespace BaksDev\Users\Profile\TypeProfile\Type\Section\Id;
 
 use BaksDev\Core\Type\UidType\Uid;
 

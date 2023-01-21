@@ -16,7 +16,7 @@
 *
 */
 
-namespace BaksDev\Users\Profile\Type\Type\Settings;
+namespace BaksDev\Users\Profile\TypeProfile\Type\Settings;
 
 final class TypeProfileSettingsIdentifier
 {

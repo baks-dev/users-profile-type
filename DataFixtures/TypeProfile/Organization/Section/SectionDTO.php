@@ -16,11 +16,11 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\DataFixtures\TypeProfile\Organization\Section;
+namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\TypeProfile\Organization\Section;
 
 
-use BaksDev\Users\Profile\Type\Entity\Section\TypeProfileSectionInterface;
-use BaksDev\Users\Profile\Type\Type\Section\Id\TypeProfileSectionUid;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSectionInterface;
+use BaksDev\Users\Profile\TypeProfile\Type\Section\Id\TypeProfileSectionUid;
 
 use BaksDev\Core\Type\Field\FieldEnum;
 use BaksDev\Core\Type\Field\InputField;

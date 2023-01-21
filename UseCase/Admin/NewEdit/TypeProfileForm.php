@@ -17,10 +17,10 @@
 *
 */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit;
 
-use BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section\SectionForm;
-use BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Trans\TransForm;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\SectionForm;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Trans\TransForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

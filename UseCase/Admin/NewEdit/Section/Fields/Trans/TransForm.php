@@ -17,7 +17,7 @@
 *
 */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section\Fields\Trans;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields\Trans;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;

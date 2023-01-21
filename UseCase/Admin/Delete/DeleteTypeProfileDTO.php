@@ -23,11 +23,11 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\Delete;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\Delete;
 
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEventInterface;
-use BaksDev\Users\Profile\Type\Type\Event\TypeProfileEventUid;
-use BaksDev\Users\Profile\Type\UseCase\Admin\Delete\Modify\TypeProfileModifyDTO;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
+use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventUid;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\Delete\Modify\TypeProfileModifyDTO;
 
 final class DeleteTypeProfileDTO implements TypeProfileEventInterface
 {

@@ -17,9 +17,9 @@
 *
 */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\Delete;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\Delete;
 
-use BaksDev\Users\Profile\Type\UseCase\Admin\Delete\DeleteTypeProfileDTO;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\Delete\DeleteTypeProfileDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

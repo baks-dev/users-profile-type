@@ -16,7 +16,7 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Type\Section\Field\Id;
+namespace BaksDev\Users\Profile\TypeProfile\Type\Section\Field\Id;
 
 use BaksDev\Core\Type\UidType\Uid;
 final class TypeProfileSectionFieldUid extends Uid

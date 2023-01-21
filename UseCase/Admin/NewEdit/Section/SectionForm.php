@@ -16,11 +16,11 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section;
 
 
-use BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section\Fields\FieldForm;
-use BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section\Trans\TransForm;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields\FieldForm;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Trans\TransForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

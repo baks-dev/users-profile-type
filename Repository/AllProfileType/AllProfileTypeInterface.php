@@ -16,7 +16,7 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Repository\AllProfileType;
+namespace BaksDev\Users\Profile\TypeProfile\Repository\AllProfileType;
 
 interface AllProfileTypeInterface
 {

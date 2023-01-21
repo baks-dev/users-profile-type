@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 
-namespace BaksDev\Users\Profile\Type\DataFixtures\TypeProfile\User;
+namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\TypeProfile\User;
 
-use BaksDev\Users\Profile\Type\Entity as EntityTypeProfile;
-use BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\ProfileTypeHandler;
+use BaksDev\Users\Profile\TypeProfile\Entity as EntityTypeProfile;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\ProfileTypeHandler;
 use BaksDev\Core\Type\Locale\LocaleEnum;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;

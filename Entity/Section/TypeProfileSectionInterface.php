@@ -16,7 +16,7 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity\Section;
+namespace BaksDev\Users\Profile\TypeProfile\Entity\Section;
 
 interface TypeProfileSectionInterface
 {

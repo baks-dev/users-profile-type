@@ -16,9 +16,9 @@
 *
 */
 
-namespace BaksDev\Users\Profile\Type\Type\Id;
+namespace BaksDev\Users\Profile\TypeProfile\Type\Id;
 
-use BaksDev\Users\Profile\Type\Type\Id\TypeProfileUid;
+use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 use BaksDev\Core\Type\UidType\UidType;
 
 final class TypeProfileType extends UidType

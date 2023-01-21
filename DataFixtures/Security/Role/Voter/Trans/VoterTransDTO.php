@@ -16,7 +16,7 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\DataFixtures\Security\Role\Voter\Trans;
+namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\Security\Role\Voter\Trans;
 
 use BaksDev\Users\Groups\Role\Entity\Voters\Trans\VoterTransInterface;
 use BaksDev\Core\Type\Locale\Locale;

@@ -16,7 +16,7 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity\Section\Fields\Trans;
+namespace BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans;
 
 interface TypeProfileSectionFieldTransInterface
 {

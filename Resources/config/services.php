@@ -10,7 +10,7 @@ return static function (ContainerConfigurator $configurator)
       ->autoconfigure() // Automatically registers your services as commands, event subscribers, etc.
     ;
 	
-	$namespace = 'BaksDev\Users\Profile\Type';
+	$namespace = 'BaksDev\Users\Profile\TypeProfile';
 	
     $services->load($namespace.'\Controller\\', __DIR__.'/../../Controller')
       ->tag('controller.service_arguments');

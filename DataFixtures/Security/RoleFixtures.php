@@ -16,13 +16,13 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\DataFixtures\Security;
+namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\Security;
 
 use BaksDev\Users\Groups\Group\DataFixtures\Security\Group\GroupFixtures;
 use BaksDev\Users\Groups\Group\Entity\Event\GroupEvent;
 use BaksDev\Users\Groups\Group\UseCase\Admin\NewEdit\CheckRoleHandler;
 use BaksDev\Users\Groups\Role\UseCase\Admin\NewEdit\RoleHandler;
-use BaksDev\Users\Profile\Type\DataFixtures\Security\Role\RoleDTO;
+use BaksDev\Users\Profile\TypeProfile\DataFixtures\Security\Role\RoleDTO;
 use BaksDev\Users\Groups\Role\Entity\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

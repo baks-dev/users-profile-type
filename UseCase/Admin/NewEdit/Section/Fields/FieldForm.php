@@ -16,9 +16,9 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section\Fields;
+namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields;
 
-use BaksDev\Users\Profile\Type\UseCase\Admin\NewEdit\Section\Fields\Trans\TransForm;
+use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields\Trans\TransForm;
 use BaksDev\Core\Type\Field\InputField;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;

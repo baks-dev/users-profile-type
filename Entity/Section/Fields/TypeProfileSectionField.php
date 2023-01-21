@@ -23,14 +23,14 @@
  *
  */
 
-namespace BaksDev\Users\Profile\Type\Entity\Section\Fields;
+namespace BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields;
 
 
-use BaksDev\Users\Profile\Type\Entity\Event\TypeProfileEventInterface;
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\TypeProfileSectionFieldInterface;
-use BaksDev\Users\Profile\Type\Entity\Section\Fields\Trans\TypeProfileSectionFieldTrans;
-use BaksDev\Users\Profile\Type\Entity\Section\TypeProfileSection;
-use BaksDev\Users\Profile\Type\Type\Section\Field\Id\TypeProfileSectionFieldUid;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionFieldInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans\TypeProfileSectionFieldTrans;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSection;
+use BaksDev\Users\Profile\TypeProfile\Type\Section\Field\Id\TypeProfileSectionFieldUid;
 use BaksDev\Core\Entity\EntityEvent;
 use BaksDev\Core\Type\Field\FieldEnum;
 use BaksDev\Core\Type\Field\InputField;
