@@ -26,6 +26,7 @@
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans;
 
 
+use BaksDev\Core\Entity\EntityState;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSection;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans\TypeProfileSectionTransInterface;
@@ -40,39 +41,34 @@ use InvalidArgumentException;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_section_trans')]
-class TypeProfileSectionTrans extends EntityEvent
+class TypeProfileSectionTrans extends EntityState
 {
     const TABLE = 'type_users_profile_section_trans';
     
     /** Связь на секцию */
     #[ORM\Id]
-    #[ORM\ManyToOne(targetEntity: TypeProfileSection::class, cascade: ["remove", "persist"], inversedBy: "translate")]
+    #[ORM\ManyToOne(targetEntity: TypeProfileSection::class, inversedBy: "translate")]
     #[ORM\JoinColumn(name: 'section', referencedColumnName: "id", nullable: true)]
-    protected ?TypeProfileSection $section;
+    private readonly ?TypeProfileSection $section;
     
     /** Локаль */
     #[ORM\Id]
     #[ORM\Column(name: 'local', type: Locale::TYPE, length: 2, nullable: false)]
-    protected Locale $local;
+    private readonly Locale $local;
     
     /** Название */
     #[ORM\Column(name: 'name', type: Types::STRING, length: 100, nullable: false)]
-    protected string $name;
+    private string $name;
     
     /** Описание */
     #[ORM\Column(name: 'description', type: Types::TEXT, nullable: true)]
-    protected ?string $description;
+    private ?string $description;
     
     /**
      * @param TypeProfileSection|null $section
      */
     public function __construct(TypeProfileSection $section) { $this->section = $section; }
-    
-    /**
-     * @param $dto
-     * @return mixed
-     * @throws Exception
-     */
+
     public function getDto($dto) : mixed
     {
         if($dto instanceof TypeProfileSectionTransInterface)
@@ -82,12 +78,7 @@ class TypeProfileSectionTrans extends EntityEvent
         
         throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
     }
-    
-    /**
-     * @param $dto
-     * @return mixed
-     * @throws Exception
-     */
+
     public function setEntity($dto) : mixed
     {
         
@@ -98,8 +89,7 @@ class TypeProfileSectionTrans extends EntityEvent
         
         throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
     }
-    
-    
+	
     public function equals($dto) : bool
     {
         if($dto instanceof TypeProfileSectionTransInterface)

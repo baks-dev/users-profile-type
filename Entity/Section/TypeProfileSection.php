@@ -26,6 +26,7 @@
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Section;
 
 
+use BaksDev\Core\Entity\EntityState;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionField;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans\TypeProfileSectionTrans;
@@ -44,32 +45,32 @@ use InvalidArgumentException;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_section')]
-class TypeProfileSection extends EntityEvent
+class TypeProfileSection extends EntityState
 {
     const TABLE = 'type_users_profile_section';
     
     /** ID */
     #[ORM\Id]
     #[ORM\Column(type: TypeProfileSectionUid::TYPE)]
-    protected TypeProfileSectionUid $id;
+    private readonly TypeProfileSectionUid $id;
     
     /** Связь на событие Event */
-    #[ORM\ManyToOne(targetEntity: TypeProfileEvent::class, cascade: ["remove", "persist"], inversedBy: "section")]
+    #[ORM\ManyToOne(targetEntity: TypeProfileEvent::class, inversedBy: "section")]
     #[ORM\JoinColumn(name: 'event', referencedColumnName: "id", nullable: true)]
-    protected ?TypeProfileEvent $event;
+    private ?TypeProfileEvent $event;
     
     /** Перевод */
     #[ORM\OneToMany(mappedBy: 'section', targetEntity: TypeProfileSectionTrans::class, cascade: ['persist', 'remove'])]
-    protected Collection $translate;
+    private Collection $translate;
     
     /** Поля секции */
     #[ORM\OneToMany(mappedBy: 'section', targetEntity: TypeProfileSectionField::class, cascade: ['persist', 'remove'])]
     #[ORM\OrderBy(['sort' => 'ASC'])]
-    protected Collection $field;
+    private Collection $field;
     
     /** Сортировка */
     #[ORM\Column(name: 'sort', type: Types::SMALLINT, length: 3, nullable: false, options: ['default' => 500])]
-    protected int $sort = 500;
+    private int $sort = 500;
     
     
     public function __construct(TypeProfileEvent $event)
@@ -79,20 +80,17 @@ class TypeProfileSection extends EntityEvent
         $this->field = new ArrayCollection();
         $this->event = $event;
     }
-    
-    /**
-     * @return TypeProfileSectionUid
-     */
-    public function getId() : TypeProfileSectionUid
+	
+	public function __toString() : string
+	{
+		return $this->id;
+	}
+	
+	public function getId() : TypeProfileSectionUid
     {
         return $this->id;
     }
-    
-    /**
-     * @param $dto
-     * @return mixed
-     * @throws Exception
-     */
+
     public function getDto($dto) : mixed
     {
         if($dto instanceof TypeProfileSectionInterface)
@@ -102,12 +100,7 @@ class TypeProfileSection extends EntityEvent
         
         throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
     }
-    
-    /**
-     * @param $dto
-     * @return mixed
-     * @throws Exception
-     */
+
     public function setEntity($dto) : mixed
     {
         
@@ -119,7 +112,7 @@ class TypeProfileSection extends EntityEvent
         throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
     }
     
-    protected function equals($dto) : bool
+    private function equals($dto) : bool
     {
         if($dto instanceof TypeProfileSectionInterface)
         {

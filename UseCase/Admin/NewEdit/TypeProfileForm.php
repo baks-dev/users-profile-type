@@ -72,7 +72,8 @@ final class TypeProfileForm extends AbstractType
 		(
 			'Save',
 			SubmitType::class,
-			['label' => 'Save', 'label_html' => true, 'attr' => ['class' => 'btn-primary']]);
+			['label' => 'Save', 'label_html' => true,
+			 'attr' => ['class' => 'btn-primary']]);
     }
     
     public function configureOptions(OptionsResolver $resolver) : void

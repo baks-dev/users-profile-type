@@ -18,6 +18,7 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit;
 
+use BaksDev\Core\Entity\EntityState;
 use BaksDev\Users\Profile\TypeProfile\Entity;
 use BaksDev\Core\Type\Modify\ModifyActionEnum;
 use Doctrine\ORM\EntityManagerInterface;
@@ -77,7 +78,8 @@ final class ProfileTypeHandler
 			
 			//$EventRepo = $this->entityManager->getRepository(Entity\Event\Event::class)->find($command->getEvent());
 			//$Event = $EventRepo->cloneEntity();
-		} else
+		} 
+		else
 		{
 			$Event = new Entity\Event\TypeProfileEvent();
 			$this->entityManager->persist($Event);
@@ -121,7 +123,9 @@ final class ProfileTypeHandler
 			
 		}
 		
-		/* Удаляем отстутсвующие объекты коллекци */
+		/** Удаляем отстутсвующие объекты коллекци
+		 * @see EntityState
+		 */
 		foreach($Event->getRemoveEntity() as $remove)
 		{
 			$this->entityManager->remove($remove);

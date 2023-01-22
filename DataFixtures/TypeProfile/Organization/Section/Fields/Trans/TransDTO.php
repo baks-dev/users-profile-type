@@ -20,13 +20,13 @@ namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\TypeProfile\Organizatio
 
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Field;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans\TransInterface;
-use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans\TypeProfileSectionFieldsTransInterface;
+use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans\TypeProfileSectionFieldTransInterface;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionField;
 use BaksDev\Users\Profile\TypeProfile\Type\Section\Field\Id\FieldUid;
 use BaksDev\Core\Type\Locale\Locale;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class TransDTO implements TypeProfileSectionFieldsTransInterface
+final class TransDTO implements TypeProfileSectionFieldTransInterface
 {
 	public const NAME = [
 		100 =>

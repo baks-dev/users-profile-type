@@ -25,6 +25,7 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Trans;
 
+use BaksDev\Core\Entity\EntityState;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
 use BaksDev\Users\Profile\TypeProfile\Entity\Trans\TypeProfileTransInterface;
 use BaksDev\Core\Entity\EntityEvent;
@@ -37,38 +38,33 @@ use Exception;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_trans')]
-class TypeProfileTrans extends EntityEvent
+class TypeProfileTrans extends EntityState
 {
     const TABLE = 'type_users_profile_trans';
     
     /** Связь на событие */
     #[ORM\Id]
-    #[ORM\ManyToOne(targetEntity: TypeProfileEvent::class, cascade: ["all"], inversedBy: "translate")]
+    #[ORM\ManyToOne(targetEntity: TypeProfileEvent::class, inversedBy: "translate")]
     #[ORM\JoinColumn(name: 'event', referencedColumnName: "id")]
-    protected TypeProfileEvent $event;
+    private readonly TypeProfileEvent $event;
     
     /** Локаль */
     #[ORM\Id]
     #[ORM\Column(name: 'local', type: Locale::TYPE, length: 2)]
-    protected Locale $local;
+    private readonly Locale $local;
     
     /** Название */
     #[ORM\Column(name: 'name', type: Types::STRING, length: 100)]
-    protected string $name;
+    private string $name;
     
     /** Описание */
     #[ORM\Column(name: 'description', type: Types::TEXT, nullable: true)]
-    protected ?string $description;
+    private ?string $description;
     
     public function __construct(TypeProfileEvent $event) {
         $this->event = $event;
     }
-    
-    /**
-     * @param $dto
-     * @return mixed
-     * @throws Exception
-     */
+
     public function getDto($dto) : mixed
     {
         if($dto instanceof TypeProfileTransInterface)
@@ -78,12 +74,7 @@ class TypeProfileTrans extends EntityEvent
         
         throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
     }
-    
-    /**
-     * @param $dto
-     * @return mixed
-     * @throws Exception
-     */
+
     public function setEntity($dto) : mixed
     {
         
@@ -118,5 +109,4 @@ class TypeProfileTrans extends EntityEvent
         
         return null;
     }
-
 }

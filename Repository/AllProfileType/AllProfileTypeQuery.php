@@ -101,15 +101,8 @@ final class AllProfileTypeQuery implements AllProfileTypeInterface
         }
 	
 		$qb->orderBy('profile_event.sort', 'ASC');
-	
-
-		
-		
 		return $this->paginator->fetchAllAssociative($qb);
-        
-       // $qb->orderBy('profile_event.sort', 'ASC');
-        
-        //return $qb;
+
     }
     
 }

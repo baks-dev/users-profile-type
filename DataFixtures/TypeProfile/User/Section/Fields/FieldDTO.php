@@ -21,8 +21,8 @@ namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\TypeProfile\User\Sectio
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionFieldInterface;
 use BaksDev\Users\Profile\TypeProfile\Type\Section\Field\Id\TypeProfileSectionFieldUid;
 
-use BaksDev\Core\Type\Field\FieldEnum;
-use BaksDev\Core\Type\Field\InputField;
+use BaksDev\Reference\Field\Type\FieldEnum;
+use BaksDev\Reference\Field\Type\InputField;
 use BaksDev\Core\Type\Locale\Locale;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;

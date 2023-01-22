@@ -42,7 +42,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFILE_DELETE')")]
 final class DeleteController extends AbstractController
 {
-    #[Route('/admin/profile/delete/{id}', name: 'admin.profile.delete', methods: ['POST'])]
+    #[Route('/admin/profile/delete/{id}', name: 'admin.delete', methods: ['POST'])]
     public function delete(
       Request $request,
       TypeProfileEvent $Event,

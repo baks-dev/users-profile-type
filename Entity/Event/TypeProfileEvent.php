@@ -25,6 +25,7 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Event;
 
+use BaksDev\Core\Entity\EntityState;
 use BaksDev\Users\Profile\TypeProfile\Entity\Modify\TypeProfileModify;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSection;
@@ -32,7 +33,6 @@ use BaksDev\Users\Profile\TypeProfile\Entity\Trans\TypeProfileTrans;
 use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventUid;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
-//use BaksDev\Core\Entity\EntityEvent;
 use BaksDev\Core\Entity\EntityEvent;
 use BaksDev\Core\Type\Locale\Locale;
 use BaksDev\Core\Type\Modify\ModifyAction;
@@ -48,122 +48,101 @@ use Exception;
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_event')]
 #[ORM\Index(columns: ['profile'])]
-class TypeProfileEvent extends EntityEvent
+class TypeProfileEvent extends EntityState
 {
-    const TABLE = 'type_users_profile_event';
-    
-    /** ID */
-    #[ORM\Id]
-    #[ORM\Column(type: TypeProfileEventUid::TYPE)]
-    protected TypeProfileEventUid $id;
-    
-    /** ID Profile */
-    #[ORM\Column(type: TypeProfileUid::TYPE, nullable: false)]
-    protected ?TypeProfileUid $profile = null;
-    
-    /** Перевод */
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: TypeProfileTrans::class, cascade: ['all'])]
-    protected Collection $translate;
-    
-    /** Секции для профиля */
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: TypeProfileSection::class, cascade: ['all'])]
-    #[ORM\OrderBy(['sort' => 'ASC'])]
-    protected Collection $section;
-    
-    /** Сортировка */
-    #[ORM\Column(type: Types::SMALLINT, length: 3, options: ['default' => 500])]
-    protected int $sort = 500;
-    
-    /** Модификатор */
-    #[ORM\OneToOne(mappedBy: 'event', targetEntity: TypeProfileModify::class, cascade: ['all'])]
-    protected TypeProfileModify $modify;
-    
-    public function __construct()
-    {
-       $this->id = new TypeProfileEventUid();
+	const TABLE = 'type_users_profile_event';
+	
+	/** ID */
+	#[ORM\Id]
+	#[ORM\Column(type: TypeProfileEventUid::TYPE)]
+	private readonly TypeProfileEventUid $id;
+	
+	/** ID Profile */
+	#[ORM\Column(type: TypeProfileUid::TYPE, nullable: false)]
+	private ?TypeProfileUid $profile = null;
+	
+	/** Перевод */
+	#[ORM\OneToMany(mappedBy: 'event', targetEntity: TypeProfileTrans::class, cascade: ['all'])]
+	private Collection $translate;
+	
+	/** Секции для профиля */
+	#[ORM\OneToMany(mappedBy: 'event', targetEntity: TypeProfileSection::class, cascade: ['all'])]
+	#[ORM\OrderBy(['sort' => 'ASC'])]
+	private Collection $section;
+	
+	/** Сортировка */
+	#[ORM\Column(type: Types::SMALLINT, length: 3, options: ['default' => 500])]
+	private int $sort = 500;
+	
+	/** Модификатор */
+	#[ORM\OneToOne(mappedBy: 'event', targetEntity: TypeProfileModify::class, cascade: ['all'])]
+	private TypeProfileModify $modify;
+	
+	public function __construct()
+	{
+		$this->id = new TypeProfileEventUid();
+		$this->modify = new TypeProfileModify($this);
+		
+	}
+	
+	public function __toString() : string
+	{
+		return $this->id;
+	}
+	
+	public function getId() : TypeProfileEventUid
+	{
+		return $this->id;
+	}
 
-        //$this->translate = new ArrayCollection();
-        //$this->section = new ArrayCollection();
-    
-        $this->modify = new TypeProfileModify($this, new ModifyAction(ModifyActionEnum::NEW));
-//
-//        $section = new Section();
-//        $this->addSection($section);
+	public function getProfile() : ?TypeProfileUid
+	{
+		return $this->profile;
+	}
+	
 
-    }
-    
-    /**
-     * @return TypeProfileEventUid
-     */
-    public function getId() : TypeProfileEventUid
-    {
-        return $this->id;
-    }
-    
-    /**
-     * @return TypeProfileUid|null
-     */
-    public function getProfile() : ?TypeProfileUid
-    {
-        return $this->profile;
-    }
-    
-    /**
-     * @param TypeProfileUid|null $profile
-     */
-    public function setProfile(TypeProfileUid|TypeProfile $profile) : void
-    {
-        $this->profile = $profile instanceof TypeProfile ? $profile->getId() : $profile;
-    }
-    
-    
-    /**
-     * @param $dto
-     * @return mixed
-     * @throws Exception
-     */
-    public function getDto($dto) : mixed
-    {
-        if($dto instanceof TypeProfileEventInterface)
-        {
-            return parent::getDto($dto);
-        }
-        
-        throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
-    
-    /**
-     * @param $dto
-     * @return mixed
-     * @throws Exception
-     */
-    public function setEntity($dto) : mixed
-    {
-        if($dto instanceof TypeProfileEventInterface)
-        {
-            return parent::setEntity($dto);
-        }
-        
-        throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
-    
-    public function isModifyActionEquals(ModifyActionEnum $action) : bool
-    {
-        return $this->modify->equals($action);
-    }
-    
-    public function getNameByLocale(Locale $locale) : ?string
-    {
-        $name = null;
-        
-        /** @var TypeProfileTrans $trans */
-        foreach($this->translate as $trans)
-        {
-            if($name = $trans->name($locale))
-                break;
-        }
-        
-        return $name;
-    }
-    
+	public function setProfile(TypeProfileUid|TypeProfile $profile) : void
+	{
+		$this->profile = $profile instanceof TypeProfile ? $profile->getId() : $profile;
+	}
+	
+	public function getDto($dto) : mixed
+	{
+		if($dto instanceof TypeProfileEventInterface)
+		{
+			return parent::getDto($dto);
+		}
+		
+		throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
+	
+	public function setEntity($dto) : mixed
+	{
+		if($dto instanceof TypeProfileEventInterface)
+		{
+			return parent::setEntity($dto);
+		}
+		
+		throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
+	
+	public function isModifyActionEquals(ModifyActionEnum $action) : bool
+	{
+		return $this->modify->equals($action);
+	}
+	
+	public function getNameByLocale(Locale $locale) : ?string
+	{
+		$name = null;
+		
+		/** @var TypeProfileTrans $trans */
+		foreach($this->translate as $trans)
+		{
+			if($name = $trans->name($locale))
+				break;
+		}
+		
+		return $name;
+	}
+	
 }

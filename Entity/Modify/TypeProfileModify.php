@@ -25,12 +25,11 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Modify;
 
+use BaksDev\Core\Entity\EntityState;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
-
 use BaksDev\Users\Profile\TypeProfile\Entity\Modify\TypeProfileModifyInterface;
 use BaksDev\Users\User\Entity\User;
 use BaksDev\Users\User\Type\Id\UserUid;
-use BaksDev\Core\Entity\EntityEvent;
 use BaksDev\Core\Type\Ip\IpAddress;
 use BaksDev\Core\Type\Modify\ModifyAction;
 use BaksDev\Core\Type\Modify\ModifyActionEnum;
@@ -44,7 +43,7 @@ use Exception;
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_modify')]
 #[ORM\Index(columns: ['action'])]
-class TypeProfileModify extends EntityEvent
+class TypeProfileModify extends EntityState
 {
     const TABLE = 'type_users_profile_modify';
     
@@ -73,23 +72,22 @@ class TypeProfileModify extends EntityEvent
     /** User-agent */
     #[ORM\Column(name: 'user_agent', type: Types::TEXT, nullable: false)]
     protected string $userAgent;
-    
-    
-    public function __construct(TypeProfileEvent $event, ModifyAction $modifyAction)
+	
+    public function __construct(TypeProfileEvent $event)
     {
         $this->event = $event;
         $this->modDate = new DateTimeImmutable();
         $this->ipAddress = new IpAddress('127.0.0.1');
         $this->userAgent = 'console';
-        $this->action = $modifyAction;
+        $this->action = new ModifyAction(ModifyActionEnum::NEW);
     }
-    
-    /**
-     * @param $dto
-     * @return mixed
-     * @throws Exception
-     */
-    public function getDto($dto) : mixed
+	
+	public function __clone() : void
+	{
+		// TODO: Implement __clone() method.
+	}
+	
+	public function getDto($dto) : mixed
     {
         if($dto instanceof TypeProfileModifyInterface)
         {
@@ -98,12 +96,7 @@ class TypeProfileModify extends EntityEvent
         
         throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
     }
-    
-    /**
-     * @param $dto
-     * @return mixed
-     * @throws Exception
-     */
+	
     public function setEntity($dto) : mixed
     {
         if($dto instanceof TypeProfileModifyInterface)
@@ -113,31 +106,19 @@ class TypeProfileModify extends EntityEvent
         
         throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
     }
-    
-    /**
-     * @param IpAddress $ipAddress
-     * @param string $userAgent
-     * @return void
-     */
+
     public function upModifyAgent(IpAddress $ipAddress, string $userAgent) : void
     {
         $this->ipAddress = $ipAddress;
         $this->userAgent = $userAgent;
         $this->modDate = new DateTimeImmutable();
     }
-    
-    /**
-     * @param UserUid|User|null $user
-     */
+
     public function setUser(UserUid|User|null $user) : void
     {
         $this->user = $user instanceof User ? $user->getId() : $user;
     }
-    
-    /**
-     * @param ModifyActionEnum $action
-     * @return bool
-     */
+	
     public function equals(ModifyActionEnum $action) : bool
     {
         return $this->action->equals($action);

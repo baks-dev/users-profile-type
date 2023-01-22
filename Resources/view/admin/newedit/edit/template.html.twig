@@ -1,7 +1,7 @@
 {% trans_default_domain('admin.profile.type') %}
 
 {# ---- ШАБЛОН ------------------------------------------------------------ #}
-{% extends '@Template/default/admin/base.html.twig' %}
+{% extends '@Core/admin/base.html.twig' %}
 
 {% block title %}
     {{ 'admin.page.edit'|trans }}
@@ -40,7 +40,7 @@
 
 {% block javascript %}
 
-<script nonce="{{ csp_nonce() }}" src="/profile_type/script.js" defer></script>
+<script nonce="{{ csp_nonce() }}" src="/assets/profile_type/script.js" defer></script>
 
 
 {% endblock %}

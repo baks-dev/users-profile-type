@@ -1,5 +1,14 @@
+{% trans_default_domain("admin.profile.type") %}
+
+{% set ROLE = 'ROLE_PROFILE' %}
+
 {# ---- ШАБЛОН ------------------------------------------------------------ #}
-{% extends '@Template/default/admin/base.html.twig' %}
+{% extends '@Core/admin/base.html.twig' %}
+
+{# ---- CSS ------------------------------------------------------------ #}
+{% block title %}
+    {{ 'admin.page.index'|trans }}
+{% endblock %}
 
 {# ---- CSS ------------------------------------------------------------ #}
 {% block stylesheets %}
@@ -20,7 +29,13 @@
 
 {# ---- КОНТЕНТ-БЛОК ------------------------------------------------------------ #}
 {% block content %}
+
     {{ include(_self|replace({ "template.html.twig": "content.html.twig" })) }}
+    <div style="display: none !important;"
+         class="popover popover-body popover-arrow fade show rounded-pill spinner-border spinner-border-sm vertical-middle d-none">
+    </div>
+
+
 {% endblock %}
 
 

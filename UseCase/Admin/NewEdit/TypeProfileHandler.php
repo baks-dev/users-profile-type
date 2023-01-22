@@ -86,13 +86,17 @@ final class TypeProfileHandler
 		
 		$Event->setEntity($command);
 		
+		
+		
 		/** @var Entity\TypeProfile $TypeProfile */
 		if($Event->getProfile())
 		{
+			
+			
 			$TypeProfile = $this->entityManager->getRepository(Entity\TypeProfile::class)->findOneBy(
 				['event' => $command->getEvent()]
 			);
-			
+
 			if(empty($TypeProfile))
 			{
 				$uniqid = uniqid('', false);
@@ -118,16 +122,17 @@ final class TypeProfileHandler
 			$this->entityManager->persist($TypeProfile);
 			
 			$Event->setProfile($TypeProfile);
-			
+			$TypeProfile->setEvent($Event);
 		}
 		
+	
 		/* Удаляем отстутсвующие объекты коллекци */
 		foreach($Event->getRemoveEntity() as $remove)
 		{
 			$this->entityManager->remove($remove);
 		}
+
 		
-		$TypeProfile->setEvent($Event);
 		$this->entityManager->flush();
 		
 		return $TypeProfile;

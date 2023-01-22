@@ -1,4 +1,5 @@
-{% trans_default_domain 'admin.profile.type' %}
+{% trans_default_domain 'profile.type' %}
+
 <tr>
 
 	<td>
@@ -9,9 +10,7 @@
 	{# Чекбокс #}
 	<td>
 		<div class="form-check form-check-sm form-check-custom">
-			<label>
-				<input class="form-check-input checked-item" type="checkbox" onchange=checkedItem(); value="{{ item.event }}">
-			</label>
+			<input class="form-check-input checked-item" type="checkbox" onchange=checkedItem(); value="{{ item.event }}">
 		</div>
 	</td>
 
@@ -31,7 +30,7 @@
 			<div class="ms-0">
 
 				{# Название #}
-				<a href="{{ path('ProfileType:admin.profile.newedit.edit', {id: item.event }) }}"
+				<a href="{{ path('ProfileType:admin.newedit.edit', {id: item.event }) }}"
 				   class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
 				>{{ item.name }}</a>
 

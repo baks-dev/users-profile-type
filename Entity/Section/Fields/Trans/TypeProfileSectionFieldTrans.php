@@ -25,6 +25,7 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans;
 
+use BaksDev\Core\Entity\EntityState;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionField;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans\TypeProfileSectionFieldTransInterface;
@@ -39,39 +40,34 @@ use InvalidArgumentException;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_section_field_trans')]
-class TypeProfileSectionFieldTrans extends EntityEvent
+class TypeProfileSectionFieldTrans extends EntityState
 {
     const TABLE = 'type_users_profile_section_field_trans';
     
     /** Связь на поле */
     #[ORM\Id]
-    #[ORM\ManyToOne(targetEntity: TypeProfileSectionField::class, cascade: ["remove", "persist"], inversedBy: "translate")]
+    #[ORM\ManyToOne(targetEntity: TypeProfileSectionField::class, inversedBy: "translate")]
     #[ORM\JoinColumn(name: 'field', referencedColumnName: "id", nullable: true)]
-    protected ?TypeProfileSectionField $field;
+    private readonly ?TypeProfileSectionField $field;
     
     /** Локаль */
     #[ORM\Id]
     #[ORM\Column(type: Locale::TYPE, length: 2)]
-    protected Locale $local;
+    private readonly Locale $local;
     
     /** Название */
     #[ORM\Column(type: Types::STRING, length: 100)]
-    protected string $name;
+    private string $name;
     
     /** Описание */
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    protected ?string $description;
+    private ?string $description;
     
     /**
      * @param TypeProfileSectionField $field
      */
     public function __construct(TypeProfileSectionField $field) { $this->field = $field; }
-    
-    /**
-     * @param $dto
-     * @return mixed
-     * @throws Exception
-     */
+
     public function getDto($dto) : mixed
     {
         if($dto instanceof TypeProfileSectionFieldTransInterface)
@@ -81,12 +77,7 @@ class TypeProfileSectionFieldTrans extends EntityEvent
         
         throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
     }
-    
-    /**
-     * @param $dto
-     * @return mixed
-     * @throws Exception
-     */
+
     public function setEntity($dto) : mixed
     {
         
