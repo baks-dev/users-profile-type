@@ -25,7 +25,7 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\UseCase;
 
-use App\Module\Files\Res\Upload\Image\ImageUploadInterface;
+use BaksDev\Files\Resources\Upload\Image\ImageUploadInterface;
 
 use BaksDev\Users\Profile\TypeProfile\Entity;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;

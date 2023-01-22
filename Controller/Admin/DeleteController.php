@@ -32,6 +32,7 @@ use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\Delete\DeleteTypeProfileForm
 use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\TypeProfileHandler;
 use BaksDev\Users\Profile\TypeProfile\UseCase\ProfileTypeAggregate;
 use BaksDev\Core\Controller\AbstractController;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,13 +42,11 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFILE_DELETE')")]
 final class DeleteController extends AbstractController
 {
-    
     #[Route('/admin/profile/delete/{id}', name: 'admin.profile.delete', methods: ['POST'])]
     public function delete(
       Request $request,
       TypeProfileEvent $Event,
       TypeProfileHandler $handler
-
     ) : Response
 	{
 		$TypeProfileDTO = new DeleteTypeProfileDTO();
