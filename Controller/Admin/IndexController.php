@@ -29,23 +29,23 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFILE')")]
 final class IndexController extends AbstractController
 {
-    
-    #[Route('/admin/profiles/{page<\d+>}', name: 'admin.index',  methods: [
-      'GET',
-      'POST'
-    ])]
-    public function index(
-      Request $request,
-      AllProfileTypeInterface $allProfileType,
-        //      AllProfile $getAllProfile,
-              int $page = 0,
-    ) : Response
+	
+	#[Route('/admin/profiles/{page<\d+>}', name: 'admin.index', methods: [
+		'GET',
+		'POST',
+	])]
+	public function index(
+		Request $request,
+		AllProfileTypeInterface $allProfileType,
+		//      AllProfile $getAllProfile,
+		int $page = 0,
+	) : Response
 	{
 		/* Поиск */
 		$search = new Search\SearchDTO();
 		$searchForm = $this->createForm(Search\SearchForm::class, $search);
 		$searchForm->handleRequest($request);
-	
+		
 		/* Получаем список */
 		$query = $allProfileType->get($search);
 		
@@ -56,4 +56,5 @@ final class IndexController extends AbstractController
 			]
 		);
 	}
+	
 }

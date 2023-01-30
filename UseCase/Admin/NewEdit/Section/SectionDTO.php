@@ -32,125 +32,130 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class SectionDTO implements TypeProfileSectionInterface
 {
-    private readonly ?TypeProfileSectionUid $id;
-    
-    /** Сортировка секции свойств продукта категории
-     * @var int
-     */
-    #[Assert\NotBlank]
-    #[Assert\Range(min: 0, max: 999)]
-    private int $sort = 100;
-    
-    /** Настройки локали секции */
-    #[Assert\Valid]
-    private ArrayCollection $translate;
-    
-    /** Коллекция свойств продукта в секции */
-    #[Assert\Valid]
-    private ArrayCollection $field;
-    
-    public function __construct()
-    {
-        $this->translate = new ArrayCollection();
-        $this->field = new ArrayCollection();
-    }
-    
-//    /**
-//     * @return TypeProfileSectionUid|null
-//     */
-//    public function getEquals() : ?TypeProfileSectionUid
-//    {
-//        return $this->id;
-//    }
-
-//    /**
-//     * @param TypeProfileSectionUid $id
-//     */
-//    public function setId(TypeProfileSectionUid $id) : void
-//    {
-//        $this->id = $id;
-//    }
+	private readonly ?TypeProfileSectionUid $id;
 	
-    /**
-     * @return int
-     */
-    public function getSort() : int
-    {
-        return $this->sort;
-    }
-    
-    /**
-     * @param int $sort
-     */
-    public function setSort(int $sort) : void
-    {
-        $this->sort = $sort;
-    }
-    
-
-    
-    /**
-     * @return ArrayCollection
-     */
-    public function getTranslate() : ArrayCollection
-    {
-        /* Вычисляем расхождение и добавляем неопределенные локали */
-        foreach(Locale::diffLocale($this->translate) as $locale)
-        {
-            $TransDTO = new TransDTO();
-            $TransDTO->setLocal($locale);
-            $this->addTranslate($TransDTO);
-        }
-        
-        return $this->translate;
-    }
-    
-    
-    /** Добавляем перевод категории
-     * @param TransDTO $trans
-     * @return void
-     */
-    public function addTranslate(TransDTO $trans) : void
-    {
-        if(!$this->translate->contains($trans))
-        {
-            $this->translate[] = $trans;
-        }
-    }
-    
-    public function removeTranslate(TransDTO $trans) : void
-    {
-        $this->translate->removeElement($trans);
-    }
+	/** Сортировка секции свойств продукта категории
+	 *
+	 * @var int
+	 */
+	#[Assert\NotBlank]
+	#[Assert\Range(min: 0, max: 999)]
+	private int $sort = 100;
 	
-    
-    
-    /**
-     * @return ArrayCollection
-     */
-    public function getField() : ArrayCollection
-    {
-        if($this->field->isEmpty())
-        {
-            $FieldDTO = new FieldDTO();
-            $this->addField($FieldDTO);
-        }
-        
-        
-        return $this->field;
-    }
-
-    public function addField(FieldDTO $field) : void
-    {
-        if(!$this->field->contains($field))
-        {
-            $this->field[] = $field;
-        }
-    }
-    
-    public function removeField(FieldDTO $field) : void
-    {
-        $this->field->removeElement($field);
-    }
+	/** Настройки локали секции */
+	#[Assert\Valid]
+	private ArrayCollection $translate;
+	
+	/** Коллекция свойств продукта в секции */
+	#[Assert\Valid]
+	private ArrayCollection $field;
+	
+	
+	public function __construct()
+	{
+		$this->translate = new ArrayCollection();
+		$this->field = new ArrayCollection();
+	}
+	
+	//    /**
+	//     * @return TypeProfileSectionUid|null
+	//     */
+	//    public function getEquals() : ?TypeProfileSectionUid
+	//    {
+	//        return $this->id;
+	//    }
+	
+	//    /**
+	//     * @param TypeProfileSectionUid $id
+	//     */
+	//    public function setId(TypeProfileSectionUid $id) : void
+	//    {
+	//        $this->id = $id;
+	//    }
+	
+	/**
+	 * @return int
+	 */
+	public function getSort() : int
+	{
+		return $this->sort;
+	}
+	
+	
+	/**
+	 * @param int $sort
+	 */
+	public function setSort(int $sort) : void
+	{
+		$this->sort = $sort;
+	}
+	
+	
+	/**
+	 * @return ArrayCollection
+	 */
+	public function getTranslate() : ArrayCollection
+	{
+		/* Вычисляем расхождение и добавляем неопределенные локали */
+		foreach(Locale::diffLocale($this->translate) as $locale)
+		{
+			$TransDTO = new TransDTO();
+			$TransDTO->setLocal($locale);
+			$this->addTranslate($TransDTO);
+		}
+		
+		return $this->translate;
+	}
+	
+	
+	/** Добавляем перевод категории
+	 *
+	 * @param TransDTO $trans
+	 *
+	 * @return void
+	 */
+	public function addTranslate(TransDTO $trans) : void
+	{
+		if(!$this->translate->contains($trans))
+		{
+			$this->translate[] = $trans;
+		}
+	}
+	
+	
+	public function removeTranslate(TransDTO $trans) : void
+	{
+		$this->translate->removeElement($trans);
+	}
+	
+	
+	/**
+	 * @return ArrayCollection
+	 */
+	public function getField() : ArrayCollection
+	{
+		if($this->field->isEmpty())
+		{
+			$FieldDTO = new FieldDTO();
+			$this->addField($FieldDTO);
+		}
+		
+		return $this->field;
+	}
+	
+	
+	public function addField(FieldDTO $field) : void
+	{
+		if(!$this->field->contains($field))
+		{
+			$this->field[] = $field;
+		}
+	}
+	
+	
+	public function removeField(FieldDTO $field) : void
+	{
+		$this->field->removeElement($field);
+	}
 	
 }

@@ -20,5 +20,5 @@ namespace BaksDev\Users\Profile\TypeProfile\Entity\Section;
 
 interface TypeProfileSectionInterface
 {
-    
+	
 }

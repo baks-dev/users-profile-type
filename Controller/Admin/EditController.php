@@ -40,40 +40,42 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFILE_EDIT')")]
 final class EditController extends AbstractController
 {
-    
-    #[Route('/admin/profile/edit/{id}', name: 'admin.newedit.edit', methods: ['GET', 'POST'])]
-    #[ParamConverter('Event', TypeProfileEvent::class)]
-    public function edit(
-      Request $request,
-      TypeProfileEvent $Event,
-      TypeProfileHandler $handler
-    ) : Response
-    {
-    
-        $profile = new TypeProfileDTO();
-        $Event->getDto($profile);
-        
-        /* Форма добавления */
-        $form = $this->createForm(TypeProfileForm::class, $profile);
-        $form->handleRequest($request);
 	
+	#[Route('/admin/profile/edit/{id}', name: 'admin.newedit.edit', methods: ['GET', 'POST'])]
+	#[ParamConverter('Event', TypeProfileEvent::class)]
+	public function edit(
+		Request $request,
+		TypeProfileEvent $Event,
+		TypeProfileHandler $handler,
+	) : Response
+	{
+		
+		$profile = new TypeProfileDTO();
+		$Event->getDto($profile);
+		
+		/* Форма добавления */
+		$form = $this->createForm(TypeProfileForm::class, $profile);
+		$form->handleRequest($request);
+		
 		if($form->isSubmitted() && $form->isValid())
 		{
-
+			
 			$TypeProfile = $handler->handle($profile);
-		
+			
 			if($TypeProfile instanceof TypeProfile)
 			{
 				$this->addFlash('success', 'admin.success.update', 'admin.profile.type');
+				
 				return $this->redirectToRoute('ProfileType:admin.index');
 			}
-		
+			
 			$this->addFlash('danger', 'admin.danger.update', 'admin.profile.type', $TypeProfile);
+			
 			return $this->redirectToRoute('ProfileType:admin.index');
-		
+			
 		}
-    
-        return $this->render(['form' => $form->createView()]);
-    }
- 
+		
+		return $this->render(['form' => $form->createView()]);
+	}
+	
 }

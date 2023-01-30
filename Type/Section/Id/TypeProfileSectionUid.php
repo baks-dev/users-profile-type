@@ -22,6 +22,6 @@ use BaksDev\Core\Type\UidType\Uid;
 
 final class TypeProfileSectionUid extends Uid
 {
-    public const TYPE = 'profile_section_id';
+	public const TYPE = 'profile_section_id';
 	
 }

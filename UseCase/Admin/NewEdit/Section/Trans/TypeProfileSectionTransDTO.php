@@ -25,7 +25,6 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Trans;
 
-
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSection;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans\TypeProfileSectionTransInterface;
 use BaksDev\Users\Profile\TypeProfile\Type\Section\Id\TypeProfileSectionUid;
@@ -53,11 +52,12 @@ final class TypeProfileSectionTransDTO implements TypeProfileSectionTransInterfa
 		return $this->local;
 	}
 	
+	
 	public function setLocal(string $local) : void
 	{
 		if(!(new \ReflectionProperty($this::class, 'local'))->isInitialized($this))
 		{
-			$this->local = new Locale($local) ;
+			$this->local = new Locale($local);
 		}
 	}
 	
@@ -67,18 +67,22 @@ final class TypeProfileSectionTransDTO implements TypeProfileSectionTransInterfa
 		return $this->name;
 	}
 	
+	
 	public function setName(?string $name) : void
 	{
 		$this->name = $name;
 	}
+	
 	
 	public function getDescription() : ?string
 	{
 		return $this->description;
 	}
 	
+	
 	public function setDescription(?string $description) : void
 	{
 		$this->description = $description;
 	}
+	
 }

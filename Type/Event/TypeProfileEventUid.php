@@ -24,6 +24,6 @@ use Symfony\Component\Uid\Uuid;
 
 final class TypeProfileEventUid extends Uid
 {
-    public const TYPE = 'profile_event';
-
+	public const TYPE = 'profile_event';
+	
 }

@@ -22,6 +22,6 @@ use BaksDev\Core\Type\UidType\Uid;
 
 final class TypeProfileUid extends Uid
 {
-    public const TYPE = 'profile_id';
-  
+	public const TYPE = 'profile_id';
+	
 }

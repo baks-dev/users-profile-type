@@ -32,45 +32,53 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 		100 =>
 			[
 				100 =>
-					['ru' => 'Название организации',
-					 'en' => 'Name of the organization',
+					[
+						'ru' => 'Название организации',
+						'en' => 'Name of the organization',
 					],
 				110 =>
-					['ru' => 'Юр. адрес',
-					 'en' => 'Legal address',
+					[
+						'ru' => 'Юр. адрес',
+						'en' => 'Legal address',
 					],
 				120 =>
-					['ru' => 'Контактное лицо',
-					 'en' => 'The contact person',
+					[
+						'ru' => 'Контактное лицо',
+						'en' => 'The contact person',
 					],
 				130 =>
-					['ru' => 'Контактный телефон',
-					 'en' => 'Contact number',
+					[
+						'ru' => 'Контактный телефон',
+						'en' => 'Contact number',
 					],
 				140 =>
-					['ru' => 'Контактный E-mail',
-					 'en' => 'Contact E-mail',
+					[
+						'ru' => 'Контактный E-mail',
+						'en' => 'Contact E-mail',
 					],
 			],
-		
 		
 		200 =>
 			[
 				100 =>
-					['ru' => 'ИНН',
-					 'en' => 'INN',
+					[
+						'ru' => 'ИНН',
+						'en' => 'INN',
 					],
 				110 =>
-					['ru' => 'BIK банка',
-					 'en' => 'Bank BIK',
+					[
+						'ru' => 'BIK банка',
+						'en' => 'Bank BIK',
 					],
 				120 =>
-					['ru' => 'Расчетный счет',
-					 'en' => 'Checking account',
+					[
+						'ru' => 'Расчетный счет',
+						'en' => 'Checking account',
 					],
 				130 =>
-					['ru' => 'Корреспондентский счёт',
-					 'en' => 'Correspondent account',
+					[
+						'ru' => 'Корреспондентский счёт',
+						'en' => 'Correspondent account',
 					],
 			
 			],
@@ -80,45 +88,53 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 		100 =>
 			[
 				100 =>
-					['ru' => 'Название организации, предприятия или учреждения, содержащее указание на его ОПФ и отражающее характер его деятельности',
-					 'en' => 'The name of the organization, enterprise or institution, containing an indication of its OPF and reflecting the nature of its activities',
+					[
+						'ru' => 'Название организации, предприятия или учреждения, содержащее указание на его ОПФ и отражающее характер его деятельности',
+						'en' => 'The name of the organization, enterprise or institution, containing an indication of its OPF and reflecting the nature of its activities',
 					],
 				110 =>
-					['ru' => 'Местоположение организации, предприятия, компании и любого другого юридического лица',
-					 'en' => 'Location of the organization, enterprise, company and any other legal entity',
+					[
+						'ru' => 'Местоположение организации, предприятия, компании и любого другого юридического лица',
+						'en' => 'Location of the organization, enterprise, company and any other legal entity',
 					],
 				120 =>
-					['ru' => 'ФИО ответственного человека',
-					 'en' => 'Name of responsible person',
+					[
+						'ru' => 'ФИО ответственного человека',
+						'en' => 'Name of responsible person',
 					],
 				130 =>
-					['ru' => 'Контактный телефон для связи',
-					 'en' => 'Contact number  for communication',
+					[
+						'ru' => 'Контактный телефон для связи',
+						'en' => 'Contact number  for communication',
 					],
 				140 =>
-					['ru' => 'Контактный E-mail для связи',
-					 'en' => 'Contact E-mail for communication',
+					[
+						'ru' => 'Контактный E-mail для связи',
+						'en' => 'Contact E-mail for communication',
 					],
 			],
-		
 		
 		200 =>
 			[
 				100 =>
-					['ru' => 'Идентификационный номер налогоплательщика',
-					 'en' => 'Taxpayer identification number',
+					[
+						'ru' => 'Идентификационный номер налогоплательщика',
+						'en' => 'Taxpayer identification number',
 					],
 				110 =>
-					['ru' => 'Банковский идентификационный код (БИК) - девятизначный уникальный код кредитной организации.',
-					 'en' => 'Bank Identification Code (BIC) - a nine-digit unique code of a credit institution.',
+					[
+						'ru' => 'Банковский идентификационный код (БИК) - девятизначный уникальный код кредитной организации.',
+						'en' => 'Bank Identification Code (BIC) - a nine-digit unique code of a credit institution.',
 					],
 				120 =>
-					['ru' => 'Банковский счет, предназначенный для хранения денежных средств и проведения приходно-расходных операций',
-					 'en' => 'A bank account designed to store funds and conduct income and expenditure transactions',
+					[
+						'ru' => 'Банковский счет, предназначенный для хранения денежных средств и проведения приходно-расходных операций',
+						'en' => 'A bank account designed to store funds and conduct income and expenditure transactions',
 					],
 				130 =>
-					['ru' => 'Счет для отражения расчётов, производимых одной банковской организацией по поручению и за счёт другой на основании заключённого между ними корреспондентского соглашения',
-					 'en' => 'An account for reflecting settlements made by one banking organization on behalf of and at the expense of another on the basis of a correspondent agreement concluded between them',
+					[
+						'ru' => 'Счет для отражения расчётов, производимых одной банковской организацией по поручению и за счёт другой на основании заключённого между ними корреспондентского соглашения',
+						'en' => 'An account for reflecting settlements made by one banking organization on behalf of and at the expense of another on the basis of a correspondent agreement concluded between them',
 					],
 			
 			],
@@ -141,12 +157,16 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 	private readonly string $description;
 	
 	private readonly int $key;
+	
 	private readonly int $sort;
 	
-	public function __construct(int $key, int $sort){
+	
+	public function __construct(int $key, int $sort)
+	{
 		$this->key = $key;
 		$this->sort = $sort;
 	}
+	
 	
 	/**
 	 * @return Locale
@@ -156,15 +176,17 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 		return $this->local;
 	}
 	
+	
 	/**
 	 * @param string|Locale $local
 	 */
 	public function setLocal(string $local) : void
 	{
-		$this->name = self::NAME[$this->key][$this->sort][(string)$local];
-		$this->description = self::DESC[$this->key][$this->sort][(string)$local];
+		$this->name = self::NAME[$this->key][$this->sort][(string) $local];
+		$this->description = self::DESC[$this->key][$this->sort][(string) $local];
 		$this->local = new Locale($local);
 	}
+	
 	
 	/**
 	 * @return string|null
@@ -174,7 +196,6 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 		return $this->name;
 	}
 	
-
 	
 	/**
 	 * @return string|null

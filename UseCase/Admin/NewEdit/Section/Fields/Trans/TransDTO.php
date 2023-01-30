@@ -18,7 +18,6 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields\Trans;
 
-
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans\TypeProfileSectionFieldTransInterface;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionField;
 use BaksDev\Core\Type\Locale\Locale;
@@ -28,7 +27,7 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 {
 	/** Поле */
 	private readonly ?TypeProfileSectionField $field;
-
+	
 	/** Локаль */
 	private readonly Locale $local;
 	
@@ -48,15 +47,17 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 	{
 		return $this->local;
 	}
-
+	
+	
 	public function setLocal(string $local) : void
 	{
 		if(!(new \ReflectionProperty($this::class, 'local'))->isInitialized($this))
 		{
-			$this->local = new Locale($local) ;
+			$this->local = new Locale($local);
 		}
-
+		
 	}
+	
 	
 	/** Название раздела */
 	
@@ -64,11 +65,13 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 	{
 		return $this->name;
 	}
-
+	
+	
 	public function setName(?string $name) : void
 	{
 		$this->name = $name;
 	}
+	
 	
 	/** Краткое описание */
 	
@@ -76,9 +79,11 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 	{
 		return $this->description;
 	}
-
+	
+	
 	public function setDescription(?string $description) : void
 	{
 		$this->description = $description;
 	}
+	
 }

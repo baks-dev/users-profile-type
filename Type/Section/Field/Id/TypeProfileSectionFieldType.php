@@ -26,16 +26,19 @@
 namespace BaksDev\Users\Profile\TypeProfile\Type\Section\Field\Id;
 
 use BaksDev\Core\Type\UidType\UidType;
+
 final class TypeProfileSectionFieldType extends UidType
 {
-    
-    public function getClassType() : string
-    {
-        return TypeProfileSectionFieldUid::class;
-    }
-    
-    public function getName() : string
-    {
-        return TypeProfileSectionFieldUid::TYPE;
-    }
+	
+	public function getClassType() : string
+	{
+		return TypeProfileSectionFieldUid::class;
+	}
+	
+	
+	public function getName() : string
+	{
+		return TypeProfileSectionFieldUid::TYPE;
+	}
+	
 }

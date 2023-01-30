@@ -18,7 +18,6 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\TypeProfile\User\Section\Trans;
 
-
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Section;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans\TransInterface;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans\TypeProfileSectionTransInterface;
@@ -30,11 +29,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class TransDTO implements TypeProfileSectionTransInterface
 {
 	
-	
 	public const NAME = [
 		100 =>
-			['ru' => 'Контактные данные',
-			 'en' => 'Contact details',
+			[
+				'ru' => 'Контактные данные',
+				'en' => 'Contact details',
 			],
 	];
 	
@@ -44,7 +43,7 @@ final class TransDTO implements TypeProfileSectionTransInterface
 				'ru' => 'Данные для связи менеджерами магазина с покупателем.',
 				'en' => 'Data for communication between store managers and the buyer.',
 			],
-		
+	
 	];
 	
 	private readonly ?TypeProfileSection $section;
@@ -59,6 +58,7 @@ final class TransDTO implements TypeProfileSectionTransInterface
 	/** Краткое описание */
 	#[Assert\Regex(pattern: '/^[\w \.\,\_\-\(\)\%]+$/iu')]
 	private readonly string $description;
+	
 	private int $key;
 	
 	
@@ -67,10 +67,12 @@ final class TransDTO implements TypeProfileSectionTransInterface
 		$this->key = $key;
 	}
 	
+	
 	public function getLocal() : Locale
 	{
 		return $this->local;
 	}
+	
 	
 	public function setLocal(string $local) : void
 	{
@@ -79,6 +81,7 @@ final class TransDTO implements TypeProfileSectionTransInterface
 		$this->local = new Locale($local);
 	}
 	
+	
 	/**
 	 * @return string|null
 	 */
@@ -86,6 +89,7 @@ final class TransDTO implements TypeProfileSectionTransInterface
 	{
 		return $this->name;
 	}
+	
 	
 	public function getDescription() : ?string
 	{

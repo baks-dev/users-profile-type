@@ -30,7 +30,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class FieldDTO implements TypeProfileSectionFieldInterface
 {
 	
-
 	/** Идентификатор для сверки коллекции  */
 	private readonly ?TypeProfileSectionFieldUid $id;
 	
@@ -49,8 +48,7 @@ final class FieldDTO implements TypeProfileSectionFieldInterface
 	private readonly bool $required;
 	
 	#[Assert\Valid]
-	private readonly ArrayCollection $translate;
-	
+	private ArrayCollection $translate;
 	
 	/* Вспомогательное свойство */
 	private int $key;
@@ -62,10 +60,12 @@ final class FieldDTO implements TypeProfileSectionFieldInterface
 		$this->key = $key;
 	}
 	
+	
 	public function getSort() : int
 	{
 		return $this->sort;
 	}
+	
 	
 	public function setSort(int $sort) : void
 	{
@@ -79,13 +79,12 @@ final class FieldDTO implements TypeProfileSectionFieldInterface
 		{
 			$SectionFieldTransDTO = new Trans\TransDTO($this->key, $this->sort);
 			$SectionFieldTransDTO->setLocal($locale);
-
+			
 			$this->addTranslate($SectionFieldTransDTO);
 		}
 		
-		
-		
 	}
+	
 	
 	/**
 	 * @return InputField
@@ -95,10 +94,12 @@ final class FieldDTO implements TypeProfileSectionFieldInterface
 		return $this->type;
 	}
 	
+	
 	public function getPublic() : bool
 	{
 		return $this->public;
 	}
+	
 	
 	public function getRequired() : bool
 	{
@@ -111,9 +112,13 @@ final class FieldDTO implements TypeProfileSectionFieldInterface
 		return $this->translate;
 	}
 	
-	public function addTranslate(Trans\TransDTO $trans) : void
+	
+	public function addTranslate(Trans\TransDTO $translate) : void
 	{
-		$this->translate[] = $trans;
+		if(!$this->translate->contains($translate))
+		{
+			$this->translate->add($translate);
+		}
 		
 	}
 	

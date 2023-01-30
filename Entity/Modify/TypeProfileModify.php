@@ -40,87 +40,96 @@ use Exception;
 
 /* Модификаторы событий Profile */
 
+
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_modify')]
 #[ORM\Index(columns: ['action'])]
 class TypeProfileModify extends EntityState
 {
-    const TABLE = 'type_users_profile_modify';
-    
-    /** ID события */
-    #[ORM\Id]
-    #[ORM\OneToOne(inversedBy: 'modify', targetEntity: TypeProfileEvent::class)]
-    #[ORM\JoinColumn(name: 'event', referencedColumnName: 'id')]
-    protected TypeProfileEvent $event;
-    
-    /** Модификатор */
-    #[ORM\Column(type: ModifyAction::TYPE, nullable: false)]
-    protected ModifyAction $action;
-    
-    /** Дата */
-    #[ORM\Column(name: 'mod_date', type: Types::DATETIME_IMMUTABLE, nullable: false)]
-    private DateTimeImmutable $modDate;
-    
-    /** ID пользователя  */
-    #[ORM\Column(name: 'user_id', type: UserUid::TYPE, nullable: true)]
-    protected ?UserUid $user = null;
-    
-    /** Ip адресс */
-    #[ORM\Column(name: 'user_ip', type: IpAddress::TYPE, nullable: false)]
-    protected IpAddress $ipAddress;
-    
-    /** User-agent */
-    #[ORM\Column(name: 'user_agent', type: Types::TEXT, nullable: false)]
-    protected string $userAgent;
+	const TABLE = 'type_users_profile_modify';
 	
-    public function __construct(TypeProfileEvent $event)
-    {
-        $this->event = $event;
-        $this->modDate = new DateTimeImmutable();
-        $this->ipAddress = new IpAddress('127.0.0.1');
-        $this->userAgent = 'console';
-        $this->action = new ModifyAction(ModifyActionEnum::NEW);
-    }
+	/** ID события */
+	#[ORM\Id]
+	#[ORM\OneToOne(inversedBy: 'modify', targetEntity: TypeProfileEvent::class)]
+	#[ORM\JoinColumn(name: 'event', referencedColumnName: 'id')]
+	protected TypeProfileEvent $event;
+	
+	/** Модификатор */
+	#[ORM\Column(type: ModifyAction::TYPE, nullable: false)]
+	protected ModifyAction $action;
+	
+	/** Дата */
+	#[ORM\Column(name: 'mod_date', type: Types::DATETIME_IMMUTABLE, nullable: false)]
+	private DateTimeImmutable $modDate;
+	
+	/** ID пользователя  */
+	#[ORM\Column(name: 'user_id', type: UserUid::TYPE, nullable: true)]
+	protected ?UserUid $user = null;
+	
+	/** Ip адресс */
+	#[ORM\Column(name: 'user_ip', type: IpAddress::TYPE, nullable: false)]
+	protected IpAddress $ipAddress;
+	
+	/** User-agent */
+	#[ORM\Column(name: 'user_agent', type: Types::TEXT, nullable: false)]
+	protected string $userAgent;
+	
+	
+	public function __construct(TypeProfileEvent $event)
+	{
+		$this->event = $event;
+		$this->modDate = new DateTimeImmutable();
+		$this->ipAddress = new IpAddress('127.0.0.1');
+		$this->userAgent = 'console';
+		$this->action = new ModifyAction(ModifyActionEnum::NEW);
+	}
+	
 	
 	public function __clone() : void
 	{
 		// TODO: Implement __clone() method.
 	}
 	
+	
 	public function getDto($dto) : mixed
-    {
-        if($dto instanceof TypeProfileModifyInterface)
-        {
-            return parent::getDto($dto);
-        }
-        
-        throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
+	{
+		if($dto instanceof TypeProfileModifyInterface)
+		{
+			return parent::getDto($dto);
+		}
+		
+		throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
 	
-    public function setEntity($dto) : mixed
-    {
-        if($dto instanceof TypeProfileModifyInterface)
-        {
-            return parent::setEntity($dto);
-        }
-        
-        throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
-
-    public function upModifyAgent(IpAddress $ipAddress, string $userAgent) : void
-    {
-        $this->ipAddress = $ipAddress;
-        $this->userAgent = $userAgent;
-        $this->modDate = new DateTimeImmutable();
-    }
-
-    public function setUser(UserUid|User|null $user) : void
-    {
-        $this->user = $user instanceof User ? $user->getId() : $user;
-    }
 	
-    public function equals(ModifyActionEnum $action) : bool
-    {
-        return $this->action->equals($action);
-    }
+	public function setEntity($dto) : mixed
+	{
+		if($dto instanceof TypeProfileModifyInterface)
+		{
+			return parent::setEntity($dto);
+		}
+		
+		throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
+	
+	
+	public function upModifyAgent(IpAddress $ipAddress, string $userAgent) : void
+	{
+		$this->ipAddress = $ipAddress;
+		$this->userAgent = $userAgent;
+		$this->modDate = new DateTimeImmutable();
+	}
+	
+	
+	public function setUser(UserUid|User|null $user) : void
+	{
+		$this->user = $user instanceof User ? $user->getId() : $user;
+	}
+	
+	
+	public function equals(ModifyActionEnum $action) : bool
+	{
+		return $this->action->equals($action);
+	}
+	
 }

@@ -30,26 +30,23 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class ProfileTypeHandler
 {
 	private EntityManagerInterface $entityManager;
+	
 	private ValidatorInterface $validator;
+	
 	private LoggerInterface $logger;
-	private RequestStack $request;
-	private TranslatorInterface $translator;
+	
 	
 	public function __construct(
 		EntityManagerInterface $entityManager,
 		ValidatorInterface $validator,
 		LoggerInterface $logger,
-		RequestStack $request,
-		TranslatorInterface $translator,
 	)
 	{
 		$this->entityManager = $entityManager;
-		//$this->imageUpload = $imageUpload;
 		$this->validator = $validator;
 		$this->logger = $logger;
-		$this->request = $request;
-		$this->translator = $translator;
 	}
+	
 	
 	public function handle(
 		Entity\Event\TypeProfileEventInterface $command,
@@ -64,27 +61,21 @@ final class ProfileTypeHandler
 			$uniqid = uniqid('', false);
 			$errorsString = (string) $errors;
 			$this->logger->error($uniqid.': '.$errorsString);
+			
 			return $uniqid;
 		}
-		
 		
 		if($command->getEvent())
 		{
 			$Event = $this->entityManager->getRepository(Entity\Event\TypeProfileEvent::class)->find(
 				$command->getEvent()
 			);
-			
-			//dump($Event);
-			
-			//$EventRepo = $this->entityManager->getRepository(Entity\Event\Event::class)->find($command->getEvent());
-			//$Event = $EventRepo->cloneEntity();
-		} 
+		}
 		else
 		{
 			$Event = new Entity\Event\TypeProfileEvent();
 			$this->entityManager->persist($Event);
 		}
-		
 		
 		$Event->setEntity($command);
 		
@@ -105,12 +96,6 @@ final class ProfileTypeHandler
 				);
 				$this->logger->error($uniqid.': '.$errorsString);
 				
-				/* Уведомление пользовтаелю */
-				$this->request->getSession()->getFlashBag()->add(
-					'danger',
-					$this->translator->trans('Возможно тип профиля уже был кем-то изменен')
-				);
-				
 				return $uniqid;
 			}
 		}
@@ -124,6 +109,7 @@ final class ProfileTypeHandler
 		}
 		
 		/** Удаляем отстутсвующие объекты коллекци
+		 *
 		 * @see EntityState
 		 */
 		foreach($Event->getRemoveEntity() as $remove)
@@ -136,4 +122,5 @@ final class ProfileTypeHandler
 		
 		return $TypeProfile;
 	}
+	
 }

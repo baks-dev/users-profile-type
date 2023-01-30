@@ -31,64 +31,70 @@ use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventUid;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 use Doctrine\ORM\Mapping as ORM;
 
-
 /* Profile Type */
+
 
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile')]
 class TypeProfile
 {
-    const TABLE = 'type_users_profile';
-    
-    /** ID */
-    #[ORM\Id]
-    #[ORM\Column(type: TypeProfileUid::TYPE)]
-    private TypeProfileUid $id;
-    
-    /** ID События */
-    #[ORM\Column(type: TypeProfileEventUid::TYPE, unique: true)]
-    private TypeProfileEventUid $event;
-    
-    /**
-     * @param TypeProfileUid $id
-     */
-    public function __construct() { $this->id = new TypeProfileUid(); }
-    
-    public function __toString() : string
-    {
-        return $this->id;
-    }
-    
-    /**
-     * @return TypeProfileUid
-     */
-    public function getId() : TypeProfileUid
-    {
-        return $this->id;
-    }
-    
-    /**
-     * @param TypeProfileUid $id
-     */
-    public function setId(TypeProfileUid $id) : void
-    {
-        $this->id = $id;
-    }
-    
-    /**
-     * @return TypeProfileEventUid
-     */
-    public function getEvent() : TypeProfileEventUid
-    {
-        return $this->event;
-    }
-    
-    /**
-     * @param TypeProfileEventUid $event
-     */
-    public function setEvent(TypeProfileEventUid|TypeProfileEvent $event) : void
-    {
-        $this->event = $event instanceof TypeProfileEvent ? $event->getId() : $event;
-    }
-    
+	const TABLE = 'type_users_profile';
+	
+	/** ID */
+	#[ORM\Id]
+	#[ORM\Column(type: TypeProfileUid::TYPE)]
+	private TypeProfileUid $id;
+	
+	/** ID События */
+	#[ORM\Column(type: TypeProfileEventUid::TYPE, unique: true)]
+	private TypeProfileEventUid $event;
+	
+	
+	/**
+	 * @param TypeProfileUid $id
+	 */
+	public function __construct() { $this->id = new TypeProfileUid(); }
+	
+	
+	public function __toString() : string
+	{
+		return $this->id;
+	}
+	
+	
+	/**
+	 * @return TypeProfileUid
+	 */
+	public function getId() : TypeProfileUid
+	{
+		return $this->id;
+	}
+	
+	
+	/**
+	 * @param TypeProfileUid $id
+	 */
+	public function setId(TypeProfileUid $id) : void
+	{
+		$this->id = $id;
+	}
+	
+	
+	/**
+	 * @return TypeProfileEventUid
+	 */
+	public function getEvent() : TypeProfileEventUid
+	{
+		return $this->event;
+	}
+	
+	
+	/**
+	 * @param TypeProfileEventUid $event
+	 */
+	public function setEvent(TypeProfileEventUid|TypeProfileEvent $event) : void
+	{
+		$this->event = $event instanceof TypeProfileEvent ? $event->getId() : $event;
+	}
+	
 }

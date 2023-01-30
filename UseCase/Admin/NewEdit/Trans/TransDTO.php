@@ -28,95 +28,92 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class TransDTO implements TypeProfileTransInterface
 {
-    /** Идентификатор события */
-    private readonly TypeProfileEvent $event;
+	/** Идентификатор события */
+	private readonly TypeProfileEvent $event;
 	
 	/** Локаль  */
 	#[Assert\NotBlank]
-    private readonly Locale $local;
-    
-    /** Название раздела (строка с точкой, нижнее подчеркивание тире процент скобки) */
-    #[Assert\NotBlank]
+	private readonly Locale $local;
+	
+	/** Название раздела (строка с точкой, нижнее подчеркивание тире процент скобки) */
+	#[Assert\NotBlank]
 	#[Assert\Regex(pattern: '/^[\w \.\,\_\-\(\)\%]+$/iu')]
-    private ?string $name;
-    
-    /** Краткое описание */
+	private ?string $name;
+	
+	/** Краткое описание */
 	#[Assert\Regex(pattern: '/^[\w \.\,\_\-\(\)\%]+$/iu')]
-    private ?string $description = null;
-    
-
-//    public function getEquals() : ?TypeProfileEvent
-//    {
-//        return $this->event;
-//    }
-
-//    /**
-//     * @param TypeProfileEvent $event
-//     */
-//    public function setEvent(TypeProfileEvent $event) : void
-//    {
-//        $this->event = $event;
-//    }
-    
-    
-    
-    /**
-     * @return Locale
-     */
-    public function getLocal() : Locale
-    {
-        return $this->local;
-    }
-
-    /**
-     * @param string|Locale $local
-     */
-    public function setLocal(string $local) : void
-    {
+	private ?string $description = null;
+	
+	//    public function getEquals() : ?TypeProfileEvent
+	//    {
+	//        return $this->event;
+	//    }
+	
+	//    /**
+	//     * @param TypeProfileEvent $event
+	//     */
+	//    public function setEvent(TypeProfileEvent $event) : void
+	//    {
+	//        $this->event = $event;
+	//    }
+	
+	/**
+	 * @return Locale
+	 */
+	public function getLocal() : Locale
+	{
+		return $this->local;
+	}
+	
+	
+	/**
+	 * @param string|Locale $local
+	 */
+	public function setLocal(string $local) : void
+	{
 		if(!(new \ReflectionProperty($this::class, 'local'))->isInitialized($this))
 		{
-			$this->local = new Locale($local) ;
+			$this->local = new Locale($local);
 		}
 		
-		
 		/* Запрещаем обновлять свойство из формы */
-        //$this->local = $local instanceof Locale ? $local : new Locale($local) ;
-    }
+		//$this->local = $local instanceof Locale ? $local : new Locale($local) ;
+	}
 	
 	
-    
-    /**
-     * @return string|null
-     */
-    public function getName() : ?string
-    {
-        return $this->name;
-    }
-    
-    /**
-     * @param string|null $name
-     */
-    public function setName(?string $name) : void
-    {
-        $this->name = $name;
-    }
-    
-    /**
-     * @return string|null
-     */
-    public function getDescription() : ?string
-    {
-        return $this->description;
-    }
-    
-    /**
-     * @param string|null $description
-     */
-    public function setDescription(?string $description) : void
-    {
-        $this->description = $description;
-    }
-    
-
-    
+	/**
+	 * @return string|null
+	 */
+	public function getName() : ?string
+	{
+		return $this->name;
+	}
+	
+	
+	/**
+	 * @param string|null $name
+	 */
+	public function setName(?string $name) : void
+	{
+		$this->name = $name;
+	}
+	
+	
+	/**
+	 * @return string|null
+	 */
+	public function getDescription() : ?string
+	{
+		return $this->description;
+	}
+	
+	
+	/**
+	 * @param string|null $description
+	 */
+	public function setDescription(?string $description) : void
+	{
+		$this->description = $description;
+	}
+	
 }

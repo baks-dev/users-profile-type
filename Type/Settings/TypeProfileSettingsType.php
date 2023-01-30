@@ -31,26 +31,30 @@ use Doctrine\DBAL\Types\StringType;
 
 final class TypeProfileSettingsType extends StringType
 {
-    public const NAME = 'profile_settings';
-    
-    public function convertToDatabaseValue($value, AbstractPlatform $platform) : mixed
-    {
-        return $value instanceof TypeProfileSettingsIdentifier ? $value->getValue() : $value;
-    }
-    
-    public function convertToPHPValue($value, AbstractPlatform $platform) : mixed
-    {
-        return !empty($value) ? new TypeProfileSettingsIdentifier() : $value;
-    }
-    
-    public function getName() : string
-    {
-        return self::NAME;
-    }
-    
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
-    {
-        return true;
-    }
-    
+	public const NAME = 'profile_settings';
+	
+	
+	public function convertToDatabaseValue($value, AbstractPlatform $platform) : mixed
+	{
+		return $value instanceof TypeProfileSettingsIdentifier ? $value->getValue() : $value;
+	}
+	
+	
+	public function convertToPHPValue($value, AbstractPlatform $platform) : mixed
+	{
+		return !empty($value) ? new TypeProfileSettingsIdentifier() : $value;
+	}
+	
+	
+	public function getName() : string
+	{
+		return self::NAME;
+	}
+	
+	
+	public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+	{
+		return true;
+	}
+	
 }

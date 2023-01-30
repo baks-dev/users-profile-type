@@ -29,10 +29,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class TypeProfileHandler
 {
 	private EntityManagerInterface $entityManager;
+	
 	private ValidatorInterface $validator;
+	
 	private LoggerInterface $logger;
+	
 	private RequestStack $request;
+	
 	private TranslatorInterface $translator;
+	
 	
 	public function __construct(
 		EntityManagerInterface $entityManager,
@@ -50,6 +55,7 @@ final class TypeProfileHandler
 		$this->translator = $translator;
 	}
 	
+	
 	public function handle(
 		Entity\Event\TypeProfileEventInterface $command,
 	) : string|Entity\TypeProfile
@@ -63,9 +69,9 @@ final class TypeProfileHandler
 			$uniqid = uniqid('', false);
 			$errorsString = (string) $errors;
 			$this->logger->error($uniqid.': '.$errorsString);
+			
 			return $uniqid;
 		}
-		
 		
 		if($command->getEvent())
 		{
@@ -77,26 +83,23 @@ final class TypeProfileHandler
 			
 			//$EventRepo = $this->entityManager->getRepository(Entity\Event\Event::class)->find($command->getEvent());
 			//$Event = $EventRepo->cloneEntity();
-		} else
+		}
+		else
 		{
 			$Event = new Entity\Event\TypeProfileEvent();
 			$this->entityManager->persist($Event);
 		}
 		
-		
 		$Event->setEntity($command);
-		
-		
 		
 		/** @var Entity\TypeProfile $TypeProfile */
 		if($Event->getProfile())
 		{
 			
-			
 			$TypeProfile = $this->entityManager->getRepository(Entity\TypeProfile::class)->findOneBy(
 				['event' => $command->getEvent()]
 			);
-
+			
 			if(empty($TypeProfile))
 			{
 				$uniqid = uniqid('', false);
@@ -125,16 +128,18 @@ final class TypeProfileHandler
 			$TypeProfile->setEvent($Event);
 		}
 		
-	
-		/* Удаляем отстутсвующие объекты коллекци */
+		/** Удаляем отстутсвующие объекты коллекци
+		 *
+		 * @see EntityState
+		 */
 		foreach($Event->getRemoveEntity() as $remove)
 		{
 			$this->entityManager->remove($remove);
 		}
-
 		
 		$this->entityManager->flush();
 		
 		return $TypeProfile;
 	}
+	
 }

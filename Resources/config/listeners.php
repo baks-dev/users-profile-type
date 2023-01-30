@@ -21,19 +21,20 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use BaksDev\Users\Profile\TypeProfile\Entity;
 use BaksDev\Users\Profile\TypeProfile\EntityListeners;
 
-return static function (ContainerConfigurator $configurator)
-{
-    $services = $configurator->services()
-      ->defaults()
-      ->autowire()
-      ->autoconfigure();
-    
-    /** EntityListeners */
-    $services->set('type.profile.modify.entity.listeners')
-      ->class(EntityListeners\ModifyListener::class)
-      ->tag(
-        'doctrine.orm.entity_listener',
-        ['event' => 'prePersist', 'lazy' => true, 'entity' => Entity\Modify\TypeProfileModify::class]);
-    
-
+return static function(ContainerConfigurator $configurator) {
+	$services = $configurator->services()
+		->defaults()
+		->autowire()
+		->autoconfigure()
+	;
+	
+	/** EntityListeners */
+	$services->set('type.profile.modify.entity.listeners')
+		->class(EntityListeners\ModifyListener::class)
+		->tag(
+			'doctrine.orm.entity_listener',
+			['event' => 'prePersist', 'lazy' => true, 'entity' => Entity\Modify\TypeProfileModify::class]
+		)
+	;
+	
 };

@@ -31,20 +31,23 @@ use BaksDev\Core\Type\Modify\ModifyActionEnum;
 
 final class TypeProfileModifyDTO implements TypeProfileModifyInterface
 {
-    /** Модификатор */
-    private ModifyAction $action;
-    
-    public function __construct() {
-        $this->action = new ModifyAction(ModifyActionEnum::DELETE);
-    }
-    
-    /**
-     * @return ModifyAction
-     */
-    public function getAction() : ModifyAction
-    {
-        return $this->action;
-    }
-    
+	/** Модификатор */
+	private ModifyAction $action;
+	
+	
+	public function __construct()
+	{
+		$this->action = new ModifyAction(ModifyActionEnum::DELETE);
+	}
+	
+	
+	/**
+	 * @return ModifyAction
+	 */
+	public function getAction() : ModifyAction
+	{
+		return $this->action;
+	}
+	
 }
 

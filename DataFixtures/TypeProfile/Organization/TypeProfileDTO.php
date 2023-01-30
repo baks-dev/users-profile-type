@@ -18,7 +18,6 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\TypeProfile\Organization;
 
-
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
 use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventUid;
 use BaksDev\Core\Type\Locale\Locale;
@@ -33,7 +32,6 @@ final class TypeProfileDTO implements TypeProfileEventInterface
 		100 => 'Контактные данные',
 		200 => 'Официальные реквизиты',
 	];
-	
 	
 	/** Идентификатор события */
 	#[Assert\Uuid]
@@ -80,6 +78,7 @@ final class TypeProfileDTO implements TypeProfileEventInterface
 		return $this->translate;
 	}
 	
+	
 	public function addTranslate(Trans\TransDTO $trans) : void
 	{
 		if(!$this->translate->contains($trans))
@@ -102,9 +101,13 @@ final class TypeProfileDTO implements TypeProfileEventInterface
 		return $this->section;
 	}
 	
+	
 	public function addSection(Section\SectionDTO $section) : void
 	{
-		$this->section->add($section);
+		if(!$this->section->contains($section))
+		{
+			$this->section->add($section);
+		}
 	}
 	
 	
@@ -113,6 +116,5 @@ final class TypeProfileDTO implements TypeProfileEventInterface
 	{
 		return $this->sort;
 	}
-	
 	
 }

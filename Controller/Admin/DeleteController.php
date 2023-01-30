@@ -38,41 +38,42 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFILE_DELETE')")]
 final class DeleteController extends AbstractController
 {
-    #[Route('/admin/profile/delete/{id}', name: 'admin.delete', methods: ['POST'])]
-    public function delete(
-      Request $request,
-      TypeProfileEvent $Event,
-      TypeProfileHandler $handler
-    ) : Response
+	#[Route('/admin/profile/delete/{id}', name: 'admin.delete', methods: ['POST'])]
+	public function delete(
+		Request $request,
+		TypeProfileEvent $Event,
+		TypeProfileHandler $handler,
+	) : Response
 	{
 		$TypeProfileDTO = new DeleteTypeProfileDTO();
 		$Event->getDto($TypeProfileDTO);
-	
+		
 		$form = $this->createForm(DeleteTypeProfileForm::class, $TypeProfileDTO, [
 			'action' => $this->generateUrl('ProfileType:admin.delete', ['id' => $TypeProfileDTO->getEvent()]),
 		]);
-	
+		
 		$form->handleRequest($request);
-	
+		
 		if($form->isSubmitted() && $form->isValid() && $form->has('delete'))
 		{
-		
+			
 			$GroupEvent = $handler->handle($TypeProfileDTO);
-		
+			
 			if($GroupEvent instanceof TypeProfile)
 			{
 				$this->addFlash('admin.form.delete.header', 'admin.success.delete', 'admin.profile.type');
+				
 				return $this->redirectToRoute('ProfileType:admin.index');
 			}
-		
+			
 			$this->addFlash('admin.form.delete.header', 'admin.danger.delete', 'admin.profile.type', $GroupEvent);
+			
 			return $this->redirectToRoute('ProfileType:admin.index', status: 400);
 		}
-	
+		
 		return $this->render
 		(
 			[
@@ -82,5 +83,5 @@ final class DeleteController extends AbstractController
 			'content.html.twig'
 		);
 	}
-    
+	
 }

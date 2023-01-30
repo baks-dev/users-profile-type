@@ -38,68 +38,72 @@ use InvalidArgumentException;
 
 /* Перевод Field */
 
+
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_section_field_trans')]
 class TypeProfileSectionFieldTrans extends EntityState
 {
-    const TABLE = 'type_users_profile_section_field_trans';
-    
-    /** Связь на поле */
-    #[ORM\Id]
-    #[ORM\ManyToOne(targetEntity: TypeProfileSectionField::class, inversedBy: "translate")]
-    #[ORM\JoinColumn(name: 'field', referencedColumnName: "id", nullable: true)]
-    private readonly ?TypeProfileSectionField $field;
-    
-    /** Локаль */
-    #[ORM\Id]
-    #[ORM\Column(type: Locale::TYPE, length: 2)]
-    private readonly Locale $local;
-    
-    /** Название */
-    #[ORM\Column(type: Types::STRING, length: 100)]
-    private string $name;
-    
-    /** Описание */
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description;
-    
-    /**
-     * @param TypeProfileSectionField $field
-     */
-    public function __construct(TypeProfileSectionField $field) { $this->field = $field; }
-
-    public function getDto($dto) : mixed
-    {
-        if($dto instanceof TypeProfileSectionFieldTransInterface)
-        {
-            return parent::getDto($dto);
-        }
-        
-        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
-
-    public function setEntity($dto) : mixed
-    {
-        
-        if($dto instanceof TypeProfileSectionFieldTransInterface)
-        {
-            return parent::setEntity($dto);
-        }
-        
-        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
-    
-    
-    public function equals($dto) : bool
-    {
-        if($dto instanceof TypeProfileSectionFieldTransInterface)
-        {
-            return  ($this->field->getId() === $dto->getEquals() &&
-              $dto->getLocal()->getValue() === $this->local->getValue());
-            
-        }
-        
-        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
-    
+	const TABLE = 'type_users_profile_section_field_trans';
+	
+	/** Связь на поле */
+	#[ORM\Id]
+	#[ORM\ManyToOne(targetEntity: TypeProfileSectionField::class, inversedBy: "translate")]
+	#[ORM\JoinColumn(name: 'field', referencedColumnName: "id", nullable: true)]
+	private readonly ?TypeProfileSectionField $field;
+	
+	/** Локаль */
+	#[ORM\Id]
+	#[ORM\Column(type: Locale::TYPE, length: 2)]
+	private readonly Locale $local;
+	
+	/** Название */
+	#[ORM\Column(type: Types::STRING, length: 100)]
+	private string $name;
+	
+	/** Описание */
+	#[ORM\Column(type: Types::TEXT, nullable: true)]
+	private ?string $description;
+	
+	
+	/**
+	 * @param TypeProfileSectionField $field
+	 */
+	public function __construct(TypeProfileSectionField $field) { $this->field = $field; }
+	
+	
+	public function getDto($dto) : mixed
+	{
+		if($dto instanceof TypeProfileSectionFieldTransInterface)
+		{
+			return parent::getDto($dto);
+		}
+		
+		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
+	
+	
+	public function setEntity($dto) : mixed
+	{
+		
+		if($dto instanceof TypeProfileSectionFieldTransInterface)
+		{
+			return parent::setEntity($dto);
+		}
+		
+		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
+	
+	
+	public function equals($dto) : bool
+	{
+		if($dto instanceof TypeProfileSectionFieldTransInterface)
+		{
+			return ($this->field->getId() === $dto->getEquals() &&
+				$dto->getLocal()->getValue() === $this->local->getValue());
+			
+		}
+		
+		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
+	
 }

@@ -17,7 +17,6 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\TypeProfile\Organization;
 
-
 use BaksDev\Users\Profile\TypeProfile\Entity as EntityTypeProfile;
 use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\ProfileTypeHandler;
 use BaksDev\Core\Type\Locale\Locale;
@@ -31,21 +30,27 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 final class TypeProfileOrganizationFixtures extends Fixture
 {
 	private ProfileTypeHandler $typeHandler;
+	
 	private SymfonyStyle $io;
 	
+	
 	public function __construct(
-      ProfileTypeHandler $typeHandler,
-    ) {
+		ProfileTypeHandler $typeHandler,
+	)
+	{
 		
 		$this->typeHandler = $typeHandler;
 		$this->io = new SymfonyStyle(new ArrayInput([]), new ConsoleOutput());
 	}
-    
-    public function load(ObjectManager $manager) : void
-    {
+	
+	
+	public function load(ObjectManager $manager) : void
+	{
 		# php bin/console doctrine:fixtures:load --append
 		
-		$isTypeProfile = $manager->getRepository(EntityTypeProfile\Trans\TypeProfileTrans::class)->findOneBy(['name' => Trans\TransDTO::NAME[LocaleEnum::DEFAULT_LOCALE]]);
+		$isTypeProfile = $manager->getRepository(EntityTypeProfile\Trans\TypeProfileTrans::class)
+			->findOneBy(['name' => Trans\TransDTO::NAME[LocaleEnum::DEFAULT_LOCALE]])
+		;
 		
 		if($isTypeProfile === null)
 		{
@@ -57,7 +62,7 @@ final class TypeProfileOrganizationFixtures extends Fixture
 				$this->io->error(sprintf('Ошика %s при добавлении профиля организации', $TypeProfile));
 			}
 		}
-
-    }
+		
+	}
 	
 }

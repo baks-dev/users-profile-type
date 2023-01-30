@@ -25,7 +25,6 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields;
 
-
 use BaksDev\Core\Entity\EntityState;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionFieldInterface;
@@ -45,96 +44,103 @@ use InvalidArgumentException;
 
 /* События Field */
 
+
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_section_field')]
 class TypeProfileSectionField extends EntityState
 {
-    const TABLE = 'type_users_profile_section_field';
-    
-    /** ID */
-    #[ORM\Id]
-    #[ORM\Column(type: TypeProfileSectionFieldUid::TYPE)]
-    private readonly TypeProfileSectionFieldUid $id;
-    
-    /** Связь на секцию */
-    #[ORM\ManyToOne(targetEntity: TypeProfileSection::class, inversedBy: 'field')]
-    #[ORM\JoinColumn(name: 'section', referencedColumnName: 'id', nullable: true)]
-    #[ORM\OrderBy(['sort' => 'ASC'])]
-    private ?TypeProfileSection $section;
-    
-    /** Перевод */
-    #[ORM\OneToMany(mappedBy: 'field', targetEntity: TypeProfileSectionFieldTrans::class, cascade: ['all'])]
-    private Collection $translate;
-    
-    /** Сортировка */
-    #[ORM\Column(name: 'sort', type: Types::SMALLINT, length: 3, nullable: false, options: ['default' => 500])]
-    private int $sort = 500;
-    
-    /** Тип поля (input, select, textarea ....)  */
-    #[ORM\Column(name: 'type', type: InputField::TYPE, length: 10, nullable: false, options: ['default' => 'input'])]
-    private InputField $type;
-    
-    #[ORM\Column(name: 'public', type: Types::BOOLEAN, nullable: false, options: ['default' => true])]
-    private bool $public = true;
-    
-    #[ORM\Column(name: 'required', type: Types::BOOLEAN, nullable: false, options: ['default' => true])]
-    private bool $required = true;
-    
-    public function __construct(TypeProfileSection $section)
-    {
-        $this->id = new TypeProfileSectionFieldUid();
-        $this->translate = new ArrayCollection();
-        $this->section = $section;
-    }
+	const TABLE = 'type_users_profile_section_field';
+	
+	/** ID */
+	#[ORM\Id]
+	#[ORM\Column(type: TypeProfileSectionFieldUid::TYPE)]
+	private readonly TypeProfileSectionFieldUid $id;
+	
+	/** Связь на секцию */
+	#[ORM\ManyToOne(targetEntity: TypeProfileSection::class, inversedBy: 'field')]
+	#[ORM\JoinColumn(name: 'section', referencedColumnName: 'id', nullable: true)]
+	#[ORM\OrderBy(['sort' => 'ASC'])]
+	private ?TypeProfileSection $section;
+	
+	/** Перевод */
+	#[ORM\OneToMany(mappedBy: 'field', targetEntity: TypeProfileSectionFieldTrans::class, cascade: ['all'])]
+	private Collection $translate;
+	
+	/** Сортировка */
+	#[ORM\Column(name: 'sort', type: Types::SMALLINT, length: 3, nullable: false, options: ['default' => 500])]
+	private int $sort = 500;
+	
+	/** Тип поля (input, select, textarea ....)  */
+	#[ORM\Column(name: 'type', type: InputField::TYPE, length: 10, nullable: false, options: ['default' => 'input'])]
+	private InputField $type;
+	
+	#[ORM\Column(name: 'public', type: Types::BOOLEAN, nullable: false, options: ['default' => true])]
+	private bool $public = true;
+	
+	#[ORM\Column(name: 'required', type: Types::BOOLEAN, nullable: false, options: ['default' => true])]
+	private bool $required = true;
+	
+	
+	public function __construct(TypeProfileSection $section)
+	{
+		$this->id = new TypeProfileSectionFieldUid();
+		$this->translate = new ArrayCollection();
+		$this->section = $section;
+	}
+	
 	
 	public function __toString() : string
 	{
 		return $this->id;
 	}
 	
+	
 	/**
-     * @return TypeProfileSectionFieldUid
-     */
-    public function getId() : TypeProfileSectionFieldUid
-    {
-        return $this->id;
-    }
-
-    public function getDto($dto) : mixed
-    {
-        if($dto instanceof TypeProfileSectionFieldInterface)
-        {
-            return parent::getDto($dto);
-        }
-        
-        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
-
-    public function setEntity($dto) : mixed
-    {
-        
-        if($dto instanceof TypeProfileSectionFieldInterface)
-        {
-            return parent::setEntity($dto);
-        }
-        
-        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
-    
-    
-    public function equals($dto) : bool
-    {
-        if($dto instanceof TypeProfileSectionFieldInterface)
-        {
-            return $this->id === $dto->getEquals();
-        }
-        
-        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
-    
-    public function removeElement() : void
-    {
-        $this->section = null;
-    }
-
+	 * @return TypeProfileSectionFieldUid
+	 */
+	public function getId() : TypeProfileSectionFieldUid
+	{
+		return $this->id;
+	}
+	
+	
+	public function getDto($dto) : mixed
+	{
+		if($dto instanceof TypeProfileSectionFieldInterface)
+		{
+			return parent::getDto($dto);
+		}
+		
+		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
+	
+	
+	public function setEntity($dto) : mixed
+	{
+		
+		if($dto instanceof TypeProfileSectionFieldInterface)
+		{
+			return parent::setEntity($dto);
+		}
+		
+		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
+	
+	
+	public function equals($dto) : bool
+	{
+		if($dto instanceof TypeProfileSectionFieldInterface)
+		{
+			return $this->id === $dto->getEquals();
+		}
+		
+		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
+	
+	
+	public function removeElement() : void
+	{
+		$this->section = null;
+	}
+	
 }

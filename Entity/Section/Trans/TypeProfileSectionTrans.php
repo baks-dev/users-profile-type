@@ -25,7 +25,6 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans;
 
-
 use BaksDev\Core\Entity\EntityState;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEventInterface;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSection;
@@ -39,66 +38,72 @@ use InvalidArgumentException;
 
 /* Перевод Section */
 
+
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_section_trans')]
 class TypeProfileSectionTrans extends EntityState
 {
-    const TABLE = 'type_users_profile_section_trans';
-    
-    /** Связь на секцию */
-    #[ORM\Id]
-    #[ORM\ManyToOne(targetEntity: TypeProfileSection::class, inversedBy: "translate")]
-    #[ORM\JoinColumn(name: 'section', referencedColumnName: "id", nullable: true)]
-    private readonly ?TypeProfileSection $section;
-    
-    /** Локаль */
-    #[ORM\Id]
-    #[ORM\Column(name: 'local', type: Locale::TYPE, length: 2, nullable: false)]
-    private readonly Locale $local;
-    
-    /** Название */
-    #[ORM\Column(name: 'name', type: Types::STRING, length: 100, nullable: false)]
-    private string $name;
-    
-    /** Описание */
-    #[ORM\Column(name: 'description', type: Types::TEXT, nullable: true)]
-    private ?string $description;
-    
-    /**
-     * @param TypeProfileSection|null $section
-     */
-    public function __construct(TypeProfileSection $section) { $this->section = $section; }
-
-    public function getDto($dto) : mixed
-    {
-        if($dto instanceof TypeProfileSectionTransInterface)
-        {
-            return parent::getDto($dto);
-        }
-        
-        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
-
-    public function setEntity($dto) : mixed
-    {
-        
-        if($dto instanceof TypeProfileSectionTransInterface)
-        {
-            return parent::setEntity($dto);
-        }
-        
-        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
+	const TABLE = 'type_users_profile_section_trans';
 	
-    public function equals($dto) : bool
-    {
-        if($dto instanceof TypeProfileSectionTransInterface)
-        {
-            return  ($this->section->getId() === $dto->getEquals() &&
-              $dto->getLocal()->getValue() === $this->local->getValue());
-            
-        }
-        
-        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
+	/** Связь на секцию */
+	#[ORM\Id]
+	#[ORM\ManyToOne(targetEntity: TypeProfileSection::class, inversedBy: "translate")]
+	#[ORM\JoinColumn(name: 'section', referencedColumnName: "id", nullable: true)]
+	private readonly ?TypeProfileSection $section;
+	
+	/** Локаль */
+	#[ORM\Id]
+	#[ORM\Column(name: 'local', type: Locale::TYPE, length: 2, nullable: false)]
+	private readonly Locale $local;
+	
+	/** Название */
+	#[ORM\Column(name: 'name', type: Types::STRING, length: 100, nullable: false)]
+	private string $name;
+	
+	/** Описание */
+	#[ORM\Column(name: 'description', type: Types::TEXT, nullable: true)]
+	private ?string $description;
+	
+	
+	/**
+	 * @param TypeProfileSection|null $section
+	 */
+	public function __construct(TypeProfileSection $section) { $this->section = $section; }
+	
+	
+	public function getDto($dto) : mixed
+	{
+		if($dto instanceof TypeProfileSectionTransInterface)
+		{
+			return parent::getDto($dto);
+		}
+		
+		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
+	
+	
+	public function setEntity($dto) : mixed
+	{
+		
+		if($dto instanceof TypeProfileSectionTransInterface)
+		{
+			return parent::setEntity($dto);
+		}
+		
+		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
+	
+	
+	public function equals($dto) : bool
+	{
+		if($dto instanceof TypeProfileSectionTransInterface)
+		{
+			return ($this->section->getId() === $dto->getEquals() &&
+				$dto->getLocal()->getValue() === $this->local->getValue());
+			
+		}
+		
+		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+	}
+	
 }

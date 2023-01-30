@@ -23,14 +23,16 @@ use BaksDev\Core\Type\UidType\UidType;
 
 final class TypeProfileType extends UidType
 {
-    
-    public function getClassType() : string
-    {
-        return TypeProfileUid::class;
-    }
-    
-    public function getName() : string
-    {
-        return TypeProfileUid::TYPE;
-    }
+	
+	public function getClassType() : string
+	{
+		return TypeProfileUid::class;
+	}
+	
+	
+	public function getName() : string
+	{
+		return TypeProfileUid::TYPE;
+	}
+	
 }

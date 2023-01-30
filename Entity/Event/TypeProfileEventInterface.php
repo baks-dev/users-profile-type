@@ -25,11 +25,10 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Event;
 
-
-
 use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventUid;
 
 interface TypeProfileEventInterface
 {
-    public function getEvent() : ?TypeProfileEventUid;
+	public function getEvent() : ?TypeProfileEventUid;
+	
 }

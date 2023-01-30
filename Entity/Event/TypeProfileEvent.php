@@ -45,6 +45,7 @@ use Exception;
 
 /* События Profile */
 
+
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_event')]
 #[ORM\Index(columns: ['profile'])]
@@ -78,6 +79,7 @@ class TypeProfileEvent extends EntityState
 	#[ORM\OneToOne(mappedBy: 'event', targetEntity: TypeProfileModify::class, cascade: ['all'])]
 	private TypeProfileModify $modify;
 	
+	
 	public function __construct()
 	{
 		$this->id = new TypeProfileEventUid();
@@ -85,26 +87,30 @@ class TypeProfileEvent extends EntityState
 		
 	}
 	
+	
 	public function __toString() : string
 	{
 		return $this->id;
 	}
 	
+	
 	public function getId() : TypeProfileEventUid
 	{
 		return $this->id;
 	}
-
+	
+	
 	public function getProfile() : ?TypeProfileUid
 	{
 		return $this->profile;
 	}
 	
-
+	
 	public function setProfile(TypeProfileUid|TypeProfile $profile) : void
 	{
 		$this->profile = $profile instanceof TypeProfile ? $profile->getId() : $profile;
 	}
+	
 	
 	public function getDto($dto) : mixed
 	{
@@ -116,6 +122,7 @@ class TypeProfileEvent extends EntityState
 		throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
 	}
 	
+	
 	public function setEntity($dto) : mixed
 	{
 		if($dto instanceof TypeProfileEventInterface)
@@ -126,10 +133,12 @@ class TypeProfileEvent extends EntityState
 		throw new \InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
 	}
 	
+	
 	public function isModifyActionEquals(ModifyActionEnum $action) : bool
 	{
 		return $this->modify->equals($action);
 	}
+	
 	
 	public function getNameByLocale(Locale $locale) : ?string
 	{

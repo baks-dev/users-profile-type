@@ -14,22 +14,22 @@ use BaksDev\Users\Profile\TypeProfile\Type\Settings\TypeProfileSettingsIdentifie
 use BaksDev\Users\Profile\TypeProfile\Type\Settings\TypeProfileSettingsType;
 use Symfony\Config\DoctrineConfig;
 
-return static function (ContainerConfigurator $container, DoctrineConfig $doctrine)
-{
-
-    $doctrine->dbal()->type(TypeProfileUid::TYPE)->class(TypeProfileType::class);
-    $doctrine->dbal()->type(TypeProfileEventUid::TYPE)->class(TypeProfileEventType::class);
-    $doctrine->dbal()->type(TypeProfileSettingsIdentifier::TYPE)->class(TypeProfileSettingsType::class);
-    $doctrine->dbal()->type(TypeProfileSectionUid::TYPE)->class(TypeProfileSectionType::class);
-    $doctrine->dbal()->type(TypeProfileSectionFieldUid::TYPE)->class(TypeProfileSectionFieldType::class);
-
-    $emDefault = $doctrine->orm()->entityManager('default');
-    
-    $emDefault->autoMapping(true);
-    $emDefault->mapping('TypeProfile')
-      ->type('attribute')
+return static function(ContainerConfigurator $container, DoctrineConfig $doctrine) {
+	
+	$doctrine->dbal()->type(TypeProfileUid::TYPE)->class(TypeProfileType::class);
+	$doctrine->dbal()->type(TypeProfileEventUid::TYPE)->class(TypeProfileEventType::class);
+	$doctrine->dbal()->type(TypeProfileSettingsIdentifier::TYPE)->class(TypeProfileSettingsType::class);
+	$doctrine->dbal()->type(TypeProfileSectionUid::TYPE)->class(TypeProfileSectionType::class);
+	$doctrine->dbal()->type(TypeProfileSectionFieldUid::TYPE)->class(TypeProfileSectionFieldType::class);
+	
+	$emDefault = $doctrine->orm()->entityManager('default');
+	
+	$emDefault->autoMapping(true);
+	$emDefault->mapping('TypeProfile')
+		->type('attribute')
 		->dir(__DIR__.'/../../Entity')
-      ->isBundle(false)
-      ->prefix('BaksDev\Users\Profile\TypeProfile\Entity')
-      ->alias('TypeProfile');
+		->isBundle(false)
+		->prefix('BaksDev\Users\Profile\TypeProfile\Entity')
+		->alias('TypeProfile')
+	;
 };

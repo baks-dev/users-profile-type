@@ -25,72 +25,78 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity;
 
-
 use BaksDev\Users\Profile\TypeProfile\Type\Settings\TypeProfileSettingsIdentifier;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 
 /* Настройки сущности Profile */
 
+
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_settings')]
 class Settings
 {
-    const TABLE = 'type_users_profile_settings';
-
-    /** ID */
-    #[ORM\Id]
-    #[ORM\Column(type: TypeProfileSettingsIdentifier::TYPE)]
-    private TypeProfileSettingsIdentifier $id;
-
-    /** Очищать корзину старше n дней */
-    #[ORM\Column(name: 'settings_truncate', type: Types::SMALLINT, length: 3, nullable: false)]
-    private int $settingsTruncate = 365;
-    
-    
-    /** Очищать события старше n дней */
-    #[ORM\Column(name: 'settings_history', type: Types::SMALLINT, length: 3, nullable: false)]
-    private int $settingsHistory = 365;
-
-    public function __construct() { $this->id = new TypeProfileSettingsIdentifier();  }
-
-    /**
-    * @return TypeProfileSettingsIdentifier
-    */
-    public function getId() : TypeProfileSettingsIdentifier
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSettingsTruncate() : int
-    {
-        return $this->settingsTruncate;
-    }
-    
-    /**
-     * @param int $settingsTruncate
-     */
-    public function setSettingsTruncate(int $settingsTruncate) : void
-    {
-        $this->settingsTruncate = $settingsTruncate;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getSettingsHistory() : int
-    {
-        return $this->settingsHistory;
-    }
-    
-    /**
-     * @param int $settingsHistory
-     */
-    public function setSettingsHistory(int $settingsHistory) : void
-    {
-        $this->settingsHistory = $settingsHistory;
-    }
+	const TABLE = 'type_users_profile_settings';
+	
+	/** ID */
+	#[ORM\Id]
+	#[ORM\Column(type: TypeProfileSettingsIdentifier::TYPE)]
+	private TypeProfileSettingsIdentifier $id;
+	
+	/** Очищать корзину старше n дней */
+	#[ORM\Column(name: 'settings_truncate', type: Types::SMALLINT, length: 3, nullable: false)]
+	private int $settingsTruncate = 365;
+	
+	/** Очищать события старше n дней */
+	#[ORM\Column(name: 'settings_history', type: Types::SMALLINT, length: 3, nullable: false)]
+	private int $settingsHistory = 365;
+	
+	
+	public function __construct() { $this->id = new TypeProfileSettingsIdentifier(); }
+	
+	
+	/**
+	 * @return TypeProfileSettingsIdentifier
+	 */
+	public function getId() : TypeProfileSettingsIdentifier
+	{
+		return $this->id;
+	}
+	
+	
+	/**
+	 * @return int
+	 */
+	public function getSettingsTruncate() : int
+	{
+		return $this->settingsTruncate;
+	}
+	
+	
+	/**
+	 * @param int $settingsTruncate
+	 */
+	public function setSettingsTruncate(int $settingsTruncate) : void
+	{
+		$this->settingsTruncate = $settingsTruncate;
+	}
+	
+	
+	/**
+	 * @return int
+	 */
+	public function getSettingsHistory() : int
+	{
+		return $this->settingsHistory;
+	}
+	
+	
+	/**
+	 * @param int $settingsHistory
+	 */
+	public function setSettingsHistory(int $settingsHistory) : void
+	{
+		$this->settingsHistory = $settingsHistory;
+	}
+	
 }

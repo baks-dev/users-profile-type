@@ -39,15 +39,19 @@ final class AllProfileTypeQuery implements AllProfileTypeInterface
 {
 	
 	private Connection $connection;
+	
 	private Locale $local;
+	
 	private PaginatorInterface $paginator;
+	
 	private SwitcherInterface $switcher;
+	
 	
 	public function __construct(
 		Connection $connection,
 		TranslatorInterface $translator,
 		PaginatorInterface $paginator,
-		SwitcherInterface $switcher
+		SwitcherInterface $switcher,
 	)
 	{
 		$this->connection = $connection;
@@ -55,54 +59,58 @@ final class AllProfileTypeQuery implements AllProfileTypeInterface
 		$this->paginator = $paginator;
 		$this->switcher = $switcher;
 	}
-    
-    public function get(SearchDTO $search = null)
-    {
-        $qb = $this->connection->createQueryBuilder();
-
-        /* TypeProfile */
-        $qb->select('profile.id');
-        $qb->addSelect('profile.event');
-        
-        $qb->from(TypeProfileEntity\TypeProfile::TABLE, 'profile');
 	
 	
+	public function get(SearchDTO $search = null)
+	{
+		$qb = $this->connection->createQueryBuilder();
 		
-        /* TypeProfile Event */
-        $qb->addSelect('profile_event.sort');
-        $qb->join('profile', TypeProfileEntity\Event\TypeProfileEvent::TABLE, 'profile_event', 'profile_event.id = profile.event');
-    
-        /* TypeProfile Translate */
-        $qb->addSelect('profile_trans.name');
-        $qb->addSelect('profile_trans.description');
-        $qb->join(
-          'profile',
+		/* TypeProfile */
+		$qb->select('profile.id');
+		$qb->addSelect('profile.event');
+		
+		$qb->from(TypeProfileEntity\TypeProfile::TABLE, 'profile');
+		
+		/* TypeProfile Event */
+		$qb->addSelect('profile_event.sort');
+		$qb->join('profile',
+			TypeProfileEntity\Event\TypeProfileEvent::TABLE,
+			'profile_event',
+			'profile_event.id = profile.event'
+		);
+		
+		/* TypeProfile Translate */
+		$qb->addSelect('profile_trans.name');
+		$qb->addSelect('profile_trans.description');
+		$qb->join(
+			'profile',
 			TypeProfileEntity\Trans\TypeProfileTrans::TABLE,
-          'profile_trans',
-          'profile_trans.event = profile.event AND profile_trans.local = :local');
+			'profile_trans',
+			'profile_trans.event = profile.event AND profile_trans.local = :local'
+		);
 		
-        $qb->setParameter('local', $this->local, Locale::TYPE);
-	
+		$qb->setParameter('local', $this->local, Locale::TYPE);
 		
-        /* Поиск */
-        if($search && $search->query)
-        {
-            /*            $qb->andWhere(
-                          '
-                                    LOWER(profile_trans.name) LIKE :query OR
-            
-                                    LOWER(profile_trans.name) LIKE :switcher
-            
-                                ');
-                        
-                        $qb->setParameter('query', '%'.mb_strtolower((new Switcher())($search->query, 0)).'%');
-                        $qb->setParameter('switcher', '%'.mb_strtolower((new Switcher())($search->query, 1)).'%');
-            */
-        }
-	
+		/* Поиск */
+		if($search && $search->query)
+		{
+			/*            $qb->andWhere(
+						  '
+									LOWER(profile_trans.name) LIKE :query OR
+			
+									LOWER(profile_trans.name) LIKE :switcher
+			
+								');
+						
+						$qb->setParameter('query', '%'.mb_strtolower((new Switcher())($search->query, 0)).'%');
+						$qb->setParameter('switcher', '%'.mb_strtolower((new Switcher())($search->query, 1)).'%');
+			*/
+		}
+		
 		$qb->orderBy('profile_event.sort', 'ASC');
+		
 		return $this->paginator->fetchAllAssociative($qb);
-
-    }
-    
+		
+	}
+	
 }

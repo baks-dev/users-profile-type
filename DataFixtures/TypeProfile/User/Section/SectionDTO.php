@@ -18,7 +18,6 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\DataFixtures\TypeProfile\User\Section;
 
-
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSectionInterface;
 use BaksDev\Users\Profile\TypeProfile\Type\Section\Id\TypeProfileSectionUid;
 
@@ -30,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class SectionDTO implements TypeProfileSectionInterface
 {
-
+	
 	private readonly ?TypeProfileSectionUid $id;
 	
 	/** Сортировка секции свойств продукта категории */
@@ -45,6 +44,7 @@ final class SectionDTO implements TypeProfileSectionInterface
 	/** Коллекция свойств продукта в секции */
 	#[Assert\Valid]
 	private ArrayCollection $field;
+	
 	
 	public function __construct()
 	{
@@ -76,6 +76,7 @@ final class SectionDTO implements TypeProfileSectionInterface
 		return $this->sort;
 	}
 	
+	
 	/**
 	 * @param int $sort
 	 */
@@ -87,29 +88,35 @@ final class SectionDTO implements TypeProfileSectionInterface
 			$TransDTO = new Trans\TransDTO($sort);
 			$TransDTO->setLocal($locale);
 			$this->addTranslate($TransDTO);
-			
-			/* Поля секций */
-			foreach(Fields\Trans\TransDTO::NAME[$sort] as $key => $value)
-			{
-				$FieldDTO = new Fields\FieldDTO($sort);
-				$FieldDTO->setSort($key);
-				$this->addField($FieldDTO);
-			}
 		}
-
+		
+		/* Поля секций */
+		foreach(Fields\Trans\TransDTO::NAME[$sort] as $key => $value)
+		{
+			$FieldDTO = new Fields\FieldDTO($sort);
+			$FieldDTO->setSort($key);
+			$this->addField($FieldDTO);
+		}
+		
 		$this->sort = $sort;
 	}
+	
 	
 	public function getTranslate() : ArrayCollection
 	{
 		return $this->translate;
 	}
 	
+	
 	public function addTranslate(Trans\TransDTO $trans) : void
 	{
-		$this->translate[] = $trans;
+		if(!$this->translate->contains($trans))
+		{
+			$this->translate[] = $trans;
+		}
+		
 	}
-
+	
 	
 	/**
 	 * @return ArrayCollection
@@ -119,6 +126,7 @@ final class SectionDTO implements TypeProfileSectionInterface
 		return $this->field;
 	}
 	
+	
 	public function addField(Fields\FieldDTO $field) : void
 	{
 		if(!$this->field->contains($field))
@@ -126,6 +134,5 @@ final class SectionDTO implements TypeProfileSectionInterface
 			$this->field[] = $field;
 		}
 	}
-	
 	
 }

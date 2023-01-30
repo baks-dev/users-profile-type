@@ -29,25 +29,33 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 final class TypeProfileUserFixtures extends Fixture
 {
 	private ProfileTypeHandler $typeHandler;
+	
 	private SymfonyStyle $io;
+	
 	
 	public function __construct(
 		ProfileTypeHandler $typeHandler,
-	) {
+	)
+	{
 		
 		$this->typeHandler = $typeHandler;
 		$this->io = new SymfonyStyle(new ArrayInput([]), new ConsoleOutput());
 	}
 	
+	
 	public function load(ObjectManager $manager) : void
 	{
 		# php bin/console doctrine:fixtures:load --append
 		
-		$isTypeProfile = $manager->getRepository(EntityTypeProfile\Trans\TypeProfileTrans::class)->findOneBy(['name' => Trans\TransDTO::NAME[LocaleEnum::DEFAULT_LOCALE]]);
+		$isTypeProfile = $manager->getRepository(EntityTypeProfile\Trans\TypeProfileTrans::class)
+			->findOneBy(['name' => Trans\TransDTO::NAME[LocaleEnum::DEFAULT_LOCALE]])
+		;
 		
 		if($isTypeProfile === null)
 		{
+			
 			$TypeProfileDTO = new TypeProfileDTO();
+			
 			$TypeProfile = $this->typeHandler->handle($TypeProfileDTO);
 			
 			if(!$TypeProfile instanceof EntityTypeProfile\TypeProfile)
@@ -55,8 +63,6 @@ final class TypeProfileUserFixtures extends Fixture
 				$this->io->error(sprintf('Ошика %s при добавлении профиля организации', $TypeProfile));
 			}
 		}
-		
 	}
-
-    
+	
 }

@@ -32,16 +32,19 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 		100 =>
 			[
 				100 =>
-					['ru' => 'Контактное лицо',
-					 'en' => 'The contact person',
+					[
+						'ru' => 'Контактное лицо',
+						'en' => 'The contact person',
 					],
 				110 =>
-					['ru' => 'Контактный телефон',
-					 'en' => 'Contact number',
+					[
+						'ru' => 'Контактный телефон',
+						'en' => 'Contact number',
 					],
 				120 =>
-					['ru' => 'Контактный E-mail',
-					 'en' => 'Contact E-mail',
+					[
+						'ru' => 'Контактный E-mail',
+						'en' => 'Contact E-mail',
 					],
 			],
 	];
@@ -49,22 +52,24 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 	public const DESC = [
 		100 =>
 			[
-
+				
 				100 =>
-					['ru' => 'ФИО пользователя',
-					 'en' => 'Name of person',
+					[
+						'ru' => 'ФИО пользователя',
+						'en' => 'Name of person',
 					],
 				110 =>
-					['ru' => 'Контактный телефон для связи',
-					 'en' => 'Contact number for communication',
+					[
+						'ru' => 'Контактный телефон для связи',
+						'en' => 'Contact number for communication',
 					],
 				120 =>
-					['ru' => 'Контактный E-mail для связи',
-					 'en' => 'Contact E-mail for communication',
+					[
+						'ru' => 'Контактный E-mail для связи',
+						'en' => 'Contact E-mail for communication',
 					],
 			],
-		
-		
+	
 	];
 	
 	private readonly ?TypeProfileSectionField $field;
@@ -84,12 +89,16 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 	private readonly string $description;
 	
 	private readonly int $key;
+	
 	private readonly int $sort;
 	
-	public function __construct(int $key, int $sort){
+	
+	public function __construct(int $key, int $sort)
+	{
 		$this->key = $key;
 		$this->sort = $sort;
 	}
+	
 	
 	/**
 	 * @return Locale
@@ -99,15 +108,17 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 		return $this->local;
 	}
 	
+	
 	/**
 	 * @param string|Locale $local
 	 */
 	public function setLocal(string $local) : void
 	{
-		$this->name = self::NAME[$this->key][$this->sort][(string)$local];
-		$this->description = self::DESC[$this->key][$this->sort][(string)$local];
+		$this->name = self::NAME[$this->key][$this->sort][(string) $local];
+		$this->description = self::DESC[$this->key][$this->sort][(string) $local];
 		$this->local = new Locale($local);
 	}
+	
 	
 	/**
 	 * @return string|null
@@ -117,7 +128,6 @@ final class TransDTO implements TypeProfileSectionFieldTransInterface
 		return $this->name;
 	}
 	
-
 	
 	/**
 	 * @return string|null

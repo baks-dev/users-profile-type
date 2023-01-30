@@ -31,48 +31,50 @@ final class TransDTO implements TypeProfileTransInterface
 	
 	public const NAME = [
 		'ru' => 'Юр. лицо',
-		'en' => 'Organization'
+		'en' => 'Organization',
 	];
 	
 	public const DESC = [
 		'ru' => 'Пользователь с возможностью оплаты безналичным расчетом ',
-		'en' => 'User with the option to pay by bank transfer'
+		'en' => 'User with the option to pay by bank transfer',
 	];
-
+	
 	/** Локаль  */
-    private readonly Locale $local;
-    
-    /** Название раздела (строка с точкой, нижнее подчеркивание тире процент скобки) */
-    #[Assert\NotBlank]
+	private readonly Locale $local;
+	
+	/** Название раздела (строка с точкой, нижнее подчеркивание тире процент скобки) */
+	#[Assert\NotBlank]
 	#[Assert\Regex(pattern: '/^[\w \.\,\_\-\(\)\%]+$/iu')]
-    private readonly string $name;
-    
-    /** Краткое описание */
+	private readonly string $name;
+	
+	/** Краткое описание */
 	#[Assert\Regex(pattern: '/^[\w \.\,\_\-\(\)\%]+$/iu')]
-    private readonly string $description;
-    
-
+	private readonly string $description;
+	
+	
 	public function setLocal(string $local) : void
 	{
 		$this->local = new Locale($local);
 		$this->name = self::NAME[$local];
 		$this->description = self::DESC[$local];
 	}
-
 	
-    public function getLocal() : Locale
-    {
-        return $this->local;
-    }
 	
-    public function getName() : ?string
-    {
-        return $this->name;
-    }
-
-    public function getDescription() : ?string
-    {
-        return $this->description;
-    }
-
+	public function getLocal() : Locale
+	{
+		return $this->local;
+	}
+	
+	
+	public function getName() : ?string
+	{
+		return $this->name;
+	}
+	
+	
+	public function getDescription() : ?string
+	{
+		return $this->description;
+	}
+	
 }

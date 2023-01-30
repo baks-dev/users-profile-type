@@ -41,35 +41,37 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PROFILE_NEW')")]
 final class NewController extends AbstractController
 {
-    #[Route('/admin/profile/new', name: 'admin.newedit.new', methods: ['GET', 'POST'])]
-    public function new(
-      Request $request,
-      TypeProfileHandler $handler
-    ) : Response
-    {
-        
-        $profile = new TypeProfileDTO();
-
-        /* Форма добавления */
-        $form = $this->createForm(TypeProfileForm::class, $profile);
-        $form->handleRequest($request);
-	
+	#[Route('/admin/profile/new', name: 'admin.newedit.new', methods: ['GET', 'POST'])]
+	public function new(
+		Request $request,
+		TypeProfileHandler $handler,
+	) : Response
+	{
+		
+		$profile = new TypeProfileDTO();
+		
+		/* Форма добавления */
+		$form = $this->createForm(TypeProfileForm::class, $profile);
+		$form->handleRequest($request);
+		
 		if($form->isSubmitted() && $form->isValid())
 		{
-		
+			
 			$TypeProfile = $handler->handle($profile);
-		
+			
 			if($TypeProfile instanceof TypeProfile)
 			{
 				$this->addFlash('success', 'admin.success.new', 'admin.profile.type');
+				
 				return $this->redirectToRoute('ProfileType:admin.index');
 			}
-		
+			
 			$this->addFlash('danger', 'admin.danger.new', 'admin.profile.type', $TypeProfile);
+			
 			return $this->redirectToRoute('ProfileType:admin.index');
 		}
-
-        return $this->render(['form' => $form->createView()]);
-    }
-    
+		
+		return $this->render(['form' => $form->createView()]);
+	}
+	
 }
