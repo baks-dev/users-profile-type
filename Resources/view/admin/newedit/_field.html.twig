@@ -1,0 +1,46 @@
+{% trans_default_domain 'admin.profile.type' %}
+
+
+<div class="d-flex gap-2 align-items-end">
+	
+	{{ form_row(field.sort, {  label : 'admin.form.fields.sort.label'|trans }) }}
+	
+	<div class="w-100">{{ form_row(field.type, { placeholder : 'Выберите тип из списка ...' }) }}</div>
+
+	<div class="p-1">
+		{{ form_row(field.DeleteField, {
+			label: '<span class="svg-icon svg-icon-2">
+					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+						<rect opacity="0.5" x="7.05025" y="15.5356" width="12" height="2" rx="1" transform="rotate(-45 7.05025 15.5356)" fill="currentColor"></rect>
+						<rect x="8.46447" y="7.05029" width="12" height="2" rx="1" transform="rotate(45 8.46447 7.05029)" fill="currentColor"></rect>
+					</svg>
+				</span>',
+			attr: { class: 'btn-outline-danger btn-sm del-item-field border-0' }
+		}) }}
+	</div>
+	
+</div>
+
+<div class="d-flex align-items-center mb-4 gap-2">
+	{# Обязательное #}
+	{{ form_widget(field.required, { label : 'admin.form.fields.required.label'|trans }) }}
+	
+	{# Публичное #}
+	{{ form_widget(field.public, { label : 'admin.form.fields.public.label'|trans }) }}
+	
+	{#  Присутствует в карточке  #}
+	{{ form_widget(field.card, { label : 'admin.form.fields.card.label'|trans }) }}
+
+</div>
+
+{{ include(_self|replace({ "_field.html.twig": "_field.trans.html.twig" }), { form : field }) }}
+
+
+
+
+
+
+
+
+
+

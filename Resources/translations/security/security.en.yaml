@@ -1,0 +1,19 @@
+ROLE_PROFILE:
+  name: 'User Profile Types'
+  desc: 'User Profile Types'
+
+ROLE_PROFILE_INDEX:
+  name: 'View'
+  desc: ''
+
+ROLE_PROFILE_NEW:
+  name: 'Add'
+  desc: ''
+
+ROLE_PROFILE_EDIT:
+  name: 'Edit'
+  desc: ''
+
+ROLE_PROFILE_DELETE:
+  name: 'Delete'
+  desc: ''

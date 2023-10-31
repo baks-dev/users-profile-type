@@ -1,0 +1,120 @@
+{% trans_default_domain 'admin.profile.type' %}
+
+{% for section in form.section|slice(0, 1) %}
+	
+	{% if section.translate.count > 1 %}
+		
+		<ul class="nav nav-pills gap-3 mb-3" id="nav-{{ form.section.vars.prototype.vars.id }}" role="tablist">
+			{% for translate in section.translate %}
+				<li class="nav-item" role="presentation">
+					
+					<button class="btn fw-bolder nav-link{{ app.request.locale == translate.vars.value.local? ' active' : '' }}"
+							data-bs-toggle="tab"
+							type="button"
+							role="tab"
+							aria-selected="true"
+							
+							id="nav-{{ form.section.vars.prototype.vars.id }}-{{ translate.vars.value.local }}-tab"
+							data-bs-target="#nav-{{ form.section.vars.prototype.vars.id }}-{{ translate.vars.value.local }}"
+							aria-controls="nav-{{ form.section.vars.prototype.vars.id }}-{{ translate.vars.value.local }}"
+					>
+						<small class="text-uppercase px-3">{{ translate.vars.value.local|trans({}, 'core') }}</small>
+					</button>
+					
+					{# <button class="btn nav-link fw-bolder active" id="pills-home-tab" data-bs-toggle="pill"
+									data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+									aria-selected="true"><span class="text-uppercase px-3">Альтернатива</span></button> #}
+				</li>
+			
+			{% endfor %}
+		</ul>
+	
+	{% endif %}
+	
+	
+	
+	<div class="tab-content" id="nav-{{ form.section.vars.prototype.vars.id }}Content">
+		
+		
+		{% for translate in section.translate %}
+			
+			
+			<div class="tab-pane fade{{ app.request.locale == translate.vars.value.local? ' show active' : '' }}"
+					role="tabpanel"
+					id="nav-{{ form.section.vars.prototype.vars.id }}-{{ translate.vars.value.local }}"
+					aria-labelledby="nav-{{ form.section.vars.prototype.vars.id }}-{{ translate.vars.value.local }}-tab"
+			>
+				
+				
+				{# Локаль #}
+				 {{ sectionTranslateLocalPrototype|replace({"__trans__" : loop.index0, '__locale__' : translate.vars.value.local })|raw }}
+
+				{#  Название #}
+				{{ sectionTranslateNamePrototype|replace({"__trans__" : loop.index0})|raw }}
+				
+				{# Краткое описание #}
+				{{ sectionTranslateDescriptionPrototype|replace({"__trans__" : loop.index0})|raw }}
+				
+				
+				{# Название #}
+				{# {{ form_row(form.section.vars.prototype.translate.vars.prototype.name, {
+                        label : 'admin.form.locale.name'|trans, attr: { 'data-lang' : "product_form_trans_"~translate.vars.value.local  }
+                    }) }} #}
+				
+				
+				
+				
+				{# Краткое описание #}
+				{# {{ form_row(form.section.vars.prototype.translate.vars.prototype.description, {
+                        label : 'admin.form.locale.desc'|trans, attr: { 'data-lang' : "product_form_trans_"~translate.vars.value.local  }
+                    }) }} #}
+			
+			</div>
+		
+		{% endfor %}
+	
+	</div>
+
+{% endfor %}
+
+{#
+<nav>
+    <div class="nav nav-tabs" id="nav-{{ form.translate.vars.id }}" role="tablist">
+        {% for trans in form.translate %}
+            <button class="nav-link{{ app.request.locale == trans.vars.value.local? ' active' : '' }}"
+                    id="nav-{{ trans.vars.id }}-tab" data-bs-toggle="tab"
+                    data-bs-target="#nav-{{ trans.vars.id }}"
+                    type="button" role="tab" aria-controls="nav-{{ trans.vars.id }}" aria-selected="true">
+                {{ trans.vars.value.local|trans({}, 'core') }}
+            </button>
+        {% endfor %}
+    </div>
+</nav>
+
+<div class="tab-content mt-5" id="nav-{{ form.translate.vars.id }}Content">
+
+    {% for trans in form.translate %}
+        <div class="tab-pane fade{{ app.request.locale == trans.vars.value.local? ' show active' : '' }}"
+             id="nav-{{ trans.vars.id }}" role="tabpanel"
+             aria-labelledby="nav-{{ trans.vars.id }}-tab">
+#}
+{# Локаль #}{#
+{{ form_row(trans.local) }}
+#}
+{#  Название #}{#
+{{ form_row(trans.name, {
+    label : 'admin.profile.form.name'|trans
+}) }}
+#}
+{# Краткое описание #}{#
+{{ form_row(trans.description, {
+    label: 'admin.profile.form.desc'|trans
+}) }}
+</div>
+{% endfor %}
+
+</div>
+#}
+
+
+

@@ -1,0 +1,53 @@
+name: 'Юр. лицо'
+desc: 'Пользователь с возможностью оплаты безналичным расчетом'
+
+section:
+  contact:
+    name: 'Контактные данные'
+    desc: 'Данные для связи менеджерами магазина с покупателем.'
+
+    field:
+
+      organizations:
+        name: 'Название организации'
+        desc: ''
+
+      address:
+        name: 'Юр. адрес'
+        desc: ''
+
+      contact:
+        name: 'Контактное лицо'
+        desc: ''
+
+      phone:
+        name: 'Контактный телефон'
+        desc: ''
+
+      mail:
+        name: 'Контактный E-mail'
+        desc: ''
+
+
+  requisite:
+    name: 'Официальные реквизиты'
+    desc: 'Реквизиты для оформления документов'
+
+
+    field:
+
+      inn:
+        name: 'ИНН'
+        desc: ''
+
+      bik:
+        name: 'BIK банка'
+        desc: ''
+
+      checking:
+        name: 'Расчетный счет'
+        desc: ''
+
+      correspondent:
+        name: 'Корреспондентский счёт'
+        desc: ''

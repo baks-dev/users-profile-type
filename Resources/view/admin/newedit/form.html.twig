@@ -1,0 +1,138 @@
+{% trans_default_domain 'admin.profile.type' %}
+
+
+{% set sectionTranslateLocalPrototype = form_row(form.section.vars.prototype.translate.vars.prototype.local, { attr : { value : '__locale__' } }) %}
+{% set sectionTranslateNamePrototype = form_row(form.section.vars.prototype.translate.vars.prototype.name, { label : 'admin.form.locale.name'|trans }) %}
+{% set sectionTranslateDescriptionPrototype = form_row(form.section.vars.prototype.translate.vars.prototype.description, { label : 'admin.form.locale.desc'|trans}) %}
+
+
+{# Сортирвока #}
+{% set fieldSortPrototype = form_row(form.section.vars.prototype.field.vars.prototype.sort, { label : 'admin.form.fields.sort.label'|trans, attr: { value : "1"~form.section.vars.prototype.field.vars.prototype.vars.name~"0" }}) %}
+{# Селектор типа #}
+{% set fieldTypePrototype = form_row(form.section.vars.prototype.field.vars.prototype.type, { placeholder : 'Выберите тип из списка ...' }) %}
+{# Обязательное #}
+{% set fieldRequiredPrototype = form_widget(form.section.vars.prototype.field.vars.prototype.required, { label : 'admin.form.fields.required.label'|trans, attr : { "checked" : true } }) %}
+{# Публичное #}
+{% set fieldPublicPrototype = form_widget(form.section.vars.prototype.field.vars.prototype.public, { label : 'admin.form.fields.public.label'|trans, attr : { "checked" : true } }) %}
+{# Карточка #}
+{% set fieldCardPrototype = form_widget(form.section.vars.prototype.field.vars.prototype.card, { label : 'admin.form.fields.card.label'|trans, attr : { "checked" : true } }) %}
+
+
+{# Удалить поле #}
+{% set fieldDeleteFieldPrototype = form_row(form.section.vars.prototype.field.vars.prototype.DeleteField, {
+	label: '<span class="svg-icon svg-icon-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                <rect opacity="0.5" x="7.05025" y="15.5356" width="12" height="2" rx="1" transform="rotate(-45 7.05025 15.5356)" fill="currentColor"></rect>
+                <rect x="8.46447" y="7.05029" width="12" height="2" rx="1" transform="rotate(45 8.46447 7.05029)" fill="currentColor"></rect>
+            </svg>
+        </span>',
+	attr: { class: 'btn-outline-danger btn-sm del-item-field border-0' }
+}) %}
+
+
+{# Переводы полуй секций #}
+{% set fieldTranslateLocalPrototype = form_row(form.section.vars.prototype.field.vars.prototype.translate.vars.prototype.local, { attr : { value : '__locale__' } }) %}
+{% set fieldTranslateNamePrototype = form_row(form.section.vars.prototype.field.vars.prototype.translate.vars.prototype.name, { label : 'admin.form.locale.name'|trans }) %}
+{% set fieldTranslateDescriptionPrototype = form_row(form.section.vars.prototype.field.vars.prototype.translate.vars.prototype.description, { label: 'admin.form.locale.desc'|trans }) %}
+
+
+<ul class="nav nav-pills gap-3 mb-3" id="nav-tab_main">
+	<li class="nav-item" role="presentation">
+		
+		<button class="btn fw-bolder nav-link active"
+				data-bs-toggle="tab"
+				type="button"
+				role="tab"
+				aria-selected="true"
+				
+				id="tab_main-tab"
+				data-bs-target="#tab_main"
+				aria-controls="nav-tab_main"
+		>
+			<small class="text-uppercase px-3">{{ 'admin.form.tabs.main'|trans }}</small>
+		</button>
+		
+		{# <a class="nav-link active" data-bs-toggle="tab" href="#tab_main">Группа</a> #}
+	</li>
+	
+	<li class="nav-item">
+		<button class="btn fw-bolder nav-link"
+				data-bs-toggle="tab"
+				type="button"
+				role="tab"
+				aria-selected="true"
+				
+				id="tab_property-tab"
+				data-bs-target="#tab_property"
+				aria-controls="nav-tab_main"
+		>
+			<small class="text-uppercase px-3">
+				{{ 'admin.form.tabs.property'|trans }}
+			</small>
+		</button>
+		
+		{# <a class="nav-link" data-bs-toggle="tab" href="#tab_description">Роли группы</a> #}
+	</li>
+
+</ul>
+
+
+<div class="tab-content" id="groupTabContent">
+	
+	{# ОСНОВНЫЕ НАСТРОЙКИ #}
+	<div class="tab-pane fade show active" id="tab_main" role="tabpanel">
+		
+		<div class="d-flex align-items-start gap-3">
+			<div class="d-flex flex-column w-100 gap-3">
+				{# Основные настройки профиля  #}
+				{{ include(_self|replace({ "form.html.twig": "_main.html.twig" })) }}
+			</div>
+			
+			<div class="d-flex flex-column w-100 gap-3">
+				{# Настройки локали #}
+				{{ include(_self|replace({ "form.html.twig": "_trans.html.twig" })) }}
+			</div>
+		</div>
+	
+	</div>
+	
+	
+	<div class="tab-pane fade" id="tab_property" role="tabpanel">
+		{# Свойства профиля #}
+		<div id="section_collection" class="d-flex flex-column gap-3">
+			{% for section in form.section %}
+				<div class="item-collection-section">
+					{{ include(_self|replace({ "form.html.twig": "_section.html.twig" })) }}
+				</div>
+			{% endfor %}
+		</div>
+		
+		{# ДОБАВИТЬ СЕКЦИЮ #}
+		<div class="position-sticky z-index-3 w-25" style="bottom: 3rem;">
+			<button type="button"
+					id="section_addCollection"
+					class="btn btn-sm btn-danger add_collection mt-3"
+					data-index="{{ form.section.count }}"
+					data-prototype="{{ include(_self|replace({ 'form.html.twig': '_section.prototype.twig' }))|e('html_attr') }}"
+			>
+
+                <span class="svg-icon svg-icon-2">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+							width="24" height="24" viewBox="0 0 24 24"
+							fill="none">
+                        <rect opacity="0.5" x="11" y="18" width="12"
+								height="2" rx="1"
+								transform="rotate(-90 11 18)"
+								fill="currentColor"></rect>
+                        <rect x="6" y="11" width="12" height="2"
+								rx="1" fill="currentColor"></rect>
+                    </svg>
+                </span>
+				Добавить секцию
+			</button>
+		
+		</div>
+	</div>
+</div>
+
+

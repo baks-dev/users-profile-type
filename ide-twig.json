@@ -1,0 +1,8 @@
+{
+  "namespaces": [
+    {
+      "namespace": "users-profile-type",
+      "path": "Resources/view"
+    }
+  ]
+}

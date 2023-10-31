@@ -1,0 +1,30 @@
+{% trans_default_domain 'admin.profile.type' %}
+
+
+<div class="d-flex gap-2 align-items-end">
+	
+	{{ fieldSortPrototype|raw }}
+	
+	<div class="w-100">{{ fieldTypePrototype|raw }}</div>
+	
+	<div class="p-1">
+		{{ fieldDeleteFieldPrototype|raw }}
+	</div>
+</div>
+
+<div class="d-flex align-items-center mb-4 gap-2">
+	{# Обязательное #}
+	{{ fieldRequiredPrototype|raw }}
+	{# Публичное #}
+	{{ fieldPublicPrototype|raw }}
+	{# Карточка #}
+	{{ fieldCardPrototype|raw }}
+</div>
+
+{{ include(_self|replace({ "_field.prototype.twig": "_field.trans.prototype.twig" })) }}
+
+
+
+
+
+

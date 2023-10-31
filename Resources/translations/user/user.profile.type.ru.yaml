@@ -1,0 +1,21 @@
+user:
+  profile:
+    new:
+      title: Добавить профиль
+    form:
+      basic:
+        header: Основные настройки
+      personal:
+        header: Личные данные
+        label:
+          birthday: Дата рождения
+          location: Место положения
+        image:
+          accepted: "Принимаются только файлы изображений .png, .jpg и .jpeg"
+      info:
+        label:
+          url: Адрес профиля
+      label:
+        username: Имя пользователя
+    update:
+      success: Профиль пользователя успешно обновлен

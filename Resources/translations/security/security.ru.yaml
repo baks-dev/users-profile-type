@@ -1,0 +1,24 @@
+# Роль
+
+ROLE_PROFILE:
+  name: 'Типы профилей пользователя'
+  desc: 'Типы профилей пользователей'
+
+# Правила
+
+ROLE_PROFILE_INDEX:
+  name: 'Просмотр'
+  desc: ''
+
+ROLE_PROFILE_NEW:
+  name: 'Добавить'
+  desc: ''
+
+ROLE_PROFILE_EDIT:
+  name: 'Редактировать'
+  desc: ''
+
+ROLE_PROFILE_DELETE:
+  name: 'Удалить'
+  desc: ''
+

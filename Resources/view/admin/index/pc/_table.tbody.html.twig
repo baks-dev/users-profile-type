@@ -1,0 +1,59 @@
+{% trans_default_domain 'admin.profile.type' %}
+<tr>
+	
+	<td>
+		{# Пользовательское меню #}
+		{{ include(_self|replace({ "_table.tbody.html.twig": "_usecase.html.twig" })) }}
+	</td>
+	
+	{# Чекбокс #}
+	<td>
+		<div class="form-check form-check-sm form-check-custom">
+			<label>
+				<input class="form-check-input checked-item"
+						type="checkbox"
+						onchange=checkedItem();
+						value="{{ item.event }}">
+			</label>
+		</div>
+	</td>
+	
+	<td class="ps-5">
+		{{ item.sort }}
+	</td>
+	
+	
+	<td class="ps-5">
+		<div class="d-flex">
+			{# Превью  #}
+			{# <a href="../../demo11/dist/apps/ecommerce/catalog/edit-category.html" class="symbol symbol-50px">
+                <span class="symbol-label" style="background-image:url(assets/media//stock/ecommerce/68.gif);"></span>
+            </a> #}
+			
+			<div class="ms-0">
+				
+				{# Название #}
+				<a href="{{ path('users-profile-type:admin.profile.newedit.edit', {id: item.event }) }}"
+						class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
+				>{{ item.name }}</a>
+				
+				{# Описание #}
+				<div class="text-muted fs-7 fw-bolder">
+					{{ item.description }}
+				</div>
+			
+			</div>
+		</div>
+	</td>
+	
+	{# <td class="ps-5">
+
+	</td> #}
+	
+	{# <td>
+		<a href="{{ path('products-category:admin.category.newedit.new', { cat: item.id }) }}" class="btn btn-sm btn-primary ">
+			{{ 'btn.new'|trans({}, 'core.btn') }}
+		</a>
+	</td> #}
+
+</tr>
