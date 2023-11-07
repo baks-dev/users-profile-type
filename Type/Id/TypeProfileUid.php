@@ -31,7 +31,7 @@ final class TypeProfileUid extends Uid
      */
     private const ORGANIZATION = '0189c5ba-4098-7ea6-a45a-1053b7087e44';
 
-    private const USER = '0189c5ba-6ef8-7a75-94e8-4cec1ddaa3ff';
+    public const USER = '0189c5ba-6ef8-7a75-94e8-4cec1ddaa3ff';
 
 	public const TYPE = 'profile';
 	
