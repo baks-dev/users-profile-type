@@ -24,6 +24,9 @@ use Symfony\Component\Uid\AbstractUid;
 
 final class TypeProfileUid extends Uid
 {
+
+	public const TYPE = 'profile';
+
     public const TEST = '018ad881-fd9e-73d2-aea3-75c908fbfbb8';
 
     /**
@@ -32,8 +35,6 @@ final class TypeProfileUid extends Uid
     private const ORGANIZATION = '0189c5ba-4098-7ea6-a45a-1053b7087e44';
 
     public const USER = '0189c5ba-6ef8-7a75-94e8-4cec1ddaa3ff';
-
-	public const TYPE = 'profile';
 	
 	private mixed $option;
 
