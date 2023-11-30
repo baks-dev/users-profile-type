@@ -39,9 +39,12 @@ final class TypeProfileUid extends Uid
 	private mixed $option;
 
 	private mixed $attr;
-	
-	
-	public function __construct(AbstractUid|string|null $value = null, mixed $option = null, mixed $attr = null)
+
+	public function __construct(
+        AbstractUid|string|null $value = null,
+        mixed $option = null,
+        mixed $attr = null
+    )
 	{
         parent::__construct($value);
 
