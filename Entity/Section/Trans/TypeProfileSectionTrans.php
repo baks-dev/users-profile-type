@@ -25,6 +25,8 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans;
 
+use BaksDev\Core\Entity\EntityEvent;
+use BaksDev\Core\Entity\EntityReadonly;
 use BaksDev\Core\Entity\EntityState;
 use BaksDev\Core\Type\Locale\Locale;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSection;
@@ -35,10 +37,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /* Перевод Section */
 
-
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_section_trans')]
-class TypeProfileSectionTrans extends EntityState
+class TypeProfileSectionTrans extends EntityEvent
 {
 	const TABLE = 'type_users_profile_section_trans';
 	
@@ -48,7 +49,7 @@ class TypeProfileSectionTrans extends EntityState
 	#[ORM\Id]
 	#[ORM\ManyToOne(targetEntity: TypeProfileSection::class, inversedBy: "translate")]
 	#[ORM\JoinColumn(name: 'section', referencedColumnName: "id", nullable: true)]
-	private readonly ?TypeProfileSection $section;
+	private ?TypeProfileSection $section;
 	
 	/** Локаль */
     #[Assert\NotBlank]
@@ -56,7 +57,7 @@ class TypeProfileSectionTrans extends EntityState
     #[Assert\Length(max: 2)]
 	#[ORM\Id]
 	#[ORM\Column(name: 'local', type: Locale::TYPE)]
-	private readonly Locale $local;
+	private Locale $local;
 	
 	/** Название */
     #[Assert\NotBlank]
@@ -68,7 +69,6 @@ class TypeProfileSectionTrans extends EntityState
     #[Assert\Length(max: 255)]
 	#[ORM\Column(name: 'description', type: Types::TEXT, nullable: true)]
 	private ?string $description;
-	
 	
 
 	public function __construct(TypeProfileSection $section)

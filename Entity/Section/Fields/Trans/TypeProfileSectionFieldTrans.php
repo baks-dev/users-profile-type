@@ -25,6 +25,7 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans;
 
+use BaksDev\Core\Entity\EntityReadonly;
 use BaksDev\Core\Entity\EntityState;
 use BaksDev\Core\Type\Locale\Locale;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionField;
@@ -38,7 +39,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_section_field_trans')]
-class TypeProfileSectionFieldTrans extends EntityState
+class TypeProfileSectionFieldTrans extends EntityReadonly
 {
 	const TABLE = 'type_users_profile_section_field_trans';
 	
@@ -48,7 +49,7 @@ class TypeProfileSectionFieldTrans extends EntityState
 	#[ORM\Id]
 	#[ORM\ManyToOne(targetEntity: TypeProfileSectionField::class, inversedBy: "translate")]
 	#[ORM\JoinColumn(name: 'field', referencedColumnName: "id", nullable: true)]
-	private readonly ?TypeProfileSectionField $field;
+	private ?TypeProfileSectionField $field;
 	
 	/** Локаль */
     #[Assert\NotBlank]

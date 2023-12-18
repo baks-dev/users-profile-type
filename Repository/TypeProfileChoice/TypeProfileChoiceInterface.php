@@ -23,8 +23,14 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Repository\TypeProfileChoice;
 
+use Generator;
+
 interface TypeProfileChoiceInterface
 {
-	public function getTypeProfileChoice();
-	
+    public function getActiveTypeProfileChoice(): Generator;
+
+    public function getPublicTypeProfileChoice(): Generator;
+
+    public function getUsersTypeProfileChoice(): Generator;
+
 }

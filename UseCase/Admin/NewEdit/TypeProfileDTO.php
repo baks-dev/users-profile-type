@@ -50,12 +50,17 @@ final class TypeProfileDTO implements TypeProfileEventInterface
 	/** Сортировка */
 	#[Assert\Range(min: 1)]
 	private int $sort = 500;
-	
-	
-	public function __construct()
+
+    /** Информация о типе профиля */
+    #[Assert\Valid]
+    private Info\TypeProfileInfoDTO $info;
+
+
+    public function __construct()
 	{
 		$this->translate = new ArrayCollection();
 		$this->section = new ArrayCollection();
+		$this->info = new Info\TypeProfileInfoDTO();
 	}
 	
 	
@@ -167,4 +172,19 @@ final class TypeProfileDTO implements TypeProfileEventInterface
 
         return $this;
     }
+
+    /**
+     * Info
+     */
+    public function getInfo(): Info\TypeProfileInfoDTO
+    {
+        return $this->info;
+    }
+
+    public function setInfo(Info\TypeProfileInfoDTO $info): self
+    {
+        $this->info = $info;
+        return $this;
+    }
+
 }

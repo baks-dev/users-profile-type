@@ -25,6 +25,7 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Modify;
 
+use BaksDev\Core\Entity\EntityEvent;
 use BaksDev\Core\Entity\EntityState;
 use BaksDev\Core\Type\Ip\IpAddress;
 use BaksDev\Core\Type\Modify\ModifyAction;
@@ -45,7 +46,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_modify')]
 #[ORM\Index(columns: ['action'])]
-class TypeProfileModify extends EntityState
+class TypeProfileModify extends EntityEvent
 {
 	const TABLE = 'type_users_profile_modify';
 	
@@ -90,6 +91,14 @@ class TypeProfileModify extends EntityState
 		$this->agent = 'console';
 		$this->action = new ModifyAction(ModifyActionNew::class);
 	}
+
+    public function __clone() : void
+    {
+        $this->modDate = new DateTimeImmutable();
+        $this->action = new ModifyAction(ModifyActionUpdate::class);
+        $this->ip = new IpAddress('127.0.0.1');
+        $this->agent = 'console';
+    }
 
     public function __toString(): string
     {

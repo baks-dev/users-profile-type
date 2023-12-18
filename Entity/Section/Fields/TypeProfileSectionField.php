@@ -25,6 +25,7 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields;
 
+use BaksDev\Core\Entity\EntityReadonly;
 use BaksDev\Core\Entity\EntityState;
 use BaksDev\Core\Type\Field\InputField;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\Trans\TypeProfileSectionFieldTrans;
@@ -41,7 +42,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_section_field')]
-class TypeProfileSectionField extends EntityState
+class TypeProfileSectionField extends EntityReadonly
 {
 	const TABLE = 'type_users_profile_section_field';
 	
@@ -50,7 +51,7 @@ class TypeProfileSectionField extends EntityState
     #[Assert\Uuid]
 	#[ORM\Id]
 	#[ORM\Column(type: TypeProfileSectionFieldUid::TYPE)]
-	private readonly TypeProfileSectionFieldUid $id;
+	private TypeProfileSectionFieldUid $id;
 	
 	/** Связь на секцию */
     #[Assert\NotBlank]
@@ -91,7 +92,14 @@ class TypeProfileSectionField extends EntityState
 	
 	public function __construct(TypeProfileSection $section)
 	{
-		$this->id = clone new TypeProfileSectionFieldUid();
+//        $modifiers = new \ReflectionProperty($this, 'id');
+
+//        if(!$modifiers->isInitialized($this))
+//        {
+//            $this->id = clone new TypeProfileSectionFieldUid();
+//        }
+
+		//$this->id = clone new TypeProfileSectionFieldUid();
 		//$this->translate = new ArrayCollection();
 		$this->section = $section;
 	}
@@ -122,7 +130,7 @@ class TypeProfileSectionField extends EntityState
 	
 	public function setEntity($dto): mixed
 	{
-		
+
 		if($dto instanceof TypeProfileSectionFieldInterface || $dto instanceof self)
 		{
 			return parent::setEntity($dto);

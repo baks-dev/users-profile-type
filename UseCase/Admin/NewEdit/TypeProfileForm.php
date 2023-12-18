@@ -34,6 +34,8 @@ final class TypeProfileForm extends AbstractType
 	
 	public function buildForm(FormBuilderInterface $builder, array $options) : void
 	{
+        $builder->add('info', Info\TypeProfileInfoForm::class);
+
 		$builder->add
 		(
 			'sort',

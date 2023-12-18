@@ -18,7 +18,12 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Repository\AllProfileType;
 
+use BaksDev\Core\Form\Search\SearchDTO;
+use BaksDev\Core\Services\Paginator\PaginatorInterface;
+
 interface AllProfileTypeInterface
 {
-	public function getTypeProfile();
+    public function find(): PaginatorInterface;
+
+    public function getTypeProfile();
 }

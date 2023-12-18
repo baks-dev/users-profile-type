@@ -46,7 +46,7 @@ final class TypeProfileHandler extends AbstractHandler
 
         try
         {
-            $command->getEvent() ? $this->preUpdate($command, false) : $this->prePersist($command);
+            $command->getEvent() ? $this->preUpdate($command) : $this->prePersist($command);
         }
         catch(DomainException $errorUniqid)
         {
@@ -63,6 +63,10 @@ final class TypeProfileHandler extends AbstractHandler
         {
             $this->main->setId($this->event->getProfile());
         }
+
+
+        dump($this->entityManager->getUnitOfWork());
+        dump($this->event);
 
         $this->entityManager->flush();
 

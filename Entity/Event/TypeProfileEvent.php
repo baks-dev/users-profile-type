@@ -25,10 +25,12 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Event;
 
+use BaksDev\Core\Entity\EntityEvent;
 use BaksDev\Core\Entity\EntityState;
 use BaksDev\Core\Type\Locale\Locale;
 use BaksDev\Core\Type\Modify\Modify\ModifyActionNew;
 use BaksDev\Core\Type\Modify\Modify\ModifyActionUpdate;
+use BaksDev\Users\Profile\TypeProfile\Entity\Info\TypeProfileInfo;
 use BaksDev\Users\Profile\TypeProfile\Entity\Modify\TypeProfileModify;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\TypeProfileSection;
 use BaksDev\Users\Profile\TypeProfile\Entity\Trans\TypeProfileTrans;
@@ -47,7 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_event')]
 #[ORM\Index(columns: ['profile'])]
-class TypeProfileEvent extends EntityState
+class TypeProfileEvent extends EntityEvent
 {
 	const TABLE = 'type_users_profile_event';
 	
@@ -56,7 +58,7 @@ class TypeProfileEvent extends EntityState
     #[Assert\Uuid]
 	#[ORM\Id]
 	#[ORM\Column(type: TypeProfileEventUid::TYPE)]
-	private readonly TypeProfileEventUid $id;
+	private TypeProfileEventUid $id;
 	
 	/** ID Profile */
     #[Assert\NotBlank]
@@ -86,16 +88,24 @@ class TypeProfileEvent extends EntityState
     #[Assert\Valid]
 	#[ORM\OneToOne(mappedBy: 'event', targetEntity: TypeProfileModify::class, cascade: ['all'])]
 	private TypeProfileModify $modify;
-	
-	
+
+    /** Информация о типе профиля */
+    #[Assert\Valid]
+    #[ORM\OneToOne(mappedBy: 'event', targetEntity: TypeProfileInfo::class, cascade: ['all'])]
+    private ?TypeProfileInfo $info = null;
+
 	public function __construct()
 	{
 		$this->id = new TypeProfileEventUid();
 		$this->modify = new TypeProfileModify($this);
-		
 	}
-	
-	
+
+
+    public function __clone()
+    {
+        $this->id = clone $this->id;
+    }
+
 	public function __toString(): string
 	{
 		return $this->id;

@@ -25,6 +25,7 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Trans;
 
+use BaksDev\Core\Entity\EntityEvent;
 use BaksDev\Core\Entity\EntityState;
 use BaksDev\Core\Type\Locale\Locale;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
@@ -38,7 +39,7 @@ use InvalidArgumentException;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_trans')]
-class TypeProfileTrans extends EntityState
+class TypeProfileTrans extends EntityEvent
 {
 	const TABLE = 'type_users_profile_trans';
 	
@@ -46,7 +47,7 @@ class TypeProfileTrans extends EntityState
 	#[ORM\Id]
 	#[ORM\ManyToOne(targetEntity: TypeProfileEvent::class, inversedBy: "translate")]
 	#[ORM\JoinColumn(name: 'event', referencedColumnName: "id")]
-	private readonly TypeProfileEvent $event;
+	private TypeProfileEvent $event;
 	
 	/** Локаль */
 	#[ORM\Id]

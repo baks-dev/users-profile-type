@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class SectionTransDTO implements TypeProfileSectionTransInterface
 {
-	private readonly ?TypeProfileSection $section;
+	//private ?TypeProfileSection $section;
 	
 	private readonly Locale $local;
 	
@@ -41,8 +41,16 @@ final class SectionTransDTO implements TypeProfileSectionTransInterface
 	/** Краткое описание */
 	#[Assert\Regex(pattern: '/^[\w \.\,\_\-\(\)\%]+$/iu')]
 	private ?string $description = null;
-	
-	
+
+//    /**
+//     * Section
+//     */
+//    public function getSection(): ?TypeProfileSection
+//    {
+//        return $this->section;
+//    }
+
+
 	public function getLocal() : Locale
 	{
 		return $this->local;

@@ -25,50 +25,110 @@ declare(strict_types=1);
 
 namespace BaksDev\Users\Profile\TypeProfile\Repository\TypeProfileChoice;
 
-use BaksDev\Core\Doctrine\ORMQueryBuilder;
-use BaksDev\Core\Type\Locale\Locale;
-use BaksDev\Users\Profile\TypeProfile\Entity as TypeProfileEntity;
+use BaksDev\Core\Doctrine\DBALQueryBuilder;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
+use BaksDev\Users\Profile\TypeProfile\Entity\Info\TypeProfileInfo;
+use BaksDev\Users\Profile\TypeProfile\Entity\Trans\TypeProfileTrans;
+use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use BaksDev\Users\Profile\UserProfile\Type\Id\UserProfileUid;
+use Generator;
 
 final class TypeProfileChoice implements TypeProfileChoiceInterface
 {
-    private TranslatorInterface $translator;
-    private ORMQueryBuilder $ORMQueryBuilder;
 
+    private DBALQueryBuilder $DBALQueryBuilder;
 
-    public function __construct(ORMQueryBuilder $ORMQueryBuilder, TranslatorInterface $translator)
+    public function __construct(DBALQueryBuilder $DBALQueryBuilder)
     {
-        $this->translator = $translator;
-        $this->ORMQueryBuilder = $ORMQueryBuilder;
+        $this->DBALQueryBuilder = $DBALQueryBuilder;
     }
 
 
-    public function getTypeProfileChoice()
+    public function getActiveTypeProfileChoice(): Generator
     {
+        $dbal = $this->getQueryBuilder();
 
-        $qb = $this->ORMQueryBuilder->createQueryBuilder(self::class);
-
-        $select = sprintf('new %s(type.id, type_trans.name, type_trans.description)', TypeProfileUid::class);
-        $qb->select($select);
-
-        $qb->from(TypeProfileEntity\TypeProfile::class, 'type');
-
-        $qb->join(TypeProfileEntity\Event\TypeProfileEvent::class, 'type_event', 'WITH', 'type_event.id = type.event');
-
-        $qb->leftJoin(TypeProfileEntity\Trans\TypeProfileTrans::class,
-            'type_trans',
-            'WITH',
-            'type_trans.event = type_event.id AND type_trans.local = :local'
+        $dbal->exists(
+            'profile',
+            TypeProfileInfo::class,
+            'info',
+            'info.profile = profile.id AND info.active = true'
         );
 
-        $qb->addOrderBy('type_event.sort');
-
-        $qb->setParameter('local', new Locale($this->translator->getLocale()), Locale::TYPE);
-
-        /* Кешируем результат ORM */
-        return $qb->enableCache('users-profile-type', 86400)->getResult();
+        return $dbal
+            ->enableCache('users-profile-type', 86400)
+            ->fetchAllHydrate(TypeProfileUid::class);
 
     }
+
+    public function getPublicTypeProfileChoice(): Generator
+    {
+        $dbal = $this->getQueryBuilder();
+
+        $dbal->exists(
+            'profile',
+            TypeProfileInfo::class,
+            'info',
+            'info.profile = profile.id AND info.public = true'
+        );
+
+        return $dbal
+            ->enableCache('users-profile-type', 86400)
+            ->fetchAllHydrate(TypeProfileUid::class);
+
+    }
+
+    public function getUsersTypeProfileChoice(): Generator
+    {
+        $dbal = $this->getQueryBuilder();
+
+        $dbal->exists(
+            'profile',
+            TypeProfileInfo::class,
+            'info',
+            'info.profile = profile.id AND info.usr = true'
+        );
+
+
+        return $dbal
+            ->enableCache('users-profile-type', 86400)
+            ->fetchAllHydrate(TypeProfileUid::class);
+    }
+
+
+
+    private function getQueryBuilder(): DBALQueryBuilder
+    {
+        $dbal = $this->DBALQueryBuilder
+            ->createQueryBuilder(self::class)
+            ->bindLocal();
+
+        $dbal->from(TypeProfile::TABLE, 'profile');
+
+        $dbal->join('profile',
+            TypeProfileEvent::TABLE,
+            'profile_event',
+            'profile_event.id = profile.event'
+        );
+
+        $dbal->join(
+            'profile',
+            TypeProfileTrans::TABLE,
+            'profile_trans',
+            'profile_trans.event = profile.event AND profile_trans.local = :local'
+        );
+
+
+
+        $dbal->orderBy('profile_event.sort', 'ASC');
+
+        $dbal->addSelect('profile.id AS value');
+        $dbal->addSelect('profile_trans.name AS attr');
+        $dbal->addSelect('profile_trans.description AS option');
+
+        return $dbal;
+    }
+
 
 }

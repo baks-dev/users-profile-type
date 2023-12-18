@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class SectionFieldDTO implements TypeProfileSectionFieldInterface
 {
 	/** Идентификатор для сверки коллекции  */
-	private readonly ?TypeProfileSectionFieldUid $id;
+	private ?TypeProfileSectionFieldUid $id = null;
 
 	/** Сортировка поля в секции  */
 	#[Assert\Range(min: 0, max: 999)]
@@ -55,12 +55,26 @@ final class SectionFieldDTO implements TypeProfileSectionFieldInterface
 	
 	public function __construct() { $this->translate = new  ArrayCollection(); }
 
+    /**
+     * Id
+     */
+    public function getId(): ?TypeProfileSectionFieldUid
+    {
+        if(!$this->id)
+        {
+            /** Если объект коллекции новый - генерируем идентификтаор */
+            $this->id = new TypeProfileSectionFieldUid();
+        }
+
+        return $this->id;
+    }
 
 //    /** Для теста */
 //    public function newSectionField(): void
 //    {
 //        $this->id = clone new TypeProfileSectionFieldUid();
 //    }
+
 
 	
 	/** Сортировка поля в секции  */

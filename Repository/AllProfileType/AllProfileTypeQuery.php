@@ -29,99 +29,138 @@ use BaksDev\Core\Doctrine\DBALQueryBuilder;
 use BaksDev\Core\Doctrine\ORMQueryBuilder;
 use BaksDev\Core\Form\Search\SearchDTO;
 use BaksDev\Core\Services\Paginator\PaginatorInterface;
-use BaksDev\Users\Profile\TypeProfile\Entity as TypeProfileEntity;
+use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
+use BaksDev\Users\Profile\TypeProfile\Entity\Info\TypeProfileInfo;
+use BaksDev\Users\Profile\TypeProfile\Entity\Trans\TypeProfileTrans;
+use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 
 final class AllProfileTypeQuery implements AllProfileTypeInterface
 {
-	private PaginatorInterface $paginator;
+    private PaginatorInterface $paginator;
     private DBALQueryBuilder $DBALQueryBuilder;
     private ORMQueryBuilder $ORMQueryBuilder;
 
+    private ?SearchDTO $search = null;
+
 
     public function __construct(
-		DBALQueryBuilder $DBALQueryBuilder,
+        DBALQueryBuilder $DBALQueryBuilder,
         ORMQueryBuilder $ORMQueryBuilder,
-		PaginatorInterface $paginator,
-	)
-	{
-		$this->paginator = $paginator;
+        PaginatorInterface $paginator,
+    )
+    {
+        $this->paginator = $paginator;
         $this->DBALQueryBuilder = $DBALQueryBuilder;
         $this->ORMQueryBuilder = $ORMQueryBuilder;
     }
-	
-	
-	public function get(SearchDTO $search = null)
-	{
 
-		$qb = $this->DBALQueryBuilder->createQueryBuilder(self::class);
+    public function search(SearchDTO $search): self
+    {
+        $this->search = $search;
+        return $this;
+    }
+
+    public function find(): PaginatorInterface
+    {
+        $qb = $this->DBALQueryBuilder->createQueryBuilder(self::class);
         $qb->bindLocal();
-		
-		/* TypeProfile */
-		$qb->select('profile.id');
-		$qb->addSelect('profile.event');
-		
-		$qb->from(TypeProfileEntity\TypeProfile::TABLE, 'profile');
-		
-		/* TypeProfile Event */
-		$qb->addSelect('profile_event.sort');
-		$qb->join('profile',
-			TypeProfileEntity\Event\TypeProfileEvent::TABLE,
-			'profile_event',
-			'profile_event.id = profile.event'
-		);
-		
-		/* TypeProfile Translate */
-		$qb->addSelect('profile_trans.name');
-		$qb->addSelect('profile_trans.description');
-		$qb->join(
-			'profile',
-			TypeProfileEntity\Trans\TypeProfileTrans::TABLE,
-			'profile_trans',
-			'profile_trans.event = profile.event AND profile_trans.local = :local'
-		);
-		
 
-		$qb->orderBy('profile_event.sort', 'ASC');
+        /* TypeProfile */
+        $qb->select('profile.id');
+        $qb->addSelect('profile.event');
+
+        $qb->from(TypeProfile::TABLE, 'profile');
+
+        /* TypeProfile Event */
+        $qb->addSelect('profile_event.sort');
+        $qb->join('profile',
+            TypeProfileEvent::TABLE,
+            'profile_event',
+            'profile_event.id = profile.event'
+        );
+
+        /* TypeProfile Translate */
+        $qb
+            ->addSelect('profile_trans.name')
+            ->addSelect('profile_trans.description')
+            ->join(
+                'profile',
+                TypeProfileTrans::TABLE,
+                'profile_trans',
+                'profile_trans.event = profile.event AND profile_trans.local = :local'
+            );
+
+        $qb
+            ->addSelect('info.active')
+            ->addSelect('info.public')
+            ->addSelect('info.usr')
+            ->leftJoin(
+                'profile',
+                TypeProfileInfo::class,
+                'info',
+                'info.profile = profile.id'
+            );
+
+
+        $qb->orderBy('profile_event.sort', 'ASC');
+
+
+        if($this->search?->getQuery())
+        {
+            $qb
+                ->createSearchQueryBuilder($this->search)
+                ->addSearchEqualUid('profile.id')
+                ->addSearchEqualUid('profile.event')
+                //                ->addSearchLike('product_trans.name')
+                //->addSearchLike('product_trans.preview')
+                ->addSearchLike('profile_trans.name')
+                ->addSearchLike('profile_trans.description');
+        }
+
 
         return $this->paginator->fetchAllAssociative($qb);
-		
-	}
-	
-	
-	public function getTypeProfile()
-	{
-		$qb = $this->ORMQueryBuilder->createQueryBuilder(self::class);
+
+    }
+
+
+
+
+
+
+    public function getTypeProfile(): ?array
+    {
+        $qb = $this->ORMQueryBuilder->createQueryBuilder(self::class);
         $qb->bindLocal();
 
-		/* TypeProfile */
-		$qb->select('profile.id');
-		$qb->addSelect('profile.event');
-		
-		$qb->from(TypeProfileEntity\TypeProfile::class, 'profile');
-		
-		/* TypeProfile Event */
-		$qb->addSelect('profile_event.sort');
-		$qb->join(
-			TypeProfileEntity\Event\TypeProfileEvent::class,
-			'profile_event',
-			'WITH',
-			'profile_event.id = profile.event'
-		);
-		
-		/* TypeProfile Translate */
-		$qb->addSelect('profile_trans.name');
-		$qb->addSelect('profile_trans.description');
-		$qb->join(
-			
-			TypeProfileEntity\Trans\TypeProfileTrans::class,
-			'profile_trans',
-			'WITH',
-			'profile_trans.event = profile.event AND profile_trans.local = :local'
-		);
-		
-		$qb->orderBy('profile_event.sort', 'ASC');
+        /* TypeProfile */
+        $qb->select('profile.id');
+        $qb->addSelect('profile.event');
+
+        $qb->from(TypeProfile::class, 'profile');
+
+        /* TypeProfile Event */
+        $qb->addSelect('profile_event.sort');
+        $qb->join(
+            TypeProfileEvent::class,
+            'profile_event',
+            'WITH',
+            'profile_event.id = profile.event'
+        );
+
+        /* TypeProfile Translate */
+        $qb->addSelect('profile_trans.name');
+        $qb->addSelect('profile_trans.description');
+        $qb->join(
+
+            TypeProfileTrans::class,
+            'profile_trans',
+            'WITH',
+            'profile_trans.event = profile.event AND profile_trans.local = :local'
+        );
+
+        $qb->orderBy('profile_event.sort', 'ASC');
 
         return $qb->getResult();
-	}
-	
+    }
+
 }

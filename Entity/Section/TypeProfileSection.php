@@ -25,6 +25,8 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Entity\Section;
 
+use BaksDev\Core\Entity\EntityEvent;
+use BaksDev\Core\Entity\EntityReadonly;
 use BaksDev\Core\Entity\EntityState;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
 use BaksDev\Users\Profile\TypeProfile\Entity\Section\Fields\TypeProfileSectionField;
@@ -39,10 +41,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /* Section */
 
-
 #[ORM\Entity]
 #[ORM\Table(name: 'type_users_profile_section')]
-class TypeProfileSection extends EntityState
+class TypeProfileSection extends EntityEvent
 {
 	const TABLE = 'type_users_profile_section';
 	
@@ -51,7 +52,7 @@ class TypeProfileSection extends EntityState
     #[Assert\Uuid]
 	#[ORM\Id]
 	#[ORM\Column(type: TypeProfileSectionUid::TYPE)]
-	private readonly TypeProfileSectionUid $id;
+	private TypeProfileSectionUid $id;
 	
 	/** Связь на событие Event */
     #[Assert\NotBlank]
@@ -82,11 +83,17 @@ class TypeProfileSection extends EntityState
 	public function __construct(TypeProfileEvent $event)
 	{
 		$this->id = new TypeProfileSectionUid();
+        $this->event = $event;
+
 		$this->translate = new ArrayCollection();
 		$this->field = new ArrayCollection();
-		$this->event = $event;
+
 	}
-	
+
+    public function __clone()
+    {
+        $this->id = clone $this->id;
+    }
 	
 	public function __toString(): string
 	{

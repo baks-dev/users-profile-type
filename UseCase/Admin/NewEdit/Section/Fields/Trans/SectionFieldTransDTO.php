@@ -40,14 +40,25 @@ final class SectionFieldTransDTO implements TypeProfileSectionFieldTransInterfac
 	/** Краткое описание */
 	#[Assert\Regex(pattern: '/^[\w \+\.\,\_\-\(\)\%]+$/iu')]
 	private ?string $description = null;
-	
-	
+
+    /**
+     * Field
+     */
+    public function getField(): ?TypeProfileSectionField
+    {
+        return $this->field;
+    }
+
 	/** Локаль */
 	
 	public function getLocal() : Locale
 	{
 		return $this->local;
 	}
+
+
+
+
 
 
     public function setLocal(Locale|string $local) : void

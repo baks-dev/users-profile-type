@@ -32,7 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class SectionDTO implements TypeProfileSectionInterface
 {
-	private readonly ?TypeProfileSectionUid $id;
+	//private ?TypeProfileSectionUid $id;
 	
 	/** Сортировка секции свойств продукта категории
 	 *
@@ -56,6 +56,16 @@ final class SectionDTO implements TypeProfileSectionInterface
 		$this->translate = new ArrayCollection();
 		$this->field = new ArrayCollection();
 	}
+
+//    /**
+//     * Id
+//     */
+//    public function getId(): ?TypeProfileSectionUid
+//    {
+//        return $this->id;
+//    }
+
+
 	
 	//    /**
 	//     * @return TypeProfileSectionUid|null
