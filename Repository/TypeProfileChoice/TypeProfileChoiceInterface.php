@@ -27,6 +27,8 @@ use Generator;
 
 interface TypeProfileChoiceInterface
 {
+    public function getAllTypeProfileChoice(): Generator;
+
     public function getActiveTypeProfileChoice(): Generator;
 
     public function getPublicTypeProfileChoice(): Generator;

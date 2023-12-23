@@ -44,6 +44,21 @@ final class TypeProfileChoice implements TypeProfileChoiceInterface
         $this->DBALQueryBuilder = $DBALQueryBuilder;
     }
 
+    public function getAllTypeProfileChoice(): Generator
+    {
+        $dbal = $this->getQueryBuilder();
+
+        $dbal->exists(
+            'profile',
+            TypeProfileInfo::class,
+            'info',
+            'info.profile = profile.id'
+        );
+
+        return $dbal
+            ->enableCache('users-profile-type', 86400)
+            ->fetchAllHydrate(TypeProfileUid::class);
+    }
 
     public function getActiveTypeProfileChoice(): Generator
     {
