@@ -65,8 +65,8 @@ final class TypeProfileHandler extends AbstractHandler
         }
 
 
-        dump($this->entityManager->getUnitOfWork());
-        dump($this->event);
+//        dump($this->entityManager->getUnitOfWork());
+//        dump($this->event);
 
         $this->entityManager->flush();
 
