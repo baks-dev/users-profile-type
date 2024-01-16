@@ -1,6 +1,6 @@
 # BaksDev ProfileType Users
 
-![Version](https://img.shields.io/badge/version-7.0.6-blue) ![php 8.2+](https://img.shields.io/badge/php-min%208.1-red.svg)
+![Version](https://img.shields.io/badge/version-7.0.7-blue) ![php 8.2+](https://img.shields.io/badge/php-min%208.1-red.svg)
 
 Модуль типов профилей пользователя
 
@@ -35,4 +35,3 @@ $ php bin/phpunit --group=users-profile-type
 ## Лицензия ![License](https://img.shields.io/badge/MIT-green)
 
 The MIT License (MIT). Обратитесь к [Файлу лицензии](LICENSE.md) за дополнительной информацией.
-
