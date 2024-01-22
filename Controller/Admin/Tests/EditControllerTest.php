@@ -33,7 +33,7 @@ final class EditControllerTest extends WebTestCase
 
     private const ROLE = 'ROLE_PROFILE_EDIT';
 
-    private static ?TypeProfileEventUid $identifier;
+    private static ?TypeProfileEventUid $identifier = null;
 
     public static function setUpBeforeClass(): void
     {
@@ -65,10 +65,9 @@ final class EditControllerTest extends WebTestCase
 
                 self::assertResponseIsSuccessful();
             }
-        } else
-        {
-            self::assertTrue(true);
         }
+
+        self::assertTrue(true);
     }
 
     /** Доступ по роли ROLE_ADMIN */
@@ -93,10 +92,9 @@ final class EditControllerTest extends WebTestCase
 
                 self::assertResponseIsSuccessful();
             }
-        } else
-        {
-            self::assertTrue(true);
         }
+
+        self::assertTrue(true);
     }
 
     /** Доступ закрыт по роли ROLE_USER */
@@ -120,10 +118,9 @@ final class EditControllerTest extends WebTestCase
 
                 self::assertResponseStatusCodeSame(403);
             }
-        } else
-        {
-            self::assertTrue(true);
         }
+
+        self::assertTrue(true);
     }
 
     /** Доступ по без роли */
