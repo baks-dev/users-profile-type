@@ -39,6 +39,9 @@ final class EditControllerTest extends WebTestCase
     {
         $em = self::getContainer()->get(EntityManagerInterface::class);
         self::$identifier = $em->getRepository(TypeProfile::class)->findOneBy([], ['id' => 'DESC'])?->getEvent();
+
+        $em->clear();
+        //$em->close();
     }
 
 

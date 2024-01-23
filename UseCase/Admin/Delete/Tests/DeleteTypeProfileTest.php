@@ -155,6 +155,9 @@ final class DeleteTypeProfileTest extends KernelTestCase
             ->find(TypeProfileUid::TEST);
         self::assertNull($TypeProfile);
 
+        $em->clear();
+        //$em->close();
+
     }
 
     /**
@@ -189,6 +192,9 @@ final class DeleteTypeProfileTest extends KernelTestCase
         $em->flush();
 
         self::assertNull($TypeProfile);
+
+        $em->clear();
+        //$em->close();
     }
 
 }

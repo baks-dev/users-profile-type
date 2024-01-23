@@ -156,6 +156,9 @@ final class EditTypeProfileHandleTest extends KernelTestCase
         $handle = $TypeProfileHandler->handle($TypeProfileDTO);
 
         self::assertTrue(($handle instanceof TypeProfile), $handle.': Ошибка WbPackage');
+
+        $em->clear();
+        //$em->close();
     }
 
 }

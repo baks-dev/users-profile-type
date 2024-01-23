@@ -78,6 +78,7 @@ final class NewTypeProfileHandleTest extends KernelTestCase
         }
 
         $em->flush();
+        $em->clear();
     }
 
 
@@ -187,5 +188,8 @@ final class NewTypeProfileHandleTest extends KernelTestCase
         $TypeProfile = $em->getRepository(TypeProfile::class)
             ->find(TypeProfileUid::TEST);
         self::assertNotNull($TypeProfile);
+
+        $em->clear();
+        //$em->close();
     }
 }
