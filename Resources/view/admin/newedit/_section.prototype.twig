@@ -1,7 +1,7 @@
 {% trans_default_domain('admin.profile.type') %}
 
 
-<div class="d-flex gap-3 border rounded-2 p-3">
+<div class="d-flex gap-3 border-light rounded-2 p-3">
 	
 	<div class="card w-100 border-light">
 		
@@ -65,7 +65,7 @@
 			{% set replace_prorotype = replace_prorotype|replace({ '__field__' : 0 }) %}
 			
 			<div id="field_collection_{{ form.section.vars.prototype.vars.name }}" class="d-flex flex-column gap-3">
-				<div class="item-collection-field card card-body">
+				<div class="item-collection-field card card-body border-light">
 					{{ replace_prorotype|raw }}
 				</div>
 			</div>

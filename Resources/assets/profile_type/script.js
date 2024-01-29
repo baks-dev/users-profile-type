@@ -114,7 +114,6 @@ if ($blockCollection) {
         div.classList.add('mb-4');
         div.classList.add('item-collection-section');
 
-
         div.innerHTML = newForm;
         $blockCollection.append(div);
 
@@ -207,6 +206,7 @@ function createField($addButtonFields) {
     div.classList.add('item-collection-field')
     div.classList.add('card')
     div.classList.add('card-body')
+    div.classList.add('border-light')
 
 
     div.innerHTML = newFormField;

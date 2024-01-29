@@ -60,7 +60,7 @@
 			
 			<div id="field_collection_{{ section.vars.name }}" class="d-flex flex-column gap-3">
 				{% for field in section.field %}
-					<div class="item-collection-field card card-body">
+					<div class="item-collection-field card card-body border-light">
 						{{ include(_self|replace({ "_section.html.twig": "_field.html.twig" })) }}
 					</div>
 				{% endfor %}

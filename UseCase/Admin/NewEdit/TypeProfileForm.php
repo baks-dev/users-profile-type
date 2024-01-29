@@ -86,7 +86,7 @@ final class TypeProfileForm extends AbstractType
 			[
 				'data_class' => TypeProfileDTO::class,
 				'method' => 'POST',
-				'attr' => ['class' => 'd-flex flex-column flex-lg-row'],
+				'attr' => ['class' => 'd-flex flex-column'],
 			]
 		);
 	}
