@@ -28,20 +28,21 @@ namespace BaksDev\Users\Profile\TypeProfile\Type\Settings;
 use BaksDev\Users\Profile\TypeProfile\Type\Settings\TypeProfileSettingsIdentifier;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
+use Doctrine\DBAL\Types\Type;
 
-final class TypeProfileSettingsType extends StringType
+final class TypeProfileSettingsType extends Type
 {
 	public const NAME = 'profile_settings';
 	
 	
-	public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
+	public function convertToDatabaseValue($value, AbstractPlatform $platform): string
 	{
 		return (string) $value;
 	}
 	
-	public function convertToPHPValue($value, AbstractPlatform $platform): mixed
+	public function convertToPHPValue($value, AbstractPlatform $platform): ?TypeProfileSettingsIdentifier
 	{
-		return !empty($value) ? new TypeProfileSettingsIdentifier() : $value;
+		return new TypeProfileSettingsIdentifier();
 	}
 	
 	public function getName(): string
@@ -54,5 +55,10 @@ final class TypeProfileSettingsType extends StringType
 	{
 		return true;
 	}
+
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
+    {
+        return $platform->getStringTypeDeclarationSQL($column);
+    }
 	
 }
