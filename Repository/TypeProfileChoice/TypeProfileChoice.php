@@ -48,8 +48,7 @@ final class TypeProfileChoice implements TypeProfileChoiceInterface
     {
         $dbal = $this->getQueryBuilder();
 
-        $dbal->exists(
-            'profile',
+        $dbal->andWhereExists(
             TypeProfileInfo::class,
             'info',
             'info.profile = profile.id'
@@ -64,8 +63,7 @@ final class TypeProfileChoice implements TypeProfileChoiceInterface
     {
         $dbal = $this->getQueryBuilder();
 
-        $dbal->exists(
-            'profile',
+        $dbal->andWhereExists(
             TypeProfileInfo::class,
             'info',
             'info.profile = profile.id AND info.active = true'
@@ -81,8 +79,7 @@ final class TypeProfileChoice implements TypeProfileChoiceInterface
     {
         $dbal = $this->getQueryBuilder();
 
-        $dbal->exists(
-            'profile',
+        $dbal->andWhereExists(
             TypeProfileInfo::class,
             'info',
             'info.profile = profile.id AND info.public = true'
@@ -98,8 +95,7 @@ final class TypeProfileChoice implements TypeProfileChoiceInterface
     {
         $dbal = $this->getQueryBuilder();
 
-        $dbal->exists(
-            'profile',
+        $dbal->andWhereExists(
             TypeProfileInfo::class,
             'info',
             'info.profile = profile.id AND info.usr = true'
