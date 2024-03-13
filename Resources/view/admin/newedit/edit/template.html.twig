@@ -7,40 +7,12 @@
 	{{ 'admin.page.edit'|trans }}
 {% endblock %}
 
-
-{# ---- CSS ------------------------------------------------------------ #}
-{% block stylesheets %}
-
-{% endblock %}
-
-{# ---- HEADER-БЛОК ------------------------------------------------------------ #}
-{# {% block header %}
-    {{ include(_self|replace({ "template.html.twig": "header.html.twig" })) }}
-{% endblock %} #}
-
-
-{# ---- LEFT-БЛОК ------------------------------------------------------------ #}
-{# {% block left %} #}
-{#   {% include '@Template/flowers/left.html.twig' %} #}
-{# {% endblock %} #}
-
-
 {# ---- КОНТЕНТ-БЛОК ------------------------------------------------------------ #}
 {% block content %}
 	{{ include(_self|replace({ "template.html.twig": "content.html.twig" })) }}
 {% endblock %}
 
 
-{# ---- FOOTER-БЛОК ------------------------------------------------------------ #}
-{#
-{% block footer %}
-    {{ include(_self|replace({ "template.html.twig": "footer.html.twig" })) }}
-{% endblock %}
-#}
-
 {% block javascript %}
-
-<script nonce="{{ csp_nonce() }}" src="/assets/profile_type/script.js?v={{ version }}" defer></script>
-
-
+<script nonce='{{ csp_nonce() }}' async  data-src="/assets/profile_type/script.js?v={{ version }}" class="lazy"></script>
 {% endblock %}
