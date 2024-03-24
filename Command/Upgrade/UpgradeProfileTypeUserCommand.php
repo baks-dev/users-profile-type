@@ -71,7 +71,6 @@ class UpgradeProfileTypeUserCommand extends Command implements ProjectUpgradeInt
     /** Добавляет тип профиля Пользователь  */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-
         /** Проверяем наличие типа Пользователь */
         $exists = $this->existTypeProfile->isExistTypeProfile(TypeProfileUid::userProfileType());
 
