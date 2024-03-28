@@ -101,9 +101,8 @@ final class TypeProfileChoice implements TypeProfileChoiceInterface
             'info.profile = profile.id AND info.usr = true'
         );
 
-
         return $dbal
-            ->enableCache('users-profile-type', 86400)
+            //->enableCache('users-profile-type', 86400)
             ->fetchAllHydrate(TypeProfileUid::class);
     }
 
