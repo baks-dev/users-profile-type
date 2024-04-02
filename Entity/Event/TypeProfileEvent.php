@@ -68,12 +68,12 @@ class TypeProfileEvent extends EntityEvent
 	
 	/** Перевод */
     #[Assert\Valid]
-	#[ORM\OneToMany(mappedBy: 'event', targetEntity: TypeProfileTrans::class, cascade: ['all'])]
+	#[ORM\OneToMany(targetEntity: TypeProfileTrans::class, mappedBy: 'event', cascade: ['all'])]
 	private Collection $translate;
 	
 	/** Секции для профиля */
     #[Assert\Valid]
-	#[ORM\OneToMany(mappedBy: 'event', targetEntity: TypeProfileSection::class, cascade: ['all'])]
+	#[ORM\OneToMany(targetEntity: TypeProfileSection::class, mappedBy: 'event', cascade: ['all'])]
 	#[ORM\OrderBy(['sort' => 'ASC'])]
 	private Collection $section;
 	
@@ -86,12 +86,12 @@ class TypeProfileEvent extends EntityEvent
 	
 	/** Модификатор */
     #[Assert\Valid]
-	#[ORM\OneToOne(mappedBy: 'event', targetEntity: TypeProfileModify::class, cascade: ['all'])]
+	#[ORM\OneToOne(targetEntity: TypeProfileModify::class, mappedBy: 'event', cascade: ['all'])]
 	private TypeProfileModify $modify;
 
     /** Информация о типе профиля */
     #[Assert\Valid]
-    #[ORM\OneToOne(mappedBy: 'event', targetEntity: TypeProfileInfo::class, cascade: ['all'])]
+    #[ORM\OneToOne(targetEntity: TypeProfileInfo::class, mappedBy: 'event', cascade: ['all'])]
     private ?TypeProfileInfo $info = null;
 
 	public function __construct()

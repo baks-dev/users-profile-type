@@ -29,7 +29,7 @@ use BaksDev\Core\Doctrine\DBALQueryBuilder;
 use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 
-final class ExistTypeProfile implements ExistTypeProfileInterface
+final class ExistTypeProfileRepository implements ExistTypeProfileInterface
 {
     private DBALQueryBuilder $DBALQueryBuilder;
 

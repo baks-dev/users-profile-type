@@ -34,7 +34,7 @@ use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 use BaksDev\Users\Profile\UserProfile\Type\Id\UserProfileUid;
 use Generator;
 
-final class TypeProfileChoice implements TypeProfileChoiceInterface
+final class TypeProfileChoiceRepository implements TypeProfileChoiceInterface
 {
 
     private DBALQueryBuilder $DBALQueryBuilder;

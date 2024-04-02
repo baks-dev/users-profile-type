@@ -63,7 +63,7 @@ class TypeProfileSectionField extends EntityReadonly
 	
 	/** Перевод */
     #[Assert\Valid]
-	#[ORM\OneToMany(mappedBy: 'field', targetEntity: TypeProfileSectionFieldTrans::class, cascade: ['all'])]
+	#[ORM\OneToMany(targetEntity: TypeProfileSectionFieldTrans::class, mappedBy: 'field', cascade: ['all'])]
 	private Collection $translate;
 	
 	/** Сортировка */

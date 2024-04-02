@@ -34,7 +34,7 @@ use BaksDev\Users\Profile\TypeProfile\Entity\Info\TypeProfileInfo;
 use BaksDev\Users\Profile\TypeProfile\Entity\Trans\TypeProfileTrans;
 use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 
-final class AllProfileTypeQuery implements AllProfileTypeInterface
+final class AllProfileTypeRepository implements AllProfileTypeInterface
 {
     private PaginatorInterface $paginator;
     private DBALQueryBuilder $DBALQueryBuilder;

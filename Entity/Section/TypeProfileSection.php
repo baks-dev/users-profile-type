@@ -63,12 +63,12 @@ class TypeProfileSection extends EntityEvent
 	
 	/** Перевод */
     #[Assert\Valid]
-	#[ORM\OneToMany(mappedBy: 'section', targetEntity: TypeProfileSectionTrans::class, cascade: ['all'])]
+	#[ORM\OneToMany(targetEntity: TypeProfileSectionTrans::class, mappedBy: 'section', cascade: ['all'])]
 	private Collection $translate;
 	
 	/** Поля секции */
     #[Assert\Valid]
-	#[ORM\OneToMany(mappedBy: 'section', targetEntity: TypeProfileSectionField::class, cascade: ['all'])]
+	#[ORM\OneToMany(targetEntity: TypeProfileSectionField::class, mappedBy: 'section', cascade: ['all'])]
 	#[ORM\OrderBy(['sort' => 'ASC'])]
 	private Collection $field;
 	
