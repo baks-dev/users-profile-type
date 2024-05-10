@@ -23,9 +23,12 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Command\Upgrade;
 
+use BaksDev\Auth\Email\Type\Email\AccountEmail;
 use BaksDev\Core\Type\Field\InputField;
+use BaksDev\Field\Pack\Phone\Type\PhoneField;
 use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Repository\ExistTypeProfile\ExistTypeProfileInterface;
+use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\TypeProfileOrganization;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields\SectionFieldDTO;
 use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields\Trans\SectionFieldTransDTO;
@@ -66,8 +69,11 @@ class UpgradeProfileTypeOrganizationCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+
+        $TypeProfileUid = new TypeProfileUid(TypeProfileOrganization::class);
+
         /** Проверяем наличие типа Юр. лицо */
-        $exists = $this->existTypeProfile->isExistTypeProfile(TypeProfileUid::organizationProfileType());
+        $exists = $this->existTypeProfile->isExistTypeProfile($TypeProfileUid);
 
         if(!$exists)
         {
@@ -75,8 +81,8 @@ class UpgradeProfileTypeOrganizationCommand extends Command
             $io->text('Добавляем тип профиля Организация');
 
             $TypeProfileDTO = new TypeProfileDTO();
-            $TypeProfileDTO->setSort(200);
-            $TypeProfileDTO->setProfile(TypeProfileUid::organizationProfileType());
+            $TypeProfileDTO->setSort(TypeProfileOrganization::priority());
+            $TypeProfileDTO->setProfile($TypeProfileUid);
 
             $TypeProfileTranslateDTO = $TypeProfileDTO->getTranslate();
 
@@ -121,7 +127,19 @@ class UpgradeProfileTypeOrganizationCommand extends Command
                 $SectionFieldDTO->setSort($sort);
                 $SectionFieldDTO->setPublic(true);
                 $SectionFieldDTO->setRequired(true);
+
+                /** По умолчанию все поля input */
                 $SectionFieldDTO->setType(new InputField('input_field'));
+
+                if($field === 'phone')
+                {
+                    $SectionFieldDTO->setType(new InputField(PhoneField::TYPE));
+                }
+
+                if($field === 'mail')
+                {
+                    $SectionFieldDTO->setType(new InputField(AccountEmail::TYPE));
+                }
 
 
                 /** @var SectionFieldTransDTO $SectionFieldTrans */

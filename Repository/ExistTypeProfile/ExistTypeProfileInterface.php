@@ -23,6 +23,7 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Repository\ExistTypeProfile;
 
+use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInterface;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 
 interface ExistTypeProfileInterface

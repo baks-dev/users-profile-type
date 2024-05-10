@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2023.  Baks.dev <admin@baks.dev>
+ *  Copyright 2024.  Baks.dev <admin@baks.dev>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -23,40 +23,33 @@
 
 declare(strict_types=1);
 
-namespace BaksDev\Users\Profile\TypeProfile\Repository\ExistTypeProfile;
+namespace BaksDev\Users\Profile\TypeProfile\Type\Id\Choice;
 
-use BaksDev\Core\Doctrine\DBALQueryBuilder;
-use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInterface;
-use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 
-final class ExistTypeProfileRepository implements ExistTypeProfileInterface
+final class TypeProfileOrganization implements TypeProfileInterface
 {
-    private DBALQueryBuilder $DBALQueryBuilder;
+    public const TYPE = '0189c5ba-4098-7ea6-a45a-1053b7087e44';
 
-    public function __construct(
-        DBALQueryBuilder $DBALQueryBuilder,
-    )
+    public function __toString(): string
     {
-        $this->DBALQueryBuilder = $DBALQueryBuilder;
+        return self::TYPE;
     }
-    
-    /**
-     * Проверяет, имеется ли такой профиль пользователя
-     */
-    public function isExistTypeProfile(TypeProfileUid $profile): bool
+
+    /** Возвращает значение (value) */
+    public function getValue(): string
     {
+        return self::TYPE;
+    }
 
-        $qb = $this->DBALQueryBuilder->createQueryBuilder(self::class);
+    /** Сортировка */
+    public static function priority(): int
+    {
+        return 200;
+    }
 
-        //$qb->select('id');
-        $qb
-            ->from(TypeProfile::TABLE, 'profile')
-            ->where('profile.id = :profile')
-            ->setParameter('profile', $profile, TypeProfileUid::TYPE)
-        ;
-
-        return $qb
-            ->fetchExist();
+    public static function equals(mixed $uid): bool
+    {
+        return self::TYPE === (string) $uid;
     }
 }

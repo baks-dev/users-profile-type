@@ -23,40 +23,33 @@
 
 declare(strict_types=1);
 
-namespace BaksDev\Users\Profile\TypeProfile\Repository\ExistTypeProfile;
+namespace BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection;
 
-use BaksDev\Core\Doctrine\DBALQueryBuilder;
-use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
-use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInterface;
-use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
+use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 
-final class ExistTypeProfileRepository implements ExistTypeProfileInterface
+final class TypeProfileCollection
 {
-    private DBALQueryBuilder $DBALQueryBuilder;
+    private iterable $type;
 
     public function __construct(
-        DBALQueryBuilder $DBALQueryBuilder,
+        #[TaggedIterator('baks.users.profile.type', defaultPriorityMethod: 'priority')] iterable $type
     )
     {
-        $this->DBALQueryBuilder = $DBALQueryBuilder;
+        $this->type = $type;
     }
-    
-    /**
-     * Проверяет, имеется ли такой профиль пользователя
-     */
-    public function isExistTypeProfile(TypeProfileUid $profile): bool
+
+    public function cases(): array
     {
+        $case = null;
 
-        $qb = $this->DBALQueryBuilder->createQueryBuilder(self::class);
+        foreach($this->type as $key => $type)
+        {
+            $case[$type::priority().$key] = new $type();
+        }
 
-        //$qb->select('id');
-        $qb
-            ->from(TypeProfile::TABLE, 'profile')
-            ->where('profile.id = :profile')
-            ->setParameter('profile', $profile, TypeProfileUid::TYPE)
-        ;
+        ksort($case);
 
-        return $qb
-            ->fetchExist();
+        return $case;
     }
+
 }

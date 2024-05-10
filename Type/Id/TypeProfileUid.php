@@ -18,59 +18,78 @@
 
 namespace BaksDev\Users\Profile\TypeProfile\Type\Id;
 
-use App\Kernel;
 use BaksDev\Core\Type\UidType\Uid;
+use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInterface;
 use Symfony\Component\Uid\AbstractUid;
 
 final class TypeProfileUid extends Uid
 {
-
-	public const TYPE = 'profile';
+    public const TYPE = 'profile';
 
     public const TEST = '018ad881-fd9e-73d2-aea3-75c908fbfbb8';
 
-    /**
-     * Идентификаторы профилей пользователя
-     */
-    private const ORGANIZATION = '0189c5ba-4098-7ea6-a45a-1053b7087e44';
+    private mixed $option;
 
-    public const USER = '0189c5ba-6ef8-7a75-94e8-4cec1ddaa3ff';
-	
-	private mixed $option;
+    private mixed $attr;
 
-	private mixed $attr;
-
-	public function __construct(
-        AbstractUid|self|string|null $value = null,
+    public function __construct(
+        AbstractUid|TypeProfileInterface|self|string|null $value = null,
         mixed $option = null,
         mixed $attr = null
     )
-	{
+    {
+        if(is_string($value) && class_exists($value))
+        {
+            $value = new $value();
+        }
+
+        if($value instanceof TypeProfileInterface)
+        {
+            $value = $value->getValue();
+        }
+
         parent::__construct($value);
 
-		$this->option = $option;
-		$this->attr = $attr;
-	}
-	
-	
-	public function getOption(): mixed
-	{
-		return $this->option;
-	}
-
-	public function getAttr(): mixed
-	{
-		return $this->attr;
-	}
-
-    public static function organizationProfileType(): self
-    {
-        return new self(self::ORGANIZATION);
+        $this->option = $option;
+        $this->attr = $attr;
     }
 
-    public static function userProfileType(): self
+    public function getOption(): mixed
     {
-        return new self(self::USER);
+        return $this->option;
     }
 
+    public function getAttr(): mixed
+    {
+        return $this->attr;
+    }
+
+    public function getTypeProfileValue(): string
+    {
+        return (string) $this->getValue();
+    }
+
+    public function getTypeProfile(): TypeProfileUid|TypeProfileInterface
+    {
+        foreach(self::getDeclared() as $declared)
+        {
+            /** @var TypeProfileInterface $declared */
+            if($declared::equals($this->getValue()))
+            {
+                return new $declared;
+            }
+        }
+
+        return new self($this->getValue());
+    }
+
+    public static function getDeclared(): array
+    {
+        return array_filter(
+            get_declared_classes(),
+            static function($className) {
+                return in_array(TypeProfileInterface::class, class_implements($className), true);
+            }
+        );
+    }
 }

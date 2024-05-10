@@ -21,42 +21,19 @@
  *  THE SOFTWARE.
  */
 
-declare(strict_types=1);
+namespace BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection;
 
-namespace BaksDev\Users\Profile\TypeProfile\Repository\ExistTypeProfile;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
-use BaksDev\Core\Doctrine\DBALQueryBuilder;
-use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
-use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInterface;
-use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
-
-final class ExistTypeProfileRepository implements ExistTypeProfileInterface
+#[AutoconfigureTag('baks.users.profile.type')]
+interface TypeProfileInterface
 {
-    private DBALQueryBuilder $DBALQueryBuilder;
+    public function __toString(): string;
 
-    public function __construct(
-        DBALQueryBuilder $DBALQueryBuilder,
-    )
-    {
-        $this->DBALQueryBuilder = $DBALQueryBuilder;
-    }
-    
-    /**
-     * Проверяет, имеется ли такой профиль пользователя
-     */
-    public function isExistTypeProfile(TypeProfileUid $profile): bool
-    {
+    public function getValue(): string;
 
-        $qb = $this->DBALQueryBuilder->createQueryBuilder(self::class);
+    public static function priority(): int;
 
-        //$qb->select('id');
-        $qb
-            ->from(TypeProfile::TABLE, 'profile')
-            ->where('profile.id = :profile')
-            ->setParameter('profile', $profile, TypeProfileUid::TYPE)
-        ;
+    public static function equals(mixed $uid): bool;
 
-        return $qb
-            ->fetchExist();
-    }
 }
