@@ -44,8 +44,13 @@ final class ExistTypeProfileRepository implements ExistTypeProfileInterface
     /**
      * Проверяет, имеется ли такой профиль пользователя
      */
-    public function isExistTypeProfile(TypeProfileUid $profile): bool
+    public function isExistTypeProfile(TypeProfileUid|string $profile): bool
     {
+        if(is_string($profile))
+        {
+            $profile = new TypeProfileUid($profile);
+        }
+
 
         $qb = $this->DBALQueryBuilder->createQueryBuilder(self::class);
 

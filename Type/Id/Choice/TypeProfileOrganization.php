@@ -26,7 +26,9 @@ declare(strict_types=1);
 namespace BaksDev\Users\Profile\TypeProfile\Type\Id\Choice;
 
 use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
+#[AutoconfigureTag('baks.users.profile.type')]
 final class TypeProfileOrganization implements TypeProfileInterface
 {
     public const TYPE = '0189c5ba-4098-7ea6-a45a-1053b7087e44';
