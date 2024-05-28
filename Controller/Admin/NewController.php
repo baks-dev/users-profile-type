@@ -51,7 +51,10 @@ final class NewController extends AbstractController
         $form = $this->createForm(TypeProfileForm::class, $profile);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $this->refreshTokenForm($form);
+
             $TypeProfile = $handler->handle($profile);
 
             if ($TypeProfile instanceof TypeProfile) {

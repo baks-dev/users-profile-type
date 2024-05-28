@@ -58,6 +58,8 @@ final class DeleteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() && $form->has('delete'))
         {
+            $this->refreshTokenForm($form);
+
             $GroupEvent = $handler->handle($TypeProfileDTO);
 
             if ($GroupEvent instanceof TypeProfile) {
