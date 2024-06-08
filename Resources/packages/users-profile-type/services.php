@@ -2,6 +2,7 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use BaksDev\Users\Profile\TypeProfile\BaksDevUsersProfileTypeProfileBundle;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInterface;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\TypeProfileOrganization;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\TypeProfileUser;
@@ -13,21 +14,20 @@ return static function(ContainerConfigurator $configurator) {
         ->autowire()
         ->autoconfigure();
 
-    $NAMESPACE = 'BaksDev\Users\Profile\TypeProfile\\';
+    $NAMESPACE = BaksDevUsersProfileTypeProfileBundle::NAMESPACE;
+    $PATH = BaksDevUsersProfileTypeProfileBundle::PATH;
 
-    $MODULE = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
-
-    $services->load($NAMESPACE, $MODULE)
+    $services->load($NAMESPACE, $PATH)
         ->exclude([
-            $MODULE.'{Entity,Resources,Type}',
-            $MODULE.'**/*Message.php',
-            $MODULE.'**/*DTO.php',
+            $PATH.'{Entity,Resources,Type}',
+            $PATH.'**/*Message.php',
+            $PATH.'**/*DTO.php',
         ])
     ;
 
 
     /* Типы профилей */
-    $services->load($NAMESPACE.'Type\Id\Choice\\', $MODULE.'Type/Id/Choice');
+    $services->load($NAMESPACE.'Type\Id\Choice\\', $PATH.'Type/Id/Choice');
 
     /** @see https://symfony.com/doc/current/service_container/autowiring.html#dealing-with-multiple-implementations-of-the-same-type */
 

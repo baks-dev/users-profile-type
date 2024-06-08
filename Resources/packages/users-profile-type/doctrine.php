@@ -2,6 +2,7 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use BaksDev\Users\Profile\TypeProfile\BaksDevUsersProfileTypeProfileBundle;
 use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventType;
 use BaksDev\Users\Profile\TypeProfile\Type\Event\TypeProfileEventUid;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileType;
@@ -24,11 +25,9 @@ return static function(ContainerConfigurator $container, DoctrineConfig $doctrin
 
     $emDefault = $doctrine->orm()->entityManager('default')->autoMapping(true);
 
-    $MODULE = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
-
     $emDefault->mapping('TypeProfile')
 		->type('attribute')
-		->dir($MODULE.'Entity')
+		->dir(BaksDevUsersProfileTypeProfileBundle::PATH.'Entity')
 		->isBundle(false)
 		->prefix('BaksDev\Users\Profile\TypeProfile\Entity')
 		->alias('TypeProfile')
