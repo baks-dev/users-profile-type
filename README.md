@@ -1,6 +1,6 @@
 # BaksDev Profile Type
 
-[![Version](https://img.shields.io/badge/version-7.1.3-blue)](https://github.com/baks-dev/users-profile-type/releases)
+[![Version](https://img.shields.io/badge/version-7.1.4-blue)](https://github.com/baks-dev/users-profile-type/releases)
 ![php 8.3+](https://img.shields.io/badge/php-min%208.3-red.svg)
 
 Модуль типов профилей пользователя
