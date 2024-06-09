@@ -1,6 +1,6 @@
 # BaksDev Profile Type
 
-[![Version](https://img.shields.io/badge/version-7.1.2-blue)](https://github.com/baks-dev/users-profile-type/releases)
+[![Version](https://img.shields.io/badge/version-7.1.3-blue)](https://github.com/baks-dev/users-profile-type/releases)
 ![php 8.3+](https://img.shields.io/badge/php-min%208.3-red.svg)
 
 Модуль типов профилей пользователя
@@ -13,7 +13,7 @@ $ composer require baks-dev/users-profile-type
 
 ## Дополнительно
 
-Установка файловых ресурсов в публичную директорию (javascript, css, image ...):
+Установка конфигурации и файловых ресурсов:
 
 ``` bash
 $ php bin/console baks:assets:install
@@ -23,11 +23,10 @@ $ php bin/console baks:assets:install
 
 ``` bash
 $ php bin/console doctrine:migrations:diff
-
 $ php bin/console doctrine:migrations:migrate
 ```
 
-Тесты
+## Тестирование
 
 ``` bash
 $ php bin/phpunit --group=users-profile-type
