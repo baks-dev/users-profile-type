@@ -15,24 +15,6 @@
  *
  */
 
-// let price_lang = {
-//     'ru': {
-//         free: 'Бесплатно',
-//         quantity: 'шт.',
-//     },
-//     'en': {
-//         free: 'Free',
-//         quantity: 'pcs.',
-//     }
-// }
-//
-// /* определяем язык системы  */
-// $htmlLang = document.getElementsByTagName('html');
-// let $lang = $htmlLang[0].getAttribute('lang');
-
-
-// window.addEventListener('load', function () {
-
 
 /** Коллекция СЕКЦИЙ */
 
