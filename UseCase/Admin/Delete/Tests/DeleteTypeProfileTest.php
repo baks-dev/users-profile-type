@@ -55,7 +55,6 @@ use Symfony\Component\DependencyInjection\Attribute\When;
 #[When(env: 'test')]
 final class DeleteTypeProfileTest extends KernelTestCase
 {
-
     public function testUseCase(): void
     {
 
@@ -73,7 +72,8 @@ final class DeleteTypeProfileTest extends KernelTestCase
 
         $qb
             ->select('event')
-            ->leftJoin(TypeProfileEvent::class,
+            ->leftJoin(
+                TypeProfileEvent::class,
                 'event',
                 'WITH',
                 'event.id = main.event'
@@ -86,8 +86,6 @@ final class DeleteTypeProfileTest extends KernelTestCase
 
         /** @var TypeProfileDTO $TypeProfileDTO */
         $TypeProfileDTO = $Event->getDto(TypeProfileDTO::class);
-
-
 
 
         self::assertEquals(TypeProfileUid::TEST, (string) $TypeProfileDTO->getProfile());
@@ -134,7 +132,6 @@ final class DeleteTypeProfileTest extends KernelTestCase
             self::assertEquals('SectionFieldTransNameNew', $SectionFieldTransDTO->getName());
             self::assertEquals('SectionFieldTransDescriptionNew', $SectionFieldTransDTO->getDescription());
         }
-
 
 
         /** DELETE */

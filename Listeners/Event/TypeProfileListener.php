@@ -48,7 +48,8 @@ final class TypeProfileListener
     public function onKernelController(ControllerEvent $event): void
     {
         // Инициируем статусы заказов
-        if (in_array(TypeProfileType::class, get_declared_classes(), true)) {
+        if(in_array(TypeProfileType::class, get_declared_classes(), true))
+        {
             $this->collection->cases();
         }
     }

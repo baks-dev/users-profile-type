@@ -53,7 +53,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[AutoconfigureTag('baks.project.upgrade')]
 class UpgradeProfileTypeUserCommand extends Command implements ProjectUpgradeInterface
 {
-
     private ExistTypeProfileInterface $existTypeProfile;
     private TranslatorInterface $translator;
     private TypeProfileHandler $profileHandler;
@@ -62,8 +61,7 @@ class UpgradeProfileTypeUserCommand extends Command implements ProjectUpgradeInt
         ExistTypeProfileInterface $existTypeProfile,
         TranslatorInterface $translator,
         TypeProfileHandler $profileHandler,
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->existTypeProfile = $existTypeProfile;

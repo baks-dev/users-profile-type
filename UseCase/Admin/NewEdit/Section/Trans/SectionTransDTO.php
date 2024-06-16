@@ -29,64 +29,64 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class SectionTransDTO implements TypeProfileSectionTransInterface
 {
-	//private ?TypeProfileSection $section;
-	
-	private readonly Locale $local;
-	
-	/** Название раздела (строка с точкой, нижнее подчеркивание тире процент скобки) */
-	#[Assert\NotBlank]
-	#[Assert\Regex(pattern: '/^[\w \.\,\_\-\(\)\%]+$/iu')]
-	private ?string $name;
-	
-	/** Краткое описание */
-	#[Assert\Regex(pattern: '/^[\w \.\,\_\-\(\)\%]+$/iu')]
-	private ?string $description = null;
+    //private ?TypeProfileSection $section;
 
-//    /**
-//     * Section
-//     */
-//    public function getSection(): ?TypeProfileSection
-//    {
-//        return $this->section;
-//    }
+    private readonly Locale $local;
 
+    /** Название раздела (строка с точкой, нижнее подчеркивание тире процент скобки) */
+    #[Assert\NotBlank]
+    #[Assert\Regex(pattern: '/^[\w \.\,\_\-\(\)\%]+$/iu')]
+    private ?string $name;
 
-	public function getLocal() : Locale
-	{
-		return $this->local;
-	}
+    /** Краткое описание */
+    #[Assert\Regex(pattern: '/^[\w \.\,\_\-\(\)\%]+$/iu')]
+    private ?string $description = null;
+
+    //    /**
+    //     * Section
+    //     */
+    //    public function getSection(): ?TypeProfileSection
+    //    {
+    //        return $this->section;
+    //    }
 
 
-    public function setLocal(Locale|string $local) : void
+    public function getLocal(): Locale
+    {
+        return $this->local;
+    }
+
+
+    public function setLocal(Locale|string $local): void
     {
         if(!(new ReflectionProperty(self::class, 'local'))->isInitialized($this))
         {
             $this->local = $local instanceof Locale ? $local : new Locale($local);
         }
     }
-	
-	
-	public function getName() : ?string
-	{
-		return $this->name;
-	}
-	
-	
-	public function setName(?string $name) : void
-	{
-		$this->name = $name;
-	}
-	
-	
-	public function getDescription() : ?string
-	{
-		return $this->description;
-	}
-	
-	
-	public function setDescription(?string $description) : void
-	{
-		$this->description = $description;
-	}
-	
+
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
+    }
+
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
 }

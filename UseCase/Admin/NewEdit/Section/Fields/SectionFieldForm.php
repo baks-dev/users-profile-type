@@ -35,117 +35,113 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SectionFieldForm extends AbstractType
 {
-	//    private $locale;
-	//
-	//    public function __construct(TranslatorInterface $translator)
-	//    {
-	//        $this->locale = $translator->getLocale();
-	//    }
-	
-	private TranslatorInterface $translator;
-	
-	private FieldsChoice $fields;
-	
-	
-	public function __construct(FieldsChoice $fields, TranslatorInterface $translator)
-	{
-		
-		$this->translator = $translator;
-		$this->fields = $fields;
-	}
-	
-	
-	public function buildForm(FormBuilderInterface $builder, array $options) : void
-	{
-		
-		$builder->add
-		(
-			'sort',
-			IntegerType::class,
-			[
-				'label' => false,
-				'attr' => ['min' => 0, 'max' => 999],
-			]
-		);
-		
-		/* CollectionType */
-		$builder->add('translate', CollectionType::class, [
-			'entry_type' => SectionFieldTransForm::class,
-			'entry_options' => ['label' => false],
-			'label' => false,
-			'by_reference' => false,
-			'allow_delete' => true,
-			'allow_add' => true,
-			'prototype_name' => '__trans__',
-		]);
-		
-		/** Тип поля (input, select, textarea ....) */
-		
-		$builder->add
-		(
-			'type',
-			ChoiceType::class,
-			[
-				'required' => false,
-				'choices' => $this->fields->getFields(),
-				'choice_value' => function($choice) {
-					return $choice instanceof FieldsChoiceInterface ? $choice?->type() : $choice;
-				},
-				'choice_label' => function($choice) {
-					return $this->translator->trans('label', domain: $choice->domain());
-				},
-			]
-		);
-		
-		$builder->get('type')->addModelTransformer(
-			new CallbackTransformer(
-				function($type) {
-					return $type;
-				},
-				function($type) {
-					return $type instanceof FieldsChoiceInterface ? new InputField($type) : null;
-				}
-			)
-		);
-		
-		/** Обязательное к заполнению */
-		
-		$builder->add('required', CheckboxType::class, [
-			'required' => false,
-		]);
-		
-		/** Публичное свойтсво */
-		
-		$builder->add('public', CheckboxType::class, [
-			'required' => false,
-		]);
-		
-		/** Присутствует в карточке */
-		
-		$builder->add('card', CheckboxType::class, [
-			'required' => false,
-		]);
-		
-		$builder->add
-		(
-			'DeleteField',
-			ButtonType::class,
-			[
-				'label_html' => true,
-			]
-		);
-		
-	}
-	
-	
-	public function configureOptions(OptionsResolver $resolver) : void
-	{
-		$resolver->setDefaults
-		(
-			[
-				'data_class' => SectionFieldDTO::class,
-			]
-		);
-	}
-	
+    //    private $locale;
+    //
+    //    public function __construct(TranslatorInterface $translator)
+    //    {
+    //        $this->locale = $translator->getLocale();
+    //    }
+
+    private TranslatorInterface $translator;
+
+    private FieldsChoice $fields;
+
+
+    public function __construct(FieldsChoice $fields, TranslatorInterface $translator)
+    {
+
+        $this->translator = $translator;
+        $this->fields = $fields;
+    }
+
+
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+
+        $builder->add(
+            'sort',
+            IntegerType::class,
+            [
+                'label' => false,
+                'attr' => ['min' => 0, 'max' => 999],
+            ]
+        );
+
+        /* CollectionType */
+        $builder->add('translate', CollectionType::class, [
+            'entry_type' => SectionFieldTransForm::class,
+            'entry_options' => ['label' => false],
+            'label' => false,
+            'by_reference' => false,
+            'allow_delete' => true,
+            'allow_add' => true,
+            'prototype_name' => '__trans__',
+        ]);
+
+        /** Тип поля (input, select, textarea ....) */
+
+        $builder->add(
+            'type',
+            ChoiceType::class,
+            [
+                'required' => false,
+                'choices' => $this->fields->getFields(),
+                'choice_value' => function ($choice) {
+                    return $choice instanceof FieldsChoiceInterface ? $choice?->type() : $choice;
+                },
+                'choice_label' => function ($choice) {
+                    return $this->translator->trans('label', domain: $choice->domain());
+                },
+            ]
+        );
+
+        $builder->get('type')->addModelTransformer(
+            new CallbackTransformer(
+                function ($type) {
+                    return $type;
+                },
+                function ($type) {
+                    return $type instanceof FieldsChoiceInterface ? new InputField($type) : null;
+                }
+            )
+        );
+
+        /** Обязательное к заполнению */
+
+        $builder->add('required', CheckboxType::class, [
+            'required' => false,
+        ]);
+
+        /** Публичное свойтсво */
+
+        $builder->add('public', CheckboxType::class, [
+            'required' => false,
+        ]);
+
+        /** Присутствует в карточке */
+
+        $builder->add('card', CheckboxType::class, [
+            'required' => false,
+        ]);
+
+        $builder->add(
+            'DeleteField',
+            ButtonType::class,
+            [
+                'label_html' => true,
+            ]
+        );
+
+    }
+
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults(
+            [
+                'data_class' => SectionFieldDTO::class,
+            ]
+        );
+    }
+
 }

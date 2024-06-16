@@ -29,67 +29,64 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SectionForm extends AbstractType
 {
-	//    private $locale;
-	//
-	//    public function __construct(TranslatorInterface $translator)
-	//    {
-	//        $this->locale = $translator->getLocale();
-	//    }
-	
-	public function buildForm(FormBuilderInterface $builder, array $options) : void
-	{
-		
-		$builder->add
-		(
-			'sort',
-			IntegerType::class,
-			[
-				'label' => false,
-				'attr' => ['min' => 0, 'max' => 999],
-			]
-		);
-		
-		/* CollectionType */
-		$builder->add('translate', CollectionType::class, [
-			'entry_type' => SectionTransForm::class,
-			'entry_options' => ['label' => false],
-			'label' => false,
-			'by_reference' => false,
-			'allow_delete' => true,
-			'allow_add' => true,
-			'prototype_name' => '__trans__',
-		]);
-		
-		/* CollectionType */
-		$builder->add('field', CollectionType::class, [
-			'entry_type' => SectionFieldForm::class,
-			'entry_options' => ['label' => false],
-			'label' => false,
-			'by_reference' => false,
-			'allow_delete' => true,
-			'allow_add' => true,
-			'prototype_name' => '__field__',
-		]);
-		
-		$builder->add
-		(
-			'DeleteSection',
-			ButtonType::class,
-			[
-				'label_html' => true,
-			]
-		);
-	}
-	
-	
-	public function configureOptions(OptionsResolver $resolver) : void
-	{
-		$resolver->setDefaults
-		(
-			[
-				'data_class' => SectionDTO::class,
-			]
-		);
-	}
-	
+    //    private $locale;
+    //
+    //    public function __construct(TranslatorInterface $translator)
+    //    {
+    //        $this->locale = $translator->getLocale();
+    //    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+
+        $builder->add(
+            'sort',
+            IntegerType::class,
+            [
+                'label' => false,
+                'attr' => ['min' => 0, 'max' => 999],
+            ]
+        );
+
+        /* CollectionType */
+        $builder->add('translate', CollectionType::class, [
+            'entry_type' => SectionTransForm::class,
+            'entry_options' => ['label' => false],
+            'label' => false,
+            'by_reference' => false,
+            'allow_delete' => true,
+            'allow_add' => true,
+            'prototype_name' => '__trans__',
+        ]);
+
+        /* CollectionType */
+        $builder->add('field', CollectionType::class, [
+            'entry_type' => SectionFieldForm::class,
+            'entry_options' => ['label' => false],
+            'label' => false,
+            'by_reference' => false,
+            'allow_delete' => true,
+            'allow_add' => true,
+            'prototype_name' => '__field__',
+        ]);
+
+        $builder->add(
+            'DeleteSection',
+            ButtonType::class,
+            [
+                'label_html' => true,
+            ]
+        );
+    }
+
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults(
+            [
+                'data_class' => SectionDTO::class,
+            ]
+        );
+    }
+
 }

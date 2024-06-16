@@ -56,13 +56,14 @@ final class DeleteController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() && $form->has('delete'))
+        if($form->isSubmitted() && $form->isValid() && $form->has('delete'))
         {
             $this->refreshTokenForm($form);
 
             $GroupEvent = $handler->handle($TypeProfileDTO);
 
-            if ($GroupEvent instanceof TypeProfile) {
+            if($GroupEvent instanceof TypeProfile)
+            {
                 $this->addFlash('admin.form.delete.header', 'admin.success.delete', 'admin.profile.type');
 
                 return $this->redirectToRoute('users-profile-type:admin.index');

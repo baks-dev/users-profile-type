@@ -30,5 +30,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 final class TypeProfileDispatch
 {
-    public function __invoke(TypeProfileMessage $message): void {}
+    public function __invoke(TypeProfileMessage $message): void
+    {
+    }
 }

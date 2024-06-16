@@ -71,7 +71,6 @@ final class NewTypeProfileHandleTest extends KernelTestCase
             ->findBy(['profile' => TypeProfileUid::TEST]);
 
 
-
         foreach($Event as $remove)
         {
             $em->remove($remove);

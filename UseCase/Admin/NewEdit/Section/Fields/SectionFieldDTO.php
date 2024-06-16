@@ -29,31 +29,34 @@ use Symfony\Component\Validator\Constraints as Assert;
 /** @see TypeProfileSectionField */
 final class SectionFieldDTO implements TypeProfileSectionFieldInterface
 {
-	/** Идентификатор для сверки коллекции  */
-	private ?TypeProfileSectionFieldUid $id = null;
+    /** Идентификатор для сверки коллекции  */
+    private ?TypeProfileSectionFieldUid $id = null;
 
-	/** Сортировка поля в секции  */
-	#[Assert\Range(min: 0, max: 999)]
-	private int $sort = 100;
-	
-	/** Тип поля (input, select, textarea ....) */
-	#[Assert\NotBlank]
-	private InputField $type;
-	
-	/** Публичное свойство */
-	private bool $public = true;
-	
-	/** Присутствует в карточке */
-	private bool $card = true;
-	
-	/** Обязательное к заполнению */
-	private bool $required = true;
-	
-	#[Assert\Valid]
-	private ArrayCollection $translate;
-	
-	
-	public function __construct() { $this->translate = new  ArrayCollection(); }
+    /** Сортировка поля в секции  */
+    #[Assert\Range(min: 0, max: 999)]
+    private int $sort = 100;
+
+    /** Тип поля (input, select, textarea ....) */
+    #[Assert\NotBlank]
+    private InputField $type;
+
+    /** Публичное свойство */
+    private bool $public = true;
+
+    /** Присутствует в карточке */
+    private bool $card = true;
+
+    /** Обязательное к заполнению */
+    private bool $required = true;
+
+    #[Assert\Valid]
+    private ArrayCollection $translate;
+
+
+    public function __construct()
+    {
+        $this->translate = new  ArrayCollection();
+    }
 
     /**
      * Id
@@ -69,124 +72,123 @@ final class SectionFieldDTO implements TypeProfileSectionFieldInterface
         return $this->id;
     }
 
-//    /** Для теста */
-//    public function newSectionField(): void
-//    {
-//        $this->id = clone new TypeProfileSectionFieldUid();
-//    }
+    //    /** Для теста */
+    //    public function newSectionField(): void
+    //    {
+    //        $this->id = clone new TypeProfileSectionFieldUid();
+    //    }
 
 
-	
-	/** Сортировка поля в секции  */
-	
-	public function getSort() : int
-	{
-		return $this->sort;
-	}
-	
-	
-	public function setSort(int $sort) : void
-	{
-		
-		$this->sort = $sort;
-	}
-	
-	
-	/** Тип поля (input, select, textarea ....) */
-	
-	public function getType() : InputField
-	{
-		return $this->type;
-	}
-	
-	
-	public function setType(InputField $type) : void
-	{
-		$this->type = $type;
-	}
-	
-	
-	/** Публичное свойство */
-	
-	public function getPublic() : bool
-	{
-		return $this->public;
-	}
-	
-	
-	public function setPublic(bool $public) : void
-	{
-		$this->public = $public;
-	}
-	
-	
-	/** Присутствует в карточке */
-	
-	public function getCard() : bool
-	{
-		return $this->card;
-	}
-	
-	
-	public function setCard(bool $card) : void
-	{
-		$this->card = $card;
-	}
-	
-	
-	/** Обязательное к заполнению */
-	
-	public function getRequired() : bool
-	{
-		return $this->required;
-	}
-	
-	
-	public function setRequired(bool $required) : void
-	{
-		$this->required = $required;
-	}
-	
-	
-	/**
-	 * @return ArrayCollection
-	 */
-	public function getTranslate() : ArrayCollection
-	{
-		/* Вычисляем расхождение и добавляем неопределенные локали */
-		foreach(Locale::diffLocale($this->translate) as $locale)
-		{
-			$SectionFieldTransDTO = new SectionFieldTransDTO();
-			$SectionFieldTransDTO->setLocal($locale);
-			$this->addTranslate($SectionFieldTransDTO);
-		}
-		
-		return $this->translate;
-	}
-	
-	
-	/**
-	 * @param SectionFieldTransDTO $trans
-	 *
-	 * @return void
-	 */
-	public function addTranslate(SectionFieldTransDTO $trans) : void
-	{
+    /** Сортировка поля в секции  */
+
+    public function getSort(): int
+    {
+        return $this->sort;
+    }
+
+
+    public function setSort(int $sort): void
+    {
+
+        $this->sort = $sort;
+    }
+
+
+    /** Тип поля (input, select, textarea ....) */
+
+    public function getType(): InputField
+    {
+        return $this->type;
+    }
+
+
+    public function setType(InputField $type): void
+    {
+        $this->type = $type;
+    }
+
+
+    /** Публичное свойство */
+
+    public function getPublic(): bool
+    {
+        return $this->public;
+    }
+
+
+    public function setPublic(bool $public): void
+    {
+        $this->public = $public;
+    }
+
+
+    /** Присутствует в карточке */
+
+    public function getCard(): bool
+    {
+        return $this->card;
+    }
+
+
+    public function setCard(bool $card): void
+    {
+        $this->card = $card;
+    }
+
+
+    /** Обязательное к заполнению */
+
+    public function getRequired(): bool
+    {
+        return $this->required;
+    }
+
+
+    public function setRequired(bool $required): void
+    {
+        $this->required = $required;
+    }
+
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTranslate(): ArrayCollection
+    {
+        /* Вычисляем расхождение и добавляем неопределенные локали */
+        foreach(Locale::diffLocale($this->translate) as $locale)
+        {
+            $SectionFieldTransDTO = new SectionFieldTransDTO();
+            $SectionFieldTransDTO->setLocal($locale);
+            $this->addTranslate($SectionFieldTransDTO);
+        }
+
+        return $this->translate;
+    }
+
+
+    /**
+     * @param SectionFieldTransDTO $trans
+     *
+     * @return void
+     */
+    public function addTranslate(SectionFieldTransDTO $trans): void
+    {
         if(empty($trans->getLocal()->getLocalValue()))
         {
             return;
         }
 
-		if(!$this->translate->contains($trans))
-		{
-			$this->translate[] = $trans;
-		}
-	}
-	
-	
-	public function removeTranslate(SectionFieldTransDTO $trans) : void
-	{
-		$this->translate->removeElement($trans);
-	}
-	
+        if(!$this->translate->contains($trans))
+        {
+            $this->translate[] = $trans;
+        }
+    }
+
+
+    public function removeTranslate(SectionFieldTransDTO $trans): void
+    {
+        $this->translate->removeElement($trans);
+    }
+
 }

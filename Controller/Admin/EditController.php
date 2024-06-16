@@ -57,13 +57,14 @@ final class EditController extends AbstractController
         $form = $this->createForm(TypeProfileForm::class, $profile);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
+        if($form->isSubmitted() && $form->isValid())
         {
             $this->refreshTokenForm($form);
 
             $TypeProfile = $handler->handle($profile);
 
-            if ($TypeProfile instanceof TypeProfile) {
+            if($TypeProfile instanceof TypeProfile)
+            {
                 $this->addFlash('success', 'admin.success.update', 'admin.profile.type');
 
                 return $this->redirectToRoute('users-profile-type:admin.index');

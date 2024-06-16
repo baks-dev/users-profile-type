@@ -36,7 +36,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: 'type_users_profile_settings')]
 class Settings
 {
-    const TABLE = 'type_users_profile_settings';
+    public const TABLE = 'type_users_profile_settings';
 
     /**
      * Идентификатор

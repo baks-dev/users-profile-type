@@ -27,27 +27,25 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class DeleteTypeProfileForm extends AbstractType
 {
-	public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-		/* Удалить ******************************************************/
-		$builder->add
-		(
-			'delete',
-			SubmitType::class,
+        /* Удалить ******************************************************/
+        $builder->add(
+            'delete',
+            SubmitType::class,
             ['label' => 'Delete', 'label_html' => true, 'attr' => ['class' => 'btn-danger']]
-		);
-	}
+        );
+    }
 
-	public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver): void
     {
-		$resolver->setDefaults
-		(
-			[
-				'data_class' => DeleteTypeProfileDTO::class,
-				'method' => 'POST',
-				'attr' => ['class' => 'w-100'],
-			]
-		);
-	}
-	
+        $resolver->setDefaults(
+            [
+                'data_class' => DeleteTypeProfileDTO::class,
+                'method' => 'POST',
+                'attr' => ['class' => 'w-100'],
+            ]
+        );
+    }
+
 }

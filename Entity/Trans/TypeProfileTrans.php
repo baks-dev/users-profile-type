@@ -41,84 +41,84 @@ use InvalidArgumentException;
 #[ORM\Table(name: 'type_users_profile_trans')]
 class TypeProfileTrans extends EntityEvent
 {
-	const TABLE = 'type_users_profile_trans';
-	
-	/** Связь на событие */
-	#[ORM\Id]
-	#[ORM\ManyToOne(targetEntity: TypeProfileEvent::class, inversedBy: "translate")]
-	#[ORM\JoinColumn(name: 'event', referencedColumnName: "id")]
-	private TypeProfileEvent $event;
-	
-	/** Локаль */
-	#[ORM\Id]
-	#[ORM\Column(name: 'local', type: Locale::TYPE, length: 2)]
-	private readonly Locale $local;
-	
-	/** Название */
-	#[ORM\Column(name: 'name', type: Types::STRING, length: 100)]
-	private string $name;
-	
-	/** Описание */
-	#[ORM\Column(name: 'description', type: Types::TEXT, nullable: true)]
-	private ?string $description;
-	
-	
-	public function __construct(TypeProfileEvent $event)
-	{
-		$this->event = $event;
-	}
+    public const TABLE = 'type_users_profile_trans';
+
+    /** Связь на событие */
+    #[ORM\Id]
+    #[ORM\ManyToOne(targetEntity: TypeProfileEvent::class, inversedBy: "translate")]
+    #[ORM\JoinColumn(name: 'event', referencedColumnName: "id")]
+    private TypeProfileEvent $event;
+
+    /** Локаль */
+    #[ORM\Id]
+    #[ORM\Column(name: 'local', type: Locale::TYPE, length: 2)]
+    private readonly Locale $local;
+
+    /** Название */
+    #[ORM\Column(name: 'name', type: Types::STRING, length: 100)]
+    private string $name;
+
+    /** Описание */
+    #[ORM\Column(name: 'description', type: Types::TEXT, nullable: true)]
+    private ?string $description;
+
+
+    public function __construct(TypeProfileEvent $event)
+    {
+        $this->event = $event;
+    }
 
     public function __toString(): string
     {
         return (string) $this->event;
     }
-	
-	public function getDto($dto): mixed
-	{
+
+    public function getDto($dto): mixed
+    {
         $dto = is_string($dto) && class_exists($dto) ? new $dto() : $dto;
 
-		if($dto instanceof TypeProfileTransInterface || $dto instanceof self)
-		{
-			return parent::getDto($dto);
-		}
-		
-		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-	}
-	
-	
-	public function setEntity($dto): mixed
-	{
-		
-		if($dto instanceof TypeProfileTransInterface || $dto instanceof self)
-		{
-			return parent::setEntity($dto);
-		}
-		
-		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-	}
-	
-	
-	public function equals($dto) : bool
-	{
-		if($dto instanceof TypeProfileTransInterface)
-		{
-			return ($this->event->getId() === $dto->getEquals() &&
-				$dto->getLocal()->getValue() === $this->local->getLocalValue());
-			
-		}
-		
-		throw new Exception(sprintf('Class %s interface error', $dto::class));
-	}
-	
-	
-	public function name(Locale $locale) : ?string
-	{
-		if($this->local->getLocalValue() === $locale->getLocalValue())
-		{
-			return $this->name;
-		}
-		
-		return null;
-	}
-	
+        if($dto instanceof TypeProfileTransInterface || $dto instanceof self)
+        {
+            return parent::getDto($dto);
+        }
+
+        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+    }
+
+
+    public function setEntity($dto): mixed
+    {
+
+        if($dto instanceof TypeProfileTransInterface || $dto instanceof self)
+        {
+            return parent::setEntity($dto);
+        }
+
+        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+    }
+
+
+    public function equals($dto): bool
+    {
+        if($dto instanceof TypeProfileTransInterface)
+        {
+            return ($this->event->getId() === $dto->getEquals() &&
+                $dto->getLocal()->getValue() === $this->local->getLocalValue());
+
+        }
+
+        throw new Exception(sprintf('Class %s interface error', $dto::class));
+    }
+
+
+    public function name(Locale $locale): ?string
+    {
+        if($this->local->getLocalValue() === $locale->getLocalValue())
+        {
+            return $this->name;
+        }
+
+        return null;
+    }
+
 }

@@ -31,63 +31,62 @@ use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\Delete\Modify\TypeProfileMod
 
 final class DeleteTypeProfileDTO implements TypeProfileEventInterface
 {
-	/**
-	 * Идентификатор события
-	 *
-	 * @var TypeProfileEventUid|null
-	 */
-	private ?TypeProfileEventUid $id = null;
-	
-	/**
-	 * Модификатор типа профиля
-	 *
-	 * @var TypeProfileModifyDTO
-	 */
-	private TypeProfileModifyDTO $modify;
-	
-	
-	public function __construct()
-	{
-		$this->modify = new TypeProfileModifyDTO();
-	}
-	
-	
-	/**
-	 * @return TypeProfileEventUid|null
-	 */
-	public function getEvent() : ?TypeProfileEventUid
-	{
-		return $this->id;
-	}
-	
-	
-	/**
-	 * @param TypeProfileEventUid $id
-	 */
-	public function setId(TypeProfileEventUid $id) : void
-	{
-		$this->id = $id;
-	}
-	
-	
-	/* Modify  */
-	
-	/**
-	 * @return TypeProfileModifyDTO
-	 */
-	public function getModify() : TypeProfileModifyDTO
-	{
-		return $this->modify;
-	}
-	
-	
-	/**
-	 * @return TypeProfileModifyDTO
-	 */
-	public function getModifyClass() : TypeProfileModifyDTO
-	{
-		return new TypeProfileModifyDTO();
-	}
-	
-}
+    /**
+     * Идентификатор события
+     *
+     * @var TypeProfileEventUid|null
+     */
+    private ?TypeProfileEventUid $id = null;
 
+    /**
+     * Модификатор типа профиля
+     *
+     * @var TypeProfileModifyDTO
+     */
+    private TypeProfileModifyDTO $modify;
+
+
+    public function __construct()
+    {
+        $this->modify = new TypeProfileModifyDTO();
+    }
+
+
+    /**
+     * @return TypeProfileEventUid|null
+     */
+    public function getEvent(): ?TypeProfileEventUid
+    {
+        return $this->id;
+    }
+
+
+    /**
+     * @param TypeProfileEventUid $id
+     */
+    public function setId(TypeProfileEventUid $id): void
+    {
+        $this->id = $id;
+    }
+
+
+    /* Modify  */
+
+    /**
+     * @return TypeProfileModifyDTO
+     */
+    public function getModify(): TypeProfileModifyDTO
+    {
+        return $this->modify;
+    }
+
+
+    /**
+     * @return TypeProfileModifyDTO
+     */
+    public function getModifyClass(): TypeProfileModifyDTO
+    {
+        return new TypeProfileModifyDTO();
+    }
+
+}

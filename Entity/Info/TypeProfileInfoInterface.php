@@ -25,5 +25,4 @@ namespace BaksDev\Users\Profile\TypeProfile\Entity\Info;
 
 interface TypeProfileInfoInterface
 {
-
 }

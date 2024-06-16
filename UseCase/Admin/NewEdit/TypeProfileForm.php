@@ -31,64 +31,60 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TypeProfileForm extends AbstractType
 {
-	
-	public function buildForm(FormBuilderInterface $builder, array $options) : void
-	{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
         $builder->add('info', Info\TypeProfileInfoForm::class);
 
-		$builder->add
-		(
-			'sort',
-			IntegerType::class,
-			[
-				'label' => false,
-				'attr' => ['min' => 0, 'max' => 999],
-			]
-		);
-		
-		/* CollectionType */
-		$builder->add('translate', CollectionType::class, [
-			'entry_type' => TransForm::class,
-			'entry_options' => ['label' => false],
-			'label' => false,
-			'by_reference' => false,
-			'allow_delete' => true,
-			'allow_add' => true,
-		]);
-		
-		$builder->add('section', CollectionType::class, [
-			'entry_type' => SectionForm::class,
-			'entry_options' => ['label' => false],
-			'label' => false,
-			'by_reference' => false,
-			'allow_delete' => true,
-			'allow_add' => true,
-			'prototype_name' => '__section__',
-		]);
-		
-		/* Сохранить ******************************************************/
-		$builder->add
-		(
-			'Save',
-			SubmitType::class,
-			[
-				'label' => 'Save', 'label_html' => true,
-				'attr' => ['class' => 'btn-primary'],
-			]
-		);
-	}
-	
-	
-	public function configureOptions(OptionsResolver $resolver) : void
-	{
-		$resolver->setDefaults
-		(
-			[
-				'data_class' => TypeProfileDTO::class,
-				'method' => 'POST',
-				'attr' => ['class' => 'd-flex flex-column'],
-			]
-		);
-	}
-	
+        $builder->add(
+            'sort',
+            IntegerType::class,
+            [
+                'label' => false,
+                'attr' => ['min' => 0, 'max' => 999],
+            ]
+        );
+
+        /* CollectionType */
+        $builder->add('translate', CollectionType::class, [
+            'entry_type' => TransForm::class,
+            'entry_options' => ['label' => false],
+            'label' => false,
+            'by_reference' => false,
+            'allow_delete' => true,
+            'allow_add' => true,
+        ]);
+
+        $builder->add('section', CollectionType::class, [
+            'entry_type' => SectionForm::class,
+            'entry_options' => ['label' => false],
+            'label' => false,
+            'by_reference' => false,
+            'allow_delete' => true,
+            'allow_add' => true,
+            'prototype_name' => '__section__',
+        ]);
+
+        /* Сохранить ******************************************************/
+        $builder->add(
+            'Save',
+            SubmitType::class,
+            [
+                'label' => 'Save', 'label_html' => true,
+                'attr' => ['class' => 'btn-primary'],
+            ]
+        );
+    }
+
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults(
+            [
+                'data_class' => TypeProfileDTO::class,
+                'method' => 'POST',
+                'attr' => ['class' => 'd-flex flex-column'],
+            ]
+        );
+    }
+
 }

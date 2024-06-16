@@ -20,27 +20,26 @@ namespace BaksDev\Users\Profile\TypeProfile\Type\Settings;
 
 final class TypeProfileSettingsIdentifier
 {
-	
-	public const TYPE = 'profile_settings';
-	
-	private string $value;
-	
-	
-	public function __construct()
-	{
-		$this->value = self::TYPE;
-	}
-	
-	
-	public function __toString(): string
-	{
-		return $this->value;
-	}
-	
-	
-	public function getValue(): string
-	{
-		return $this->value;
-	}
-	
+    public const TYPE = 'profile_settings';
+
+    private string $value;
+
+
+    public function __construct()
+    {
+        $this->value = self::TYPE;
+    }
+
+
+    public function __toString(): string
+    {
+        return $this->value;
+    }
+
+
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
 }

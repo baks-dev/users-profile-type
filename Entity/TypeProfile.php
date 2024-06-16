@@ -39,53 +39,54 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: 'type_users_profile')]
 class TypeProfile
 {
-	const TABLE = 'type_users_profile';
-	
-	/** ID */
+    public const TABLE = 'type_users_profile';
+
+    /** ID */
     #[Assert\NotBlank]
     #[Assert\Uuid]
-	#[ORM\Id]
-	#[ORM\Column(type: TypeProfileUid::TYPE)]
-	private TypeProfileUid $id;
-	
-	/** ID События */
+    #[ORM\Id]
+    #[ORM\Column(type: TypeProfileUid::TYPE)]
+    private TypeProfileUid $id;
+
+    /** ID События */
     #[Assert\NotBlank]
     #[Assert\Uuid]
-	#[ORM\Column(type: TypeProfileEventUid::TYPE, unique: true)]
-	private TypeProfileEventUid $event;
-	
-	
-	/**
-	 * @param TypeProfileUid $id
-	 */
-	public function __construct() {
+    #[ORM\Column(type: TypeProfileEventUid::TYPE, unique: true)]
+    private TypeProfileEventUid $event;
+
+
+    /**
+     * @param TypeProfileUid $id
+     */
+    public function __construct()
+    {
         $this->id = new TypeProfileUid();
     }
-	
-	
-	public function __toString(): string
-	{
-		return $this->id;
-	}
 
-	public function getId() : TypeProfileUid
-	{
-		return $this->id;
-	}
 
-	public function setId(TypeProfileUid $id) : void
-	{
-		$this->id = $id;
-	}
+    public function __toString(): string
+    {
+        return $this->id;
+    }
 
-	public function getEvent() : TypeProfileEventUid
-	{
-		return $this->event;
-	}
+    public function getId(): TypeProfileUid
+    {
+        return $this->id;
+    }
 
-	public function setEvent(TypeProfileEventUid|TypeProfileEvent $event) : void
-	{
-		$this->event = $event instanceof TypeProfileEvent ? $event->getId() : $event;
-	}
-	
+    public function setId(TypeProfileUid $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getEvent(): TypeProfileEventUid
+    {
+        return $this->event;
+    }
+
+    public function setEvent(TypeProfileEventUid|TypeProfileEvent $event): void
+    {
+        $this->event = $event instanceof TypeProfileEvent ? $event->getId() : $event;
+    }
+
 }

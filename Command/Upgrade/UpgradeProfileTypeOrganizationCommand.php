@@ -58,8 +58,7 @@ class UpgradeProfileTypeOrganizationCommand extends Command
         TranslatorInterface $translator,
         ExistTypeProfileInterface $existTypeProfile,
         TypeProfileHandler $profileHandler,
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->existTypeProfile = $existTypeProfile;

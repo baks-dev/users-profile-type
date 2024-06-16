@@ -32,138 +32,137 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class SectionDTO implements TypeProfileSectionInterface
 {
-	//private ?TypeProfileSectionUid $id;
-	
-	/** Сортировка секции свойств продукта категории
-	 *
-	 * @var int
-	 */
-	#[Assert\NotBlank]
-	#[Assert\Range(min: 0, max: 999)]
-	private int $sort = 100;
-	
-	/** Настройки локали секции */
-	#[Assert\Valid]
-	private ArrayCollection $translate;
-	
-	/** Коллекция свойств продукта в секции */
-	#[Assert\Valid]
-	private ArrayCollection $field;
-	
-	
-	public function __construct()
-	{
-		$this->translate = new ArrayCollection();
-		$this->field = new ArrayCollection();
-	}
+    //private ?TypeProfileSectionUid $id;
 
-//    /**
-//     * Id
-//     */
-//    public function getId(): ?TypeProfileSectionUid
-//    {
-//        return $this->id;
-//    }
+    /** Сортировка секции свойств продукта категории
+     *
+     * @var int
+     */
+    #[Assert\NotBlank]
+    #[Assert\Range(min: 0, max: 999)]
+    private int $sort = 100;
+
+    /** Настройки локали секции */
+    #[Assert\Valid]
+    private ArrayCollection $translate;
+
+    /** Коллекция свойств продукта в секции */
+    #[Assert\Valid]
+    private ArrayCollection $field;
 
 
-	
-	//    /**
-	//     * @return TypeProfileSectionUid|null
-	//     */
-	//    public function getEquals() : ?TypeProfileSectionUid
-	//    {
-	//        return $this->id;
-	//    }
-	
-	//    /**
-	//     * @param TypeProfileSectionUid $id
-	//     */
-	//    public function setId(TypeProfileSectionUid $id) : void
-	//    {
-	//        $this->id = $id;
-	//    }
-	
-	/**
-	 * @return int
-	 */
-	public function getSort() : int
-	{
-		return $this->sort;
-	}
-	
-	
-	/**
-	 * @param int $sort
-	 */
-	public function setSort(int $sort) : void
-	{
-		$this->sort = $sort;
-	}
-	
-	
-	/**
-	 * @return ArrayCollection
-	 */
-	public function getTranslate() : ArrayCollection
-	{
-		/* Вычисляем расхождение и добавляем неопределенные локали */
-		foreach(Locale::diffLocale($this->translate) as $locale)
-		{
-			$TransDTO = new SectionTransDTO();
-			$TransDTO->setLocal($locale);
-			$this->addTranslate($TransDTO);
-		}
-		
-		return $this->translate;
-	}
+    public function __construct()
+    {
+        $this->translate = new ArrayCollection();
+        $this->field = new ArrayCollection();
+    }
 
-	public function addTranslate(SectionTransDTO $trans) : void
-	{
+    //    /**
+    //     * Id
+    //     */
+    //    public function getId(): ?TypeProfileSectionUid
+    //    {
+    //        return $this->id;
+    //    }
+
+
+    //    /**
+    //     * @return TypeProfileSectionUid|null
+    //     */
+    //    public function getEquals() : ?TypeProfileSectionUid
+    //    {
+    //        return $this->id;
+    //    }
+
+    //    /**
+    //     * @param TypeProfileSectionUid $id
+    //     */
+    //    public function setId(TypeProfileSectionUid $id) : void
+    //    {
+    //        $this->id = $id;
+    //    }
+
+    /**
+     * @return int
+     */
+    public function getSort(): int
+    {
+        return $this->sort;
+    }
+
+
+    /**
+     * @param int $sort
+     */
+    public function setSort(int $sort): void
+    {
+        $this->sort = $sort;
+    }
+
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTranslate(): ArrayCollection
+    {
+        /* Вычисляем расхождение и добавляем неопределенные локали */
+        foreach(Locale::diffLocale($this->translate) as $locale)
+        {
+            $TransDTO = new SectionTransDTO();
+            $TransDTO->setLocal($locale);
+            $this->addTranslate($TransDTO);
+        }
+
+        return $this->translate;
+    }
+
+    public function addTranslate(SectionTransDTO $trans): void
+    {
         if(empty($trans->getLocal()->getLocalValue()))
         {
             return;
         }
 
-		if(!$this->translate->contains($trans))
-		{
-			$this->translate[] = $trans;
-		}
-	}
-	
-	
-	public function removeTranslate(SectionTransDTO $trans) : void
-	{
-		$this->translate->removeElement($trans);
-	}
-	
-	
-	/**
-	 * @return ArrayCollection
-	 */
-	public function getField() : ArrayCollection
-	{
-		if($this->field->isEmpty())
-		{
-			$FieldDTO = new SectionFieldDTO();
-			$this->addField($FieldDTO);
-		}
-		
-		return $this->field;
-	}
-	
-	
-	public function addField(SectionFieldDTO $field) : void
-	{
-		if(!$this->field->contains($field))
-		{
-			$this->field[] = $field;
-		}
-	}
-	
-	
-	public function removeField(SectionFieldDTO $field) : void
-	{
-		$this->field->removeElement($field);
-	}
-	
+        if(!$this->translate->contains($trans))
+        {
+            $this->translate[] = $trans;
+        }
+    }
+
+
+    public function removeTranslate(SectionTransDTO $trans): void
+    {
+        $this->translate->removeElement($trans);
+    }
+
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getField(): ArrayCollection
+    {
+        if($this->field->isEmpty())
+        {
+            $FieldDTO = new SectionFieldDTO();
+            $this->addField($FieldDTO);
+        }
+
+        return $this->field;
+    }
+
+
+    public function addField(SectionFieldDTO $field): void
+    {
+        if(!$this->field->contains($field))
+        {
+            $this->field[] = $field;
+        }
+    }
+
+
+    public function removeField(SectionFieldDTO $field): void
+    {
+        $this->field->removeElement($field);
+    }
+
 }

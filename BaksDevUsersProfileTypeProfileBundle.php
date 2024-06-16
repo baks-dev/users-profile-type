@@ -15,14 +15,12 @@ namespace BaksDev\Users\Profile\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInterface;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\TypeProfileOrganization;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\TypeProfileUser;
-use DirectoryIterator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
 class BaksDevUsersProfileTypeProfileBundle extends AbstractBundle
 {
-
     public const NAMESPACE = __NAMESPACE__.'\\';
 
     public const PATH = __DIR__.DIRECTORY_SEPARATOR;
@@ -52,5 +50,5 @@ class BaksDevUsersProfileTypeProfileBundle extends AbstractBundle
         $services->alias(TypeProfileInterface::class.' $typeProfileUser', TypeProfileUser::class);
         $services->alias(TypeProfileInterface::class.' $typeProfileOrganization', TypeProfileOrganization::class);
     }
-	
+
 }

@@ -27,24 +27,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SectionFieldTransForm extends AbstractType
 {
-	public function buildForm(FormBuilderInterface $builder, array $options) : void
-	{
-		/* TextType */
-		$builder->add('local', HiddenType::class);
-		$builder->add('name', TextType::class);
-		$builder->add('description', TextType::class, ['required' => false]);
-		
-	}
-	
-	
-	public function configureOptions(OptionsResolver $resolver) : void
-	{
-		$resolver->setDefaults
-		(
-			[
-				'data_class' => SectionFieldTransDTO::class,
-			]
-		);
-	}
-	
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        /* TextType */
+        $builder->add('local', HiddenType::class);
+        $builder->add('name', TextType::class);
+        $builder->add('description', TextType::class, ['required' => false]);
+
+    }
+
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults(
+            [
+                'data_class' => SectionFieldTransDTO::class,
+            ]
+        );
+    }
+
 }

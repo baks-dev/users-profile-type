@@ -33,100 +33,100 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class TypeProfileTransDTO implements TypeProfileTransInterface
 {
-	//    /**
-	//     * Идентификатор события
-	//     *
-	//     * @var TypeProfileEventUid|null
-	//     */
-	//    private ?TypeProfileEventUid $event = null;
-	
-	/** Идентификатор события */
-	private readonly TypeProfileEvent $event;
-	
-	/**
-	 * @var Locale
-	 */
-	private readonly Locale $local;
-	
-	/** Название раздела (строка с точкой, нижнее подчеркивание тире процент скобки) */
-	#[Assert\NotBlank]
-	#[Assert\Regex(pattern: '/^[\w \.\_\-\(\)\%]+$/iu')]
-	private ?string $name;
-	
-	/** Краткое описание */
-	#[Assert\Regex(pattern: '/^[\w \.\_\-\(\)\%]+$/iu')]
-	private ?string $description = null;
-	
-	
-	/**
-	 * @return TypeProfileEventUid
-	 */
-	public function getEquals() : ?TypeProfileEventUid
-	{
-		return $this->event;
-	}
-	
-	
-	/**
-	 * @param TypeProfileEvent $event
-	 */
-	public function setEvent(TypeProfileEvent $event) : void
-	{
-		$this->event = $event->getId();
-	}
-	
-	
-	/**
-	 * @return Locale
-	 */
-	public function getLocal() : Locale
-	{
-		return $this->local;
-	}
-	
-	
-	/**
-	 * @param string|Locale $local
-	 */
-	public function setLocal(string|Locale $local) : void
-	{
-		$this->local = $local instanceof Locale ? $local : new Locale($local);
-	}
-	
-	
-	/**
-	 * @return string|null
-	 */
-	public function getName() : ?string
-	{
-		return $this->name;
-	}
-	
-	
-	/**
-	 * @param string|null $name
-	 */
-	public function setName(?string $name) : void
-	{
-		$this->name = $name;
-	}
-	
-	
-	/**
-	 * @return string|null
-	 */
-	public function getDescription() : ?string
-	{
-		return $this->description;
-	}
-	
-	
-	/**
-	 * @param string|null $description
-	 */
-	public function setDescription(?string $description) : void
-	{
-		$this->description = $description;
-	}
-	
+    //    /**
+    //     * Идентификатор события
+    //     *
+    //     * @var TypeProfileEventUid|null
+    //     */
+    //    private ?TypeProfileEventUid $event = null;
+
+    /** Идентификатор события */
+    private readonly TypeProfileEvent $event;
+
+    /**
+     * @var Locale
+     */
+    private readonly Locale $local;
+
+    /** Название раздела (строка с точкой, нижнее подчеркивание тире процент скобки) */
+    #[Assert\NotBlank]
+    #[Assert\Regex(pattern: '/^[\w \.\_\-\(\)\%]+$/iu')]
+    private ?string $name;
+
+    /** Краткое описание */
+    #[Assert\Regex(pattern: '/^[\w \.\_\-\(\)\%]+$/iu')]
+    private ?string $description = null;
+
+
+    /**
+     * @return TypeProfileEventUid
+     */
+    public function getEquals(): ?TypeProfileEventUid
+    {
+        return $this->event;
+    }
+
+
+    /**
+     * @param TypeProfileEvent $event
+     */
+    public function setEvent(TypeProfileEvent $event): void
+    {
+        $this->event = $event->getId();
+    }
+
+
+    /**
+     * @return Locale
+     */
+    public function getLocal(): Locale
+    {
+        return $this->local;
+    }
+
+
+    /**
+     * @param string|Locale $local
+     */
+    public function setLocal(string|Locale $local): void
+    {
+        $this->local = $local instanceof Locale ? $local : new Locale($local);
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+
+    /**
+     * @param string|null $name
+     */
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+
+    /**
+     * @param string|null $description
+     */
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
 }

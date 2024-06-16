@@ -33,23 +33,22 @@ use BaksDev\Core\Type\Modify\Modify\ModifyActionUpdate;
 
 final class TypeProfileModifyDTO implements TypeProfileModifyInterface
 {
-	/** Модификатор */
-	private ModifyAction $action;
-	
-	
-	public function __construct()
-	{
-		$this->action = new ModifyAction(ModifyActionDelete::class);
-	}
-	
-	
-	/**
-	 * @return ModifyAction
-	 */
-	public function getAction() : ModifyAction
-	{
-		return $this->action;
-	}
-	
-}
+    /** Модификатор */
+    private ModifyAction $action;
 
+
+    public function __construct()
+    {
+        $this->action = new ModifyAction(ModifyActionDelete::class);
+    }
+
+
+    /**
+     * @return ModifyAction
+     */
+    public function getAction(): ModifyAction
+    {
+        return $this->action;
+    }
+
+}

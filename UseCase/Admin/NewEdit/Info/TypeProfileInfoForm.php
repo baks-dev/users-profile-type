@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Info;
 
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -35,7 +34,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TypeProfileInfoForm extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('active', CheckboxType::class, ['label' => false, 'required' => false]);

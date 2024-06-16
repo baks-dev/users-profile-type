@@ -36,7 +36,6 @@ use Generator;
 
 final class TypeProfileChoiceRepository implements TypeProfileChoiceInterface
 {
-
     private DBALQueryBuilder $DBALQueryBuilder;
 
     public function __construct(DBALQueryBuilder $DBALQueryBuilder)
@@ -107,7 +106,6 @@ final class TypeProfileChoiceRepository implements TypeProfileChoiceInterface
     }
 
 
-
     private function getQueryBuilder(): DBALQueryBuilder
     {
         $dbal = $this->DBALQueryBuilder
@@ -116,7 +114,8 @@ final class TypeProfileChoiceRepository implements TypeProfileChoiceInterface
 
         $dbal->from(TypeProfile::TABLE, 'profile');
 
-        $dbal->join('profile',
+        $dbal->join(
+            'profile',
             TypeProfileEvent::TABLE,
             'profile_event',
             'profile_event.id = profile.event'
@@ -128,7 +127,6 @@ final class TypeProfileChoiceRepository implements TypeProfileChoiceInterface
             'profile_trans',
             'profile_trans.event = profile.event AND profile_trans.local = :local'
         );
-
 
 
         $dbal->orderBy('profile_event.sort', 'ASC');

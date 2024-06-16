@@ -36,16 +36,15 @@ use Symfony\Component\Uid\Uuid;
 
 final class TypeProfileSectionType extends UidType
 {
-	
-	public function getClassType(): string
-	{
-		return TypeProfileSectionUid::class;
-	}
-	
-	
-	public function getName(): string
-	{
+    public function getClassType(): string
+    {
+        return TypeProfileSectionUid::class;
+    }
+
+
+    public function getName(): string
+    {
         return TypeProfileSectionUid::TYPE;
-	}
-	
+    }
+
 }

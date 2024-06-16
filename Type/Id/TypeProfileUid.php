@@ -36,8 +36,7 @@ final class TypeProfileUid extends Uid
         AbstractUid|TypeProfileInterface|self|string|null $value = null,
         mixed $option = null,
         mixed $attr = null
-    )
-    {
+    ) {
         if(is_string($value) && class_exists($value))
         {
             $value = new $value();
@@ -76,7 +75,7 @@ final class TypeProfileUid extends Uid
             /** @var TypeProfileInterface $declared */
             if($declared::equals($this->getValue()))
             {
-                return new $declared;
+                return new $declared();
             }
         }
 
@@ -87,7 +86,7 @@ final class TypeProfileUid extends Uid
     {
         return array_filter(
             get_declared_classes(),
-            static function($className) {
+            static function ($className) {
                 return in_array(TypeProfileInterface::class, class_implements($className), true);
             }
         );

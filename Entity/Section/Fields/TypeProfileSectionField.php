@@ -44,116 +44,116 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: 'type_users_profile_section_field')]
 class TypeProfileSectionField extends EntityReadonly
 {
-	const TABLE = 'type_users_profile_section_field';
-	
-	/** ID */
+    public const TABLE = 'type_users_profile_section_field';
+
+    /** ID */
     #[Assert\NotBlank]
     #[Assert\Uuid]
-	#[ORM\Id]
-	#[ORM\Column(type: TypeProfileSectionFieldUid::TYPE)]
-	private TypeProfileSectionFieldUid $id;
-	
-	/** Связь на секцию */
+    #[ORM\Id]
+    #[ORM\Column(type: TypeProfileSectionFieldUid::TYPE)]
+    private TypeProfileSectionFieldUid $id;
+
+    /** Связь на секцию */
     #[Assert\NotBlank]
     #[Assert\Uuid]
-	#[ORM\ManyToOne(targetEntity: TypeProfileSection::class, inversedBy: 'field')]
-	#[ORM\JoinColumn(name: 'section', referencedColumnName: 'id', nullable: true)]
-	#[ORM\OrderBy(['sort' => 'ASC'])]
-	private ?TypeProfileSection $section;
-	
-	/** Перевод */
+    #[ORM\ManyToOne(targetEntity: TypeProfileSection::class, inversedBy: 'field')]
+    #[ORM\JoinColumn(name: 'section', referencedColumnName: 'id', nullable: true)]
+    #[ORM\OrderBy(['sort' => 'ASC'])]
+    private ?TypeProfileSection $section;
+
+    /** Перевод */
     #[Assert\Valid]
-	#[ORM\OneToMany(targetEntity: TypeProfileSectionFieldTrans::class, mappedBy: 'field', cascade: ['all'])]
-	private Collection $translate;
-	
-	/** Сортировка */
+    #[ORM\OneToMany(targetEntity: TypeProfileSectionFieldTrans::class, mappedBy: 'field', cascade: ['all'])]
+    private Collection $translate;
+
+    /** Сортировка */
     #[Assert\NotBlank]
     #[Assert\Length(max: 3)]
     #[Assert\Range(min: 0, max: 999)]
-	#[ORM\Column(type: Types::SMALLINT)]
-	private int $sort = 500;
-	
-	/** Тип поля (input, select, textarea ....)  */
+    #[ORM\Column(type: Types::SMALLINT)]
+    private int $sort = 500;
+
+    /** Тип поля (input, select, textarea ....)  */
     #[Assert\NotBlank]
     #[Assert\Length(max: 32)]
-	#[ORM\Column(type: InputField::TYPE)]
-	private InputField $type;
+    #[ORM\Column(type: InputField::TYPE)]
+    private InputField $type;
 
-	#[ORM\Column(type: Types::BOOLEAN)]
-	private bool $public = true;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $public = true;
 
     /** Показать в карточке (Товар, заказ) */
-	#[ORM\Column(type: Types::BOOLEAN)]
-	private bool $card = true;
-	
-	#[ORM\Column(type: Types::BOOLEAN)]
-	private bool $required = true;
-	
-	
-	public function __construct(TypeProfileSection $section)
-	{
-//        $modifiers = new \ReflectionProperty($this, 'id');
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $card = true;
 
-//        if(!$modifiers->isInitialized($this))
-//        {
-//            $this->id = clone new TypeProfileSectionFieldUid();
-//        }
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $required = true;
 
-		//$this->id = clone new TypeProfileSectionFieldUid();
-		//$this->translate = new ArrayCollection();
-		$this->section = $section;
-	}
 
-	public function __toString(): string
-	{
-		return $this->id;
-	}
+    public function __construct(TypeProfileSection $section)
+    {
+        //        $modifiers = new \ReflectionProperty($this, 'id');
 
-	public function getId() : TypeProfileSectionFieldUid
-	{
-		return $this->id;
-	}
-	
-	
-	public function getDto($dto): mixed
-	{
+        //        if(!$modifiers->isInitialized($this))
+        //        {
+        //            $this->id = clone new TypeProfileSectionFieldUid();
+        //        }
+
+        //$this->id = clone new TypeProfileSectionFieldUid();
+        //$this->translate = new ArrayCollection();
+        $this->section = $section;
+    }
+
+    public function __toString(): string
+    {
+        return $this->id;
+    }
+
+    public function getId(): TypeProfileSectionFieldUid
+    {
+        return $this->id;
+    }
+
+
+    public function getDto($dto): mixed
+    {
         $dto = is_string($dto) && class_exists($dto) ? new $dto() : $dto;
 
-		if($dto instanceof TypeProfileSectionFieldInterface)
-		{
-			return parent::getDto($dto);
-		}
-		
-		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-	}
-	
-	
-	public function setEntity($dto): mixed
-	{
+        if($dto instanceof TypeProfileSectionFieldInterface)
+        {
+            return parent::getDto($dto);
+        }
 
-		if($dto instanceof TypeProfileSectionFieldInterface || $dto instanceof self)
-		{
-			return parent::setEntity($dto);
-		}
-		
-		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-	}
-	
-	
-	public function equals($dto) : bool
-	{
-		if($dto instanceof TypeProfileSectionFieldInterface || $dto instanceof self)
-		{
-			return $this->id === $dto->getEquals();
-		}
-		
-		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-	}
-	
-	
-	public function removeElement() : void
-	{
-		$this->section = null;
-	}
-	
+        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+    }
+
+
+    public function setEntity($dto): mixed
+    {
+
+        if($dto instanceof TypeProfileSectionFieldInterface || $dto instanceof self)
+        {
+            return parent::setEntity($dto);
+        }
+
+        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+    }
+
+
+    public function equals($dto): bool
+    {
+        if($dto instanceof TypeProfileSectionFieldInterface || $dto instanceof self)
+        {
+            return $this->id === $dto->getEquals();
+        }
+
+        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+    }
+
+
+    public function removeElement(): void
+    {
+        $this->section = null;
+    }
+
 }

@@ -33,8 +33,7 @@ final class TypeProfileCollection
 
     public function __construct(
         #[TaggedIterator('baks.users.profile.type', defaultPriorityMethod: 'priority')] iterable $type
-    )
-    {
+    ) {
         $this->type = $type;
     }
 

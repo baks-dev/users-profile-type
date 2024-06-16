@@ -30,45 +30,45 @@ use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 
 final class TypeProfileMessage
 {
-	/** Идентификатор */
-	private TypeProfileUid $id;
-	
-	/** Идентификатор события */
-	private TypeProfileEventUid $event;
-	
-	/** Идентификатор предыдущего события */
-	private ?TypeProfileEventUid $last;
-	
-	
-	public function __construct(TypeProfileUid $id, TypeProfileEventUid $event, ?TypeProfileEventUid $last = null)
-	{
-		$this->last = $last;
-		$this->id = $id;
-		$this->event = $event;
-	}
-	
-	
-	/** Идентификатор */
-	
-	public function getId() : TypeProfileUid
-	{
-		return $this->id;
-	}
-	
-	
-	/** Идентификатор события */
-	
-	public function getEvent() : TypeProfileEventUid
-	{
-		return $this->event;
-	}
-	
-	
-	/** Идентификатор предыдущего события */
-	
-	public function getLast() : ?TypeProfileEventUid
-	{
-		return $this->last;
-	}
-	
+    /** Идентификатор */
+    private TypeProfileUid $id;
+
+    /** Идентификатор события */
+    private TypeProfileEventUid $event;
+
+    /** Идентификатор предыдущего события */
+    private ?TypeProfileEventUid $last;
+
+
+    public function __construct(TypeProfileUid $id, TypeProfileEventUid $event, ?TypeProfileEventUid $last = null)
+    {
+        $this->last = $last;
+        $this->id = $id;
+        $this->event = $event;
+    }
+
+
+    /** Идентификатор */
+
+    public function getId(): TypeProfileUid
+    {
+        return $this->id;
+    }
+
+
+    /** Идентификатор события */
+
+    public function getEvent(): TypeProfileEventUid
+    {
+        return $this->event;
+    }
+
+
+    /** Идентификатор предыдущего события */
+
+    public function getLast(): ?TypeProfileEventUid
+    {
+        return $this->last;
+    }
+
 }

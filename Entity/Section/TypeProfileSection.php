@@ -45,107 +45,107 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: 'type_users_profile_section')]
 class TypeProfileSection extends EntityEvent
 {
-	const TABLE = 'type_users_profile_section';
-	
-	/** ID */
+    public const TABLE = 'type_users_profile_section';
+
+    /** ID */
     #[Assert\NotBlank]
     #[Assert\Uuid]
-	#[ORM\Id]
-	#[ORM\Column(type: TypeProfileSectionUid::TYPE)]
-	private TypeProfileSectionUid $id;
-	
-	/** Связь на событие Event */
+    #[ORM\Id]
+    #[ORM\Column(type: TypeProfileSectionUid::TYPE)]
+    private TypeProfileSectionUid $id;
+
+    /** Связь на событие Event */
     #[Assert\NotBlank]
     #[Assert\Uuid]
-	#[ORM\ManyToOne(targetEntity: TypeProfileEvent::class, inversedBy: "section")]
-	#[ORM\JoinColumn(name: 'event', referencedColumnName: "id", nullable: true)]
-	private ?TypeProfileEvent $event;
-	
-	/** Перевод */
+    #[ORM\ManyToOne(targetEntity: TypeProfileEvent::class, inversedBy: "section")]
+    #[ORM\JoinColumn(name: 'event', referencedColumnName: "id", nullable: true)]
+    private ?TypeProfileEvent $event;
+
+    /** Перевод */
     #[Assert\Valid]
-	#[ORM\OneToMany(targetEntity: TypeProfileSectionTrans::class, mappedBy: 'section', cascade: ['all'])]
-	private Collection $translate;
-	
-	/** Поля секции */
+    #[ORM\OneToMany(targetEntity: TypeProfileSectionTrans::class, mappedBy: 'section', cascade: ['all'])]
+    private Collection $translate;
+
+    /** Поля секции */
     #[Assert\Valid]
-	#[ORM\OneToMany(targetEntity: TypeProfileSectionField::class, mappedBy: 'section', cascade: ['all'])]
-	#[ORM\OrderBy(['sort' => 'ASC'])]
-	private Collection $field;
-	
-	/** Сортировка */
+    #[ORM\OneToMany(targetEntity: TypeProfileSectionField::class, mappedBy: 'section', cascade: ['all'])]
+    #[ORM\OrderBy(['sort' => 'ASC'])]
+    private Collection $field;
+
+    /** Сортировка */
     #[Assert\NotBlank]
     #[Assert\Length(max: 3)]
     #[Assert\Range(min: 0, max: 999)]
-	#[ORM\Column(name: 'sort', type: Types::SMALLINT, options: ['default' => 500])]
-	private int $sort = 500;
-	
-	
-	public function __construct(TypeProfileEvent $event)
-	{
-		$this->id = new TypeProfileSectionUid();
+    #[ORM\Column(name: 'sort', type: Types::SMALLINT, options: ['default' => 500])]
+    private int $sort = 500;
+
+
+    public function __construct(TypeProfileEvent $event)
+    {
+        $this->id = new TypeProfileSectionUid();
         $this->event = $event;
 
-		$this->translate = new ArrayCollection();
-		$this->field = new ArrayCollection();
+        $this->translate = new ArrayCollection();
+        $this->field = new ArrayCollection();
 
-	}
+    }
 
     public function __clone()
     {
         $this->id = clone $this->id;
     }
-	
-	public function __toString(): string
-	{
-		return $this->id;
-	}
-	
-	
-	public function getId() : TypeProfileSectionUid
-	{
-		return $this->id;
-	}
-	
-	
-	public function getDto($dto): mixed
-	{
+
+    public function __toString(): string
+    {
+        return $this->id;
+    }
+
+
+    public function getId(): TypeProfileSectionUid
+    {
+        return $this->id;
+    }
+
+
+    public function getDto($dto): mixed
+    {
         $dto = is_string($dto) && class_exists($dto) ? new $dto() : $dto;
 
-		if($dto instanceof TypeProfileSectionInterface)
-		{
-			return parent::getDto($dto);
-		}
-		
-		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-	}
-	
-	
-	public function setEntity($dto): mixed
-	{
-		
-		if($dto instanceof TypeProfileSectionInterface || $dto instanceof self)
-		{
-			return parent::setEntity($dto);
-		}
-		
-		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-	}
-	
-	
-	private function equals($dto) : bool
-	{
-		if($dto instanceof TypeProfileSectionInterface || $dto instanceof self)
-		{
-			return $this->id === $dto->getEquals();
-		}
-		
-		throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-	}
-	
-	
-	public function removeElement() : void
-	{
-		$this->event = null;
-	}
-	
+        if($dto instanceof TypeProfileSectionInterface)
+        {
+            return parent::getDto($dto);
+        }
+
+        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+    }
+
+
+    public function setEntity($dto): mixed
+    {
+
+        if($dto instanceof TypeProfileSectionInterface || $dto instanceof self)
+        {
+            return parent::setEntity($dto);
+        }
+
+        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+    }
+
+
+    private function equals($dto): bool
+    {
+        if($dto instanceof TypeProfileSectionInterface || $dto instanceof self)
+        {
+            return $this->id === $dto->getEquals();
+        }
+
+        throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
+    }
+
+
+    public function removeElement(): void
+    {
+        $this->event = null;
+    }
+
 }

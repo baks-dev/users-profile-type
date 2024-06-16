@@ -47,8 +47,7 @@ final class AllProfileTypeRepository implements AllProfileTypeInterface
         DBALQueryBuilder $DBALQueryBuilder,
         ORMQueryBuilder $ORMQueryBuilder,
         PaginatorInterface $paginator,
-    )
-    {
+    ) {
         $this->paginator = $paginator;
         $this->DBALQueryBuilder = $DBALQueryBuilder;
         $this->ORMQueryBuilder = $ORMQueryBuilder;
@@ -73,7 +72,8 @@ final class AllProfileTypeRepository implements AllProfileTypeInterface
 
         /* TypeProfile Event */
         $qb->addSelect('profile_event.sort');
-        $qb->join('profile',
+        $qb->join(
+            'profile',
             TypeProfileEvent::TABLE,
             'profile_event',
             'profile_event.id = profile.event'
@@ -123,10 +123,6 @@ final class AllProfileTypeRepository implements AllProfileTypeInterface
     }
 
 
-
-
-
-
     public function getTypeProfile(): ?array
     {
         $qb = $this->ORMQueryBuilder->createQueryBuilder(self::class);
@@ -151,7 +147,6 @@ final class AllProfileTypeRepository implements AllProfileTypeInterface
         $qb->addSelect('profile_trans.name');
         $qb->addSelect('profile_trans.description');
         $qb->join(
-
             TypeProfileTrans::class,
             'profile_trans',
             'WITH',

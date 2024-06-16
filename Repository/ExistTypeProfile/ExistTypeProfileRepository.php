@@ -36,11 +36,10 @@ final class ExistTypeProfileRepository implements ExistTypeProfileInterface
 
     public function __construct(
         DBALQueryBuilder $DBALQueryBuilder,
-    )
-    {
+    ) {
         $this->DBALQueryBuilder = $DBALQueryBuilder;
     }
-    
+
     /**
      * Проверяет, имеется ли такой профиль пользователя
      */
@@ -58,8 +57,7 @@ final class ExistTypeProfileRepository implements ExistTypeProfileInterface
         $qb
             ->from(TypeProfile::TABLE, 'profile')
             ->where('profile.id = :profile')
-            ->setParameter('profile', $profile, TypeProfileUid::TYPE)
-        ;
+            ->setParameter('profile', $profile, TypeProfileUid::TYPE);
 
         return $qb
             ->fetchExist();

@@ -34,8 +34,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class TypeProfileHandler extends AbstractHandler
 {
-
-    public function handle(TypeProfileDTO $command,): string|TypeProfile
+    public function handle(TypeProfileDTO $command): string|TypeProfile
     {
 
         /* Валидация DTO  */
@@ -65,8 +64,8 @@ final class TypeProfileHandler extends AbstractHandler
         }
 
 
-//        //dump($this->entityManager->getUnitOfWork());
-//        //dump($this->event);
+        //        //dump($this->entityManager->getUnitOfWork());
+        //        //dump($this->event);
 
         $this->entityManager->flush();
 

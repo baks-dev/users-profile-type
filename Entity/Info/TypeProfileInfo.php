@@ -82,17 +82,17 @@ class TypeProfileInfo extends EntityReadonly
         return $this->profile;
     }
 
-//    public function setEvent(ProductEvent $event): self
-//    {
-//        $this->event = $event;
-//        return $this;
-//    }
+    //    public function setEvent(ProductEvent $event): self
+    //    {
+    //        $this->event = $event;
+    //        return $this;
+    //    }
 
     public function getDto($dto): mixed
     {
         $dto = is_string($dto) && class_exists($dto) ? new $dto() : $dto;
 
-        if ($dto instanceof TypeProfileInfoInterface)
+        if($dto instanceof TypeProfileInfoInterface)
         {
             return parent::getDto($dto);
         }
@@ -102,7 +102,8 @@ class TypeProfileInfo extends EntityReadonly
 
     public function setEntity($dto): mixed
     {
-        if ($dto instanceof TypeProfileInfoInterface || $dto instanceof self) {
+        if($dto instanceof TypeProfileInfoInterface || $dto instanceof self)
+        {
             return parent::setEntity($dto);
         }
 

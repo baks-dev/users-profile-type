@@ -20,5 +20,4 @@ namespace BaksDev\Users\Profile\TypeProfile\Entity\Section\Trans;
 
 interface TypeProfileSectionTransInterface
 {
-	
 }

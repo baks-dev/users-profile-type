@@ -51,7 +51,6 @@ use Symfony\Component\DependencyInjection\Attribute\When;
 #[When(env: 'test')]
 final class EditTypeProfileHandleTest extends KernelTestCase
 {
-
     public function testUseCase(): void
     {
         $container = self::getContainer();

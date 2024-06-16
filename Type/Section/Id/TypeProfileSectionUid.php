@@ -25,7 +25,7 @@ use Symfony\Component\Uid\AbstractUid;
 final class TypeProfileSectionUid extends Uid
 {
     public const TEST = '0188a9a7-fe11-718d-814f-7a5239996458';
-    
-	public const TYPE = 'profile_section';
+
+    public const TYPE = 'profile_section';
 
 }

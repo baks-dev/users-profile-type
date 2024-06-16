@@ -30,16 +30,15 @@ use Doctrine\DBAL\Types\Types;
 
 final class TypeProfileSectionFieldType extends UidType
 {
-	
-	public function getClassType(): string
-	{
-		return TypeProfileSectionFieldUid::class;
-	}
-	
-	
-	public function getName(): string
-	{
+    public function getClassType(): string
+    {
+        return TypeProfileSectionFieldUid::class;
+    }
+
+
+    public function getName(): string
+    {
         return TypeProfileSectionFieldUid::TYPE;
-	}
-	
+    }
+
 }

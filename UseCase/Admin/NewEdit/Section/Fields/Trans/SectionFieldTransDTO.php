@@ -26,20 +26,20 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class SectionFieldTransDTO implements TypeProfileSectionFieldTransInterface
 {
-	/** Поле */
-	private readonly ?TypeProfileSectionField $field;
-	
-	/** Локаль */
-	private readonly Locale $local;
-	
-	/** Название раздела (строка с точкой, нижнее подчеркивание тире процент скобки) */
-	#[Assert\NotBlank]
-	#[Assert\Regex(pattern: '/^[\w \+\.\,\_\-\(\)\%]+$/iu')]
-	private ?string $name;
-	
-	/** Краткое описание */
-	#[Assert\Regex(pattern: '/^[\w \+\.\,\_\-\(\)\%]+$/iu')]
-	private ?string $description = null;
+    /** Поле */
+    private readonly ?TypeProfileSectionField $field;
+
+    /** Локаль */
+    private readonly Locale $local;
+
+    /** Название раздела (строка с точкой, нижнее подчеркивание тире процент скобки) */
+    #[Assert\NotBlank]
+    #[Assert\Regex(pattern: '/^[\w \+\.\,\_\-\(\)\%]+$/iu')]
+    private ?string $name;
+
+    /** Краткое описание */
+    #[Assert\Regex(pattern: '/^[\w \+\.\,\_\-\(\)\%]+$/iu')]
+    private ?string $description = null;
 
     /**
      * Field
@@ -49,52 +49,48 @@ final class SectionFieldTransDTO implements TypeProfileSectionFieldTransInterfac
         return $this->field;
     }
 
-	/** Локаль */
-	
-	public function getLocal() : Locale
-	{
-		return $this->local;
-	}
+    /** Локаль */
+
+    public function getLocal(): Locale
+    {
+        return $this->local;
+    }
 
 
-
-
-
-
-    public function setLocal(Locale|string $local) : void
+    public function setLocal(Locale|string $local): void
     {
         if(!(new ReflectionProperty(self::class, 'local'))->isInitialized($this))
         {
             $this->local = $local instanceof Locale ? $local : new Locale($local);
         }
     }
-	
-	
-	/** Название раздела */
-	
-	public function getName() : ?string
-	{
-		return $this->name;
-	}
-	
-	
-	public function setName(?string $name) : void
-	{
-		$this->name = $name;
-	}
-	
-	
-	/** Краткое описание */
-	
-	public function getDescription() : ?string
-	{
-		return $this->description;
-	}
-	
-	
-	public function setDescription(?string $description) : void
-	{
-		$this->description = $description;
-	}
-	
+
+
+    /** Название раздела */
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
+    }
+
+
+    /** Краткое описание */
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
 }

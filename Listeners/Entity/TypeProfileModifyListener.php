@@ -52,7 +52,8 @@ final class TypeProfileModifyListener
     {
         $token = $this->token->getToken();
 
-        if ($token) {
+        if($token)
+        {
 
             $data->setUsr($token->getUser());
 
@@ -65,7 +66,7 @@ final class TypeProfileModifyListener
         }
 
         /* Если пользователь не из консоли */
-        if ($this->request->getCurrentRequest())
+        if($this->request->getCurrentRequest())
         {
             $data->upModifyAgent(
                 new IpAddress($this->request->getCurrentRequest()->getClientIp()), /* Ip */

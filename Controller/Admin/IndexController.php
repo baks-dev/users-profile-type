@@ -36,8 +36,7 @@ final class IndexController extends AbstractController
         Request $request,
         AllProfileTypeInterface $allProfileType,
         int $page = 0,
-    ): Response
-    {
+    ): Response {
         // Поиск
         $search = new Search\SearchDTO();
         $searchForm = $this->createForm(Search\SearchForm::class, $search);
