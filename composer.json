@@ -38,6 +38,16 @@
       "BaksDev\\Users\\Profile\\TypeProfile\\Tests\\": "Tests/"
     }
   },
+
+  "scripts": {
+    "auto-scripts": {
+      "baks:users-profile-type:user": "symfony-cmd"
+    },
+    "post-install-cmd": [
+      "@auto-scripts"
+    ]
+  },
+
   "config": {
     "sort-packages": true,
     "allow-plugins": {
