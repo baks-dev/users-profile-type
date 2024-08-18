@@ -25,14 +25,14 @@ declare(strict_types=1);
 
 namespace BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection;
 
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 final class TypeProfileCollection
 {
     private iterable $type;
 
     public function __construct(
-        #[TaggedIterator('baks.users.profile.type', defaultPriorityMethod: 'priority')] iterable $type
+        #[AutowireIterator('baks.users.profile.type', defaultPriorityMethod: 'priority')] iterable $type
     ) {
         $this->type = $type;
     }
