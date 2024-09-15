@@ -26,10 +26,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use BaksDev\Users\Profile\TypeProfile\BaksDevUsersProfileTypeProfileBundle;
 use Symfony\Config\FrameworkConfig;
 
-return static function(FrameworkConfig $config) {
+return static function (FrameworkConfig $config) {
 
     $config
         ->translator()
-        ->paths([BaksDevUsersProfileTypeProfileBundle::PATH.'Resources/translations/']);
+        ->paths([BaksDevUsersProfileTypeProfileBundle::PATH.implode(DIRECTORY_SEPARATOR, ['Resources', 'translations', ''])]); // .'Resources/translations/']);
 
 };

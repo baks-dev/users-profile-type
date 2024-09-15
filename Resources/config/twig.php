@@ -26,10 +26,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use BaksDev\Users\Profile\TypeProfile\BaksDevUsersProfileTypeProfileBundle;
 use Symfony\Config\TwigConfig;
 
-return static function(TwigConfig $twig) {
+return static function (TwigConfig $twig) {
 
     $twig->path(
-        BaksDevUsersProfileTypeProfileBundle::PATH.'Resources/view',
+        BaksDevUsersProfileTypeProfileBundle::PATH.implode(DIRECTORY_SEPARATOR, ['Resources', 'view', '']), // .'Resources/view',
         'users-profile-type'
     );
 
