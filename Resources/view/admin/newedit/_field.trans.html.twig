@@ -3,68 +3,68 @@
 
 
         {% if field.translate.count > 1 %}
-	
-			<ul class="nav nav-pills gap-3 mb-3" id="nav-{{ field.translate.vars.id }}" role="tablist">
-		
-		
-				{% for translate in field.translate %}
-			
-			
-			
-					<li class="nav-item" role="presentation">
-				
-						<button class="btn fw-bolder nav-link{{ app.request.locale == translate.vars.value.local? ' active' : '' }}"
-								data-bs-toggle="tab"
-								type="button"
-								role="tab"
-								aria-selected="true"
-						
-								id="nav-{{ field.translate.vars.id }}-{{ translate.vars.value.local }}-tab"
-								data-bs-target="#nav-{{ field.translate.vars.id }}-{{ translate.vars.value.local }}"
-								aria-controls="nav-{{ field.translate.vars.id }}-{{ translate.vars.value.local }}"
-						>
-							<small class="text-uppercase px-3">{{ translate.vars.value.local|trans({}, 'core') }}</small>
-						</button>
-				
-				
-						{# <button class="btn nav-link fw-bolder active" id="pills-home-tab" data-bs-toggle="pill"
+
+            <ul class="nav nav-pills gap-3 mb-3" id="nav-{{ field.translate.vars.id }}" role="tablist">
+
+
+                {% for translate in field.translate %}
+
+
+
+                    <li class="nav-item" role="presentation">
+
+                        <button class="btn fw-bolder nav-link{{ app.request.locale == translate.vars.value.local? ' active' : '' }}"
+                                data-bs-toggle="tab"
+                                type="button"
+                                role="tab"
+                                aria-selected="true"
+
+                                id="nav-{{ field.translate.vars.id }}-{{ translate.vars.value.local }}-tab"
+                                data-bs-target="#nav-{{ field.translate.vars.id }}-{{ translate.vars.value.local }}"
+                                aria-controls="nav-{{ field.translate.vars.id }}-{{ translate.vars.value.local }}"
+                        >
+                            <small class="text-uppercase px-3">{{ translate.vars.value.local|trans({}, 'core') }}</small>
+                        </button>
+
+
+                        {# <button class="btn nav-link fw-bolder active" id="pills-home-tab" data-bs-toggle="pill"
 									data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
 									aria-selected="true"><span class="text-uppercase px-3">Альтернатива</span></button> #}
-					</li>
-		
-				{% endfor %}
-	
-	
-			</ul>
+                    </li>
 
-		{% endif %}
+                {% endfor %}
+
+
+            </ul>
+
+        {% endif %}
 
 
 <div class="tab-content" id="nav-{{ field.translate.vars.id }}Content">
-	
-	{% for translate in field.translate %}
-		
-		<div class="tab-pane fade{{ app.request.locale == translate.vars.value.local? ' show active' : '' }}"
-				role="tabpanel"
-				id="nav-{{ field.translate.vars.id }}-{{ translate.vars.value.local }}"
-				aria-labelledby="nav-{{ field.translate.vars.id }}-{{ translate.vars.value.local }}-tab"
-		>
-			
-			 {{ form_row(translate.local) }}
-			
-			{# Название группы #}
-			{{ form_row(translate.name, {
-				label : 'admin.form.locale.name'|trans, attr: { 'data-lang' : "product_form_trans_"~translate.vars.value.local  }
-			}) }}
-			
-			
-			{# Краткое описание #}
-			{{ form_row(translate.description, {
-				label : 'admin.form.locale.desc'|trans, attr: { 'data-lang' : "product_form_trans_"~translate.vars.value.local  }
-			}) }}
-		
-		</div>
-	{% endfor %}
+
+    {% for translate in field.translate %}
+
+        <div class="tab-pane fade{{ app.request.locale == translate.vars.value.local? ' show active' : '' }}"
+             role="tabpanel"
+             id="nav-{{ field.translate.vars.id }}-{{ translate.vars.value.local }}"
+             aria-labelledby="nav-{{ field.translate.vars.id }}-{{ translate.vars.value.local }}-tab"
+        >
+
+            {{ form_row(translate.local) }}
+
+            {# Название группы #}
+            {{ form_row(translate.name, {
+                label : 'admin.form.locale.name'|trans, attr: { 'data-lang' : "product_form_trans_"~translate.vars.value.local  }
+            }) }}
+
+
+            {# Краткое описание #}
+            {{ form_row(translate.description, {
+                label : 'admin.form.locale.desc'|trans, attr: { 'data-lang' : "product_form_trans_"~translate.vars.value.local  }
+            }) }}
+
+        </div>
+    {% endfor %}
 
 </div>
 

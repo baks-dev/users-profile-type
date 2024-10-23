@@ -4,12 +4,12 @@
 {% extends Template('/admin/base.html.twig') %}
 
 {% block title %}
-	{{ 'admin.page.edit'|trans }}
+    {{ 'admin.page.edit'|trans }}
 {% endblock %}
 
 {# ---- КОНТЕНТ-БЛОК ------------------------------------------------------------ #}
 {% block content %}
-	{{ include(_self|replace({ "template.html.twig": "content.html.twig" })) }}
+    {{ include(_self|replace({ "template.html.twig": "content.html.twig" })) }}
 {% endblock %}
 
 

@@ -1,18 +1,23 @@
 /*
- *  Copyright 2022.  Baks.dev <admin@baks.dev>
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *   limitations under the License.
- *
+ *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is furnished
+ *  to do so, subject to the following conditions:
+ *  
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *  
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ *  THE SOFTWARE.
  */
 
 
@@ -26,21 +31,27 @@ var $addButton = document.getElementById('section_addCollection');
 /* Блок для новой коллекции */
 let $blockCollection = document.getElementById('section_collection');
 
-if ($blockCollection) {
+if($blockCollection)
+{
 
     /* добавить событие на удаление ко всем существующим элементам формы в блок с классом .del-item */
     let $delItem = $blockCollection.querySelectorAll('.del-item-section');
 
     /* Удаляем при клике колекцию СЕКЦИЙ */
-    if ($delItem) {
-        $delItem.forEach(function (item, i, arr) {
-            item.addEventListener('click', function (event) {
+    if($delItem)
+    {
+        $delItem.forEach(function(item, i, arr)
+        {
+            item.addEventListener('click', function(event)
+            {
 
                 let $counter = $addButton.dataset.index
 
-                if ($counter > 1) {
+                if($counter > 1)
+                {
                     item.closest('.item-collection-section').remove();
-                } else {
+                } else
+                {
                     alert('Минимально должна быть добавлена одна секция');
                 }
             });
@@ -50,7 +61,8 @@ if ($blockCollection) {
 
     /* кнопки Добавить поле */
     let $addButtonField = document.querySelectorAll('[id^="field_addCollection_"]');
-    $addButtonField.forEach(function (item, i, arr) {
+    $addButtonField.forEach(function(item, i, arr)
+    {
         fieldCollection(item.dataset.section);
     });
 
@@ -60,14 +72,18 @@ if ($blockCollection) {
     let $delItemField = $blockCollection.querySelectorAll('.del-item-field');
 
     /* Удаляем при клике колекцию ПОЛЕЙ */
-    $delItemField.forEach(function (item, i, arr) {
-        item.addEventListener('click', function (event) {
+    $delItemField.forEach(function(item, i, arr)
+    {
+        item.addEventListener('click', function(event)
+        {
 
             let $countField = item.closest('.item-collection-field').parentNode.getElementsByClassName('item-collection-field').length;
 
-            if ($countField > 1) {
+            if($countField > 1)
+            {
                 item.closest('.item-collection-field').remove();
-            } else {
+            } else
+            {
                 alert('Минимально должно быть добавлено одно поле');
             }
         });
@@ -75,7 +91,8 @@ if ($blockCollection) {
 
 
     /* Добавляем новую коллекцию */
-    $addButton.addEventListener('click', function (event) {
+    $addButton.addEventListener('click', function(event)
+    {
         let $addButton = this;
 
 
@@ -84,7 +101,7 @@ if ($blockCollection) {
         let index = $addButton.dataset.index * 1;
 
         /* Замена '__name__' в HTML-коде прототипа на
-        вместо этого будет число, основанное на том, сколько коллекций */
+         вместо этого будет число, основанное на том, сколько коллекций */
         newForm = newForm.replace(/__section__/g, index);
         //newForm = newForm.replace(/__field__/g, 0);
 
@@ -103,12 +120,15 @@ if ($blockCollection) {
         $addButton.dataset.index = (index + 1).toString();
 
         /* Удаляем при клике колекцию СЕКЦИЙ */
-        div.querySelector('.del-item-section').addEventListener('click', function (event) {
+        div.querySelector('.del-item-section').addEventListener('click', function(event)
+        {
             let $counter = $blockCollection.getElementsByClassName('item-collection-section').length;
-            if ($counter > 1) {
+            if($counter > 1)
+            {
                 $addButton.dataset.index = ($addButton.dataset.index - 1).toString();
                 this.closest('.item-collection-section').remove();
-            } else {
+            } else
+            {
                 alert('Минимально должна быть добавлена одна секция');
             }
         });
@@ -127,8 +147,10 @@ if ($blockCollection) {
 
         /* Удаляем при клике колекцию */
         let $delField = div.querySelector('.del-item-field');
-        if ($delField) {
-            $delField.addEventListener('click', function (event) {
+        if($delField)
+        {
+            $delField.addEventListener('click', function(event)
+            {
                 this.closest('.item-collection-field').remove();
 
             });
@@ -144,7 +166,8 @@ if ($blockCollection) {
 //});
 
 
-function fieldCollection(index) {
+function fieldCollection(index)
+{
 
     /** Коллекция FIELDS */
 
@@ -154,14 +177,16 @@ function fieldCollection(index) {
     /* Блок для новой коллекции */
     //let $blockCollectionFields = document.getElementById('field_collection_'+index);
 
-    $addButtonFields.addEventListener('click', function (event) {
+    $addButtonFields.addEventListener('click', function(event)
+    {
         /* Добавляем в форму FIELD */
         createField($addButtonFields);
     });
 }
 
 
-function createField($addButtonFields) {
+function createField($addButtonFields)
+{
 
     //console.log($addButtonFields);
 
@@ -177,7 +202,7 @@ function createField($addButtonFields) {
 
 
     /* Замена '__name__' в HTML-коде прототипа на
-    вместо этого будет число, основанное на том, сколько коллекций */
+     вместо этого будет число, основанное на том, сколько коллекций */
     //newFormField = newFormField.replace(/__SECTION__/g, index);
     newFormField = newFormField.replace(/__section__/g, section);
     newFormField = newFormField.replace(/__field__/g, index);
@@ -198,10 +223,12 @@ function createField($addButtonFields) {
     $addButtonFields.dataset.index = (index + 1).toString();
 
     /* Удаляем при клике колекцию */
-    div.querySelector('.del-item-field').addEventListener('click', function (event) {
+    div.querySelector('.del-item-field').addEventListener('click', function(event)
+    {
 
         let $countField = div.parentNode.getElementsByClassName('item-collection-field').length;
-        if ($countField > 1) {
+        if($countField > 1)
+        {
 
 
             $addButtonFields.dataset.index = ($addButtonFields.dataset.index - 1).toString();
@@ -211,7 +238,8 @@ function createField($addButtonFields) {
 
 
         } /* Удаляем блок */
-        else {
+        else
+        {
             alert('Минимально должно быть добавлено одно поле');
         }
 

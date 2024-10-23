@@ -2,98 +2,98 @@
 
 
 <div class="d-flex gap-3 border rounded-2 p-3">
-	
-	<div class="card w-100 border-light">
-		
-		<div class="card-header border-light bg-body">
-			<div class="card-title">
-				<h4>
-					{{ 'admin.form.section.label'|trans }}
-				</h4>
-			</div>
-		</div>
-		
-		<div class="card-body pb-0">
-			
-			
-			<div class="d-flex justify-content-evenly gap-1 align-items-end">
-				
-				<div class="p-1">
-					{{ form_row(section.DeleteSection, {
-						label: '<span class="svg-icon svg-icon-2 text-nowrap">
+
+    <div class="card w-100 border-light">
+
+        <div class="card-header border-light bg-body">
+            <div class="card-title">
+                <h4>
+                    {{ 'admin.form.section.label'|trans }}
+                </h4>
+            </div>
+        </div>
+
+        <div class="card-body pb-0">
+
+
+            <div class="d-flex justify-content-evenly gap-1 align-items-end">
+
+                <div class="p-1">
+                    {{ form_row(section.DeleteSection, {
+                        label: '<span class="svg-icon svg-icon-2 text-nowrap">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                                                 <rect opacity="0.5" x="7.05025" y="15.5356" width="12" height="2" rx="1" transform="rotate(-45 7.05025 15.5356)" fill="currentColor"></rect>
                                                 <rect x="8.46447" y="7.05029" width="12" height="2" rx="1" transform="rotate(45 8.46447 7.05029)" fill="currentColor"></rect>
                                             </svg>' ~'admin.form.section.btn.delete'|trans~ '</span>',
-						attr: { class: 'btn-outline-danger btn-sm del-item-section border-0' }
-					}) }}
-				</div>
-				
-				<div class="w-100">
-					{# Сортировка секции #}
-					{{ form_row(section.sort, {  label : 'admin.form.section.sort'|trans } ) }}
-				
-				</div>
-			</div>
-			
-			
-			{# Настройки локали секции #}
-			{{ include(_self|replace({ "_section.html.twig": "_section.trans.html.twig" })) }}
-		
-		</div>
-	</div>
-	
-	
-	<div class="card w-100 border-light">
-		
-		<div class="card-header border-light bg-body">
-			<div class="card-title">
-				<h4>
-					Поля секции
-				</h4>
-			</div>
-		</div>
-		
-		
-		<div class="card-body pb-0">
-			
-			
-			<div id="field_collection_{{ section.vars.name }}" class="d-flex flex-column gap-3">
-				{% for field in section.field %}
-					<div class="item-collection-field card card-body border-light">
-						{{ include(_self|replace({ "_section.html.twig": "_field.html.twig" })) }}
-					</div>
-				{% endfor %}
-			</div>
-			
-			
-			{# Добавить поле #}
-			<button type="button"
-					id="field_addCollection_{{ section.vars.name }}"
-					data-index="{{ section.field.count }}"
-					data-section="{{ section.vars.name }}"
-					class="btn btn-sm btn-outline-primary border-0 mt-3"
-					data-prototype="{{ include(_self|replace({ "_section.html.twig": "_field.prototype.twig" })) |e('html_attr') }}"
-			>
-				<!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-				<span class="svg-icon svg-icon-2">
+                        attr: { class: 'btn-outline-danger btn-sm del-item-section border-0' }
+                    }) }}
+                </div>
+
+                <div class="w-100">
+                    {# Сортировка секции #}
+                    {{ form_row(section.sort, {  label : 'admin.form.section.sort'|trans } ) }}
+
+                </div>
+            </div>
+
+
+            {# Настройки локали секции #}
+            {{ include(_self|replace({ "_section.html.twig": "_section.trans.html.twig" })) }}
+
+        </div>
+    </div>
+
+
+    <div class="card w-100 border-light">
+
+        <div class="card-header border-light bg-body">
+            <div class="card-title">
+                <h4>
+                    Поля секции
+                </h4>
+            </div>
+        </div>
+
+
+        <div class="card-body pb-0">
+
+
+            <div id="field_collection_{{ section.vars.name }}" class="d-flex flex-column gap-3">
+                {% for field in section.field %}
+                    <div class="item-collection-field card card-body border-light">
+                        {{ include(_self|replace({ "_section.html.twig": "_field.html.twig" })) }}
+                    </div>
+                {% endfor %}
+            </div>
+
+
+            {# Добавить поле #}
+            <button type="button"
+                    id="field_addCollection_{{ section.vars.name }}"
+                    data-index="{{ section.field.count }}"
+                    data-section="{{ section.vars.name }}"
+                    class="btn btn-sm btn-outline-primary border-0 mt-3"
+                    data-prototype="{{ include(_self|replace({ "_section.html.twig": "_field.prototype.twig" })) |e('html_attr') }}"
+            >
+                <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
+                <span class="svg-icon svg-icon-2">
 							<svg xmlns="http://www.w3.org/2000/svg"
-									width="24" height="24" viewBox="0 0 24 24"
-									fill="none">
+                                 width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
 								<rect opacity="0.5" x="11" y="18" width="12"
-										height="2" rx="1"
-										transform="rotate(-90 11 18)"
-										fill="currentColor"></rect>
+                                      height="2" rx="1"
+                                      transform="rotate(-90 11 18)"
+                                      fill="currentColor"></rect>
 								<rect x="6" y="11" width="12" height="2"
-										rx="1" fill="currentColor"></rect>
+                                      rx="1" fill="currentColor"></rect>
 							</svg>
 						</span>
-				Добавить поле
-			</button>
-		
-		
-		</div>
-	</div>
+                Добавить поле
+            </button>
+
+
+        </div>
+    </div>
 
 </div>
 
