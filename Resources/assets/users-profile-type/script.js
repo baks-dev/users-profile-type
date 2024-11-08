@@ -44,16 +44,10 @@ if($blockCollection)
         {
             item.addEventListener('click', function(event)
             {
-
                 let $counter = $addButton.dataset.index
 
-                if($counter > 1)
-                {
-                    item.closest('.item-collection-section').remove();
-                } else
-                {
-                    alert('Минимально должна быть добавлена одна секция');
-                }
+                item.closest('.item-collection-section').remove();
+
             });
         });
     }
