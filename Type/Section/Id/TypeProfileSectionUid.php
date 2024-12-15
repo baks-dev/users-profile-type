@@ -28,8 +28,8 @@ use BaksDev\Core\Type\UidType\Uid;
 
 final class TypeProfileSectionUid extends Uid
 {
-    public const TEST = '0188a9a7-fe11-718d-814f-7a5239996458';
+    public const string TEST = '0188a9a7-fe11-718d-814f-7a5239996458';
 
-    public const TYPE = 'profile_section';
+    public const string TYPE = 'profile_section';
 
 }

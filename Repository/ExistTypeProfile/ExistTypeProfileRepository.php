@@ -29,16 +29,9 @@ use BaksDev\Core\Doctrine\DBALQueryBuilder;
 use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 
-final class ExistTypeProfileRepository implements ExistTypeProfileInterface
+final readonly class ExistTypeProfileRepository implements ExistTypeProfileInterface
 {
-    private DBALQueryBuilder $DBALQueryBuilder;
-
-    public function __construct(
-        DBALQueryBuilder $DBALQueryBuilder,
-    )
-    {
-        $this->DBALQueryBuilder = $DBALQueryBuilder;
-    }
+    public function __construct(private DBALQueryBuilder $DBALQueryBuilder) {}
 
     /**
      * Проверяет, имеется ли такой профиль пользователя
@@ -50,16 +43,13 @@ final class ExistTypeProfileRepository implements ExistTypeProfileInterface
             $profile = new TypeProfileUid($profile);
         }
 
-
         $qb = $this->DBALQueryBuilder->createQueryBuilder(self::class);
 
-        //$qb->select('id');
         $qb
-            ->from(TypeProfile::TABLE, 'profile')
+            ->from(TypeProfile::class, 'profile')
             ->where('profile.id = :profile')
             ->setParameter('profile', $profile, TypeProfileUid::TYPE);
 
-        return $qb
-            ->fetchExist();
+        return $qb->fetchExist();
     }
 }

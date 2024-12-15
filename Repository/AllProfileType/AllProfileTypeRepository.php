@@ -34,23 +34,14 @@ use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 
 final class AllProfileTypeRepository implements AllProfileTypeInterface
 {
-    private PaginatorInterface $paginator;
-    private DBALQueryBuilder $DBALQueryBuilder;
-    private ORMQueryBuilder $ORMQueryBuilder;
 
     private ?SearchDTO $search = null;
 
-
     public function __construct(
-        DBALQueryBuilder $DBALQueryBuilder,
-        ORMQueryBuilder $ORMQueryBuilder,
-        PaginatorInterface $paginator,
-    )
-    {
-        $this->paginator = $paginator;
-        $this->DBALQueryBuilder = $DBALQueryBuilder;
-        $this->ORMQueryBuilder = $ORMQueryBuilder;
-    }
+        private readonly DBALQueryBuilder $DBALQueryBuilder,
+        private readonly ORMQueryBuilder $ORMQueryBuilder,
+        private readonly PaginatorInterface $paginator,
+    ) {}
 
     public function search(SearchDTO $search): self
     {
@@ -67,13 +58,13 @@ final class AllProfileTypeRepository implements AllProfileTypeInterface
         $qb->select('profile.id');
         $qb->addSelect('profile.event');
 
-        $qb->from(TypeProfile::TABLE, 'profile');
+        $qb->from(TypeProfile::class, 'profile');
 
         /* TypeProfile Event */
         $qb->addSelect('profile_event.sort');
         $qb->join(
             'profile',
-            TypeProfileEvent::TABLE,
+            TypeProfileEvent::class,
             'profile_event',
             'profile_event.id = profile.event'
         );
@@ -84,7 +75,7 @@ final class AllProfileTypeRepository implements AllProfileTypeInterface
             ->addSelect('profile_trans.description')
             ->join(
                 'profile',
-                TypeProfileTrans::TABLE,
+                TypeProfileTrans::class,
                 'profile_trans',
                 'profile_trans.event = profile.event AND profile_trans.local = :local'
             );

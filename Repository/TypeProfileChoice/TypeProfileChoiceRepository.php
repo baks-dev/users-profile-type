@@ -33,14 +33,9 @@ use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 use Generator;
 
-final class TypeProfileChoiceRepository implements TypeProfileChoiceInterface
+final readonly class TypeProfileChoiceRepository implements TypeProfileChoiceInterface
 {
-    private DBALQueryBuilder $DBALQueryBuilder;
-
-    public function __construct(DBALQueryBuilder $DBALQueryBuilder)
-    {
-        $this->DBALQueryBuilder = $DBALQueryBuilder;
-    }
+    public function __construct(private DBALQueryBuilder $DBALQueryBuilder) {}
 
     public function getAllTypeProfileChoice(): Generator
     {
@@ -111,18 +106,18 @@ final class TypeProfileChoiceRepository implements TypeProfileChoiceInterface
             ->createQueryBuilder(self::class)
             ->bindLocal();
 
-        $dbal->from(TypeProfile::TABLE, 'profile');
+        $dbal->from(TypeProfile::class, 'profile');
 
         $dbal->join(
             'profile',
-            TypeProfileEvent::TABLE,
+            TypeProfileEvent::class,
             'profile_event',
             'profile_event.id = profile.event'
         );
 
         $dbal->join(
             'profile',
-            TypeProfileTrans::TABLE,
+            TypeProfileTrans::class,
             'profile_trans',
             'profile_trans.event = profile.event AND profile_trans.local = :local'
         );

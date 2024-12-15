@@ -29,9 +29,9 @@ use Symfony\Component\Uid\AbstractUid;
 
 final class TypeProfileUid extends Uid
 {
-    public const TYPE = 'profile';
+    public const string TYPE = 'profile';
 
-    public const TEST = '018ad881-fd9e-73d2-aea3-75c908fbfbb8';
+    public const string TEST = '018ad881-fd9e-73d2-aea3-75c908fbfbb8';
 
     private mixed $option;
 

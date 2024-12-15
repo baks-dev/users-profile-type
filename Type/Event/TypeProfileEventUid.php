@@ -28,8 +28,8 @@ use BaksDev\Core\Type\UidType\Uid;
 
 final class TypeProfileEventUid extends Uid
 {
-    public const TEST = '0188a9a7-903a-7d11-b037-f819b110ee1a';
+    public const string TEST = '0188a9a7-903a-7d11-b037-f819b110ee1a';
 
-    public const TYPE = 'profile_event';
+    public const string TYPE = 'profile_event';
 
 }
