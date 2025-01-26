@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -27,27 +27,14 @@ use BaksDev\Core\Entity\AbstractHandler;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
 use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Messenger\TypeProfileMessage;
-use DomainException;
 
 final class TypeProfileHandler extends AbstractHandler
 {
     public function handle(TypeProfileDTO $command): string|TypeProfile
     {
+        $this->setCommand($command);
 
-        /* Валидация DTO  */
-        $this->validatorCollection->add($command);
-
-        $this->main = new TypeProfile();
-        $this->event = new TypeProfileEvent();
-
-        try
-        {
-            $command->getEvent() ? $this->preUpdate($command) : $this->prePersist($command);
-        }
-        catch(DomainException $errorUniqid)
-        {
-            return $errorUniqid->getMessage();
-        }
+        $this->preEventPersistOrUpdate(TypeProfile::class, TypeProfileEvent::class);
 
         /* Валидация всех объектов */
         if($this->validatorCollection->isInvalid())
@@ -60,17 +47,15 @@ final class TypeProfileHandler extends AbstractHandler
             $this->main->setId($this->event->getProfile());
         }
 
-
-        //        //dump($this->entityManager->getUnitOfWork());
-        //        //dump($this->event);
-
-        $this->entityManager->flush();
+        $this->flush();
 
         /* Отправляем сообщение в шину */
-        $this->messageDispatch->dispatch(
-            message: new TypeProfileMessage($this->main->getId(), $this->main->getEvent(), $command->getEvent()),
-            transport: 'users-profile-type',
-        );
+        $this->messageDispatch
+            ->addClearCacheOther('delivery')
+            ->dispatch(
+                message: new TypeProfileMessage($this->main->getId(), $this->main->getEvent(), $command->getEvent()),
+                transport: 'users-profile-type',
+            );
 
         return $this->main;
     }

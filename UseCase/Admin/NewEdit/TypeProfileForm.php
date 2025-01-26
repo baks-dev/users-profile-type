@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -63,9 +63,14 @@ final class TypeProfileForm extends AbstractType
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event): void {
 
+            /** @var TypeProfileDTO $TypeProfileDTO */
             $TypeProfileDTO = $event->getData();
-            $SectionDTO = new SectionDTO();
-            $TypeProfileDTO->addSection($SectionDTO);
+
+            if($TypeProfileDTO->getSection()->isEmpty())
+            {
+                $SectionDTO = new SectionDTO();
+                $TypeProfileDTO->addSection($SectionDTO);
+            }
 
         });
 

@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -29,26 +29,13 @@ use BaksDev\Core\Entity\AbstractHandler;
 use BaksDev\Users\Profile\TypeProfile\Entity\Event\TypeProfileEvent;
 use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Messenger\TypeProfileMessage;
-use DomainException;
 
 final class DeleteTypeProfileHandler extends AbstractHandler
 {
     public function handle(DeleteTypeProfileDTO $command): string|TypeProfile
     {
-        /* Валидация DTO  */
-        $this->validatorCollection->add($command);
-
-        $this->main = new TypeProfile();
-        $this->event = new TypeProfileEvent();
-
-        try
-        {
-            $this->preRemove($command);
-        }
-        catch(DomainException $errorUniqid)
-        {
-            return $errorUniqid->getMessage();
-        }
+        $this->setCommand($command);
+        $this->preEventRemove(TypeProfile::class, TypeProfileEvent::class);
 
         /** Валидация всех объектов */
         if($this->validatorCollection->isInvalid())
@@ -56,14 +43,15 @@ final class DeleteTypeProfileHandler extends AbstractHandler
             return $this->validatorCollection->getErrorUniqid();
         }
 
-        $this->entityManager->flush();
+        $this->flush();
 
         /* Отправляем сообщение в шину */
-        $this->messageDispatch->dispatch(
-            message: new TypeProfileMessage($this->main->getId(), $this->main->getEvent(), $command->getEvent()),
-            transport: 'users-profile-type',
-        );
-
+        $this->messageDispatch
+            ->addClearCacheOther('delivery')
+            ->dispatch(
+                message: new TypeProfileMessage($this->main->getId(), $this->main->getEvent(), $command->getEvent()),
+                transport: 'users-profile-type',
+            );
 
         return $this->main;
     }
