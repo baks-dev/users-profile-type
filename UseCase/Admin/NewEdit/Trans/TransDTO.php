@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ final class TransDTO implements TypeProfileTransInterface
 
     /** Название раздела (строка с точкой, нижнее подчеркивание тире процент скобки) */
     #[Assert\NotBlank]
-    #[Assert\Regex(pattern: '/^[\w \.\,\_\-\(\)\%]+$/iu')]
+    #[Assert\Regex(pattern: '/^[\w \.\,\:\_\-\(\)\%]+$/iu')]
     private ?string $name;
 
     /** Краткое описание */
