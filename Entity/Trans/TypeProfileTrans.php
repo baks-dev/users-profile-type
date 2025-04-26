@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -38,8 +38,6 @@ use InvalidArgumentException;
 #[ORM\Table(name: 'type_users_profile_trans')]
 class TypeProfileTrans extends EntityEvent
 {
-    public const TABLE = 'type_users_profile_trans';
-
     /** Связь на событие */
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: TypeProfileEvent::class, inversedBy: "translate")]

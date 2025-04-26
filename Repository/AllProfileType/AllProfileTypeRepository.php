@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -112,36 +112,38 @@ final class AllProfileTypeRepository implements AllProfileTypeInterface
 
     }
 
-
     public function getTypeProfile(): ?array
     {
-        $qb = $this->ORMQueryBuilder->createQueryBuilder(self::class);
-        $qb->bindLocal();
+        $qb = $this->ORMQueryBuilder
+            ->createQueryBuilder(self::class)
+            ->bindLocal();
 
         /* TypeProfile */
-        $qb->select('profile.id');
-        $qb->addSelect('profile.event');
-
-        $qb->from(TypeProfile::class, 'profile');
+        $qb
+            ->select('profile.id')
+            ->addSelect('profile.event')
+            ->from(TypeProfile::class, 'profile');
 
         /* TypeProfile Event */
-        $qb->addSelect('profile_event.sort');
-        $qb->join(
-            TypeProfileEvent::class,
-            'profile_event',
-            'WITH',
-            'profile_event.id = profile.event'
-        );
+        $qb
+            ->addSelect('profile_event.sort')
+            ->join(
+                TypeProfileEvent::class,
+                'profile_event',
+                'WITH',
+                'profile_event.id = profile.event'
+            );
 
         /* TypeProfile Translate */
-        $qb->addSelect('profile_trans.name');
-        $qb->addSelect('profile_trans.description');
-        $qb->join(
-            TypeProfileTrans::class,
-            'profile_trans',
-            'WITH',
-            'profile_trans.event = profile.event AND profile_trans.local = :local'
-        );
+        $qb
+            ->addSelect('profile_trans.name')
+            ->addSelect('profile_trans.description')
+            ->join(
+                TypeProfileTrans::class,
+                'profile_trans',
+                'WITH',
+                'profile_trans.event = profile.event AND profile_trans.local = :local'
+            );
 
         $qb->orderBy('profile_event.sort', 'ASC');
 

@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -46,8 +46,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Index(columns: ['profile'])]
 class TypeProfileEvent extends EntityEvent
 {
-    public const TABLE = 'type_users_profile_event';
-
     /** ID */
     #[Assert\NotBlank]
     #[Assert\Uuid]
@@ -63,12 +61,12 @@ class TypeProfileEvent extends EntityEvent
 
     /** Перевод */
     #[Assert\Valid]
-    #[ORM\OneToMany(targetEntity: TypeProfileTrans::class, mappedBy: 'event', cascade: ['all'])]
+    #[ORM\OneToMany(targetEntity: TypeProfileTrans::class, mappedBy: 'event', cascade: ['all'], fetch: 'EAGER')]
     private Collection $translate;
 
     /** Секции для профиля */
     #[Assert\Valid]
-    #[ORM\OneToMany(targetEntity: TypeProfileSection::class, mappedBy: 'event', cascade: ['all'])]
+    #[ORM\OneToMany(targetEntity: TypeProfileSection::class, mappedBy: 'event', cascade: ['all'], fetch: 'EAGER')]
     #[ORM\OrderBy(['sort' => 'ASC'])]
     private Collection $section;
 
@@ -81,12 +79,12 @@ class TypeProfileEvent extends EntityEvent
 
     /** Модификатор */
     #[Assert\Valid]
-    #[ORM\OneToOne(targetEntity: TypeProfileModify::class, mappedBy: 'event', cascade: ['all'])]
+    #[ORM\OneToOne(targetEntity: TypeProfileModify::class, mappedBy: 'event', cascade: ['all'], fetch: 'EAGER')]
     private TypeProfileModify $modify;
 
     /** Информация о типе профиля */
     #[Assert\Valid]
-    #[ORM\OneToOne(targetEntity: TypeProfileInfo::class, mappedBy: 'event', cascade: ['all'])]
+    #[ORM\OneToOne(targetEntity: TypeProfileInfo::class, mappedBy: 'event', cascade: ['all'], fetch: 'EAGER')]
     private ?TypeProfileInfo $info = null;
 
     public function __construct()

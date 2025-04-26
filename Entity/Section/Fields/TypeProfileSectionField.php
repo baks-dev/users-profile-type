@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -40,8 +40,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: 'type_users_profile_section_field')]
 class TypeProfileSectionField extends EntityReadonly
 {
-    public const TABLE = 'type_users_profile_section_field';
-
     /** ID */
     #[Assert\NotBlank]
     #[Assert\Uuid]
@@ -59,7 +57,7 @@ class TypeProfileSectionField extends EntityReadonly
 
     /** Перевод */
     #[Assert\Valid]
-    #[ORM\OneToMany(targetEntity: TypeProfileSectionFieldTrans::class, mappedBy: 'field', cascade: ['all'])]
+    #[ORM\OneToMany(targetEntity: TypeProfileSectionFieldTrans::class, mappedBy: 'field', cascade: ['all'], fetch: 'EAGER')]
     private Collection $translate;
 
     /** Сортировка */
