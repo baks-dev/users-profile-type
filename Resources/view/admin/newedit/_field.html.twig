@@ -5,7 +5,13 @@
 
     {{ form_row(field.sort, {  label : 'admin.form.fields.sort.label'|trans }) }}
 
-    <div class="w-100">{{ form_row(field.type, { placeholder : 'Выберите тип из списка ...' }) }}</div>
+    <div class="w-100">
+        {{ form_row(field.type, {
+            label: 'Тип поля',
+            placeholder : 'Выберите тип из списка ...',
+            attr: { 'data-select' : 'select2' }
+        }) }}
+    </div>
 
     <div class="p-1">
         {{ form_row(field.DeleteField, {

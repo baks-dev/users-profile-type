@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,11 @@ namespace BaksDev\Users\Profile\TypeProfile\Command\Upgrade;
 
 use BaksDev\Auth\Email\Type\Email\AccountEmail;
 use BaksDev\Core\Type\Field\InputField;
+use BaksDev\Field\Pack\Inn\Type\InnField;
+use BaksDev\Field\Pack\Invoice\Type\InvoiceField;
+use BaksDev\Field\Pack\Kpp\Type\KppField;
 use BaksDev\Field\Pack\Phone\Type\PhoneField;
+use BaksDev\Users\Address\Type\AddressField\AddressField;
 use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Repository\ExistTypeProfile\ExistTypeProfileInterface;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\TypeProfileOrganization;
@@ -141,6 +145,10 @@ class UpgradeProfileTypeOrganizationCommand extends Command
                     $SectionFieldDTO->setType(new InputField(AccountEmail::TYPE));
                 }
 
+                if($field === 'address')
+                {
+                    $SectionFieldDTO->setType(new InputField(AddressField::TYPE));
+                }
 
                 /** @var SectionFieldTransDTO $SectionFieldTrans */
                 foreach($SectionFieldDTO->getTranslate() as $SectionFieldTrans)
@@ -176,7 +184,7 @@ class UpgradeProfileTypeOrganizationCommand extends Command
             }
 
             /* Добавляем поля для заполнения */
-            $fields = ['inn', 'bik', 'checking', 'correspondent'];
+            $fields = ['inn', 'kpp', 'bik', 'invoice', 'correspondent'];
 
             foreach($fields as $sort => $field)
             {
@@ -186,6 +194,20 @@ class UpgradeProfileTypeOrganizationCommand extends Command
                 $SectionFieldDTO->setRequired(true);
                 $SectionFieldDTO->setType(new InputField('input_field'));
 
+                if($field === 'inn')
+                {
+                    $SectionFieldDTO->setType(new InputField(InnField::TYPE));
+                }
+
+                if($field === 'kpp')
+                {
+                    $SectionFieldDTO->setType(new InputField(KppField::TYPE));
+                }
+
+                if($field === 'invoice')
+                {
+                    $SectionFieldDTO->setType(new InputField(InvoiceField::TYPE));
+                }
 
                 /** @var SectionFieldTransDTO $SectionFieldTrans */
                 foreach($SectionFieldDTO->getTranslate() as $SectionFieldTrans)
@@ -201,6 +223,7 @@ class UpgradeProfileTypeOrganizationCommand extends Command
             }
 
             $TypeProfileDTO->addSection($SectionDTO);
+
 
             $handle = $this->profileHandler->handle($TypeProfileDTO);
 
