@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -48,7 +48,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsCommand(
     name: 'baks:users-profile-type:user',
-    description: 'Добавляет тип Пользователь профилей пользователя',
+    description: 'Добавляет тип профилей пользователя «Пользователь»',
 )]
 #[AutoconfigureTag('baks.project.upgrade')]
 class UpgradeProfileTypeUserCommand extends Command implements ProjectUpgradeInterface
@@ -82,7 +82,7 @@ class UpgradeProfileTypeUserCommand extends Command implements ProjectUpgradeInt
         if(!$exists)
         {
             $io = new SymfonyStyle($input, $output);
-            $io->text('Добавляем тип профиля Пользователь');
+            $io->text('Добавляем тип профиля «Пользователь»');
 
             $TypeProfileDTO = new TypeProfileDTO();
             $TypeProfileDTO->setSort(TypeProfileUser::priority());

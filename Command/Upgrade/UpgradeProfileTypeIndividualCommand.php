@@ -32,7 +32,7 @@ use BaksDev\Field\Pack\Phone\Type\PhoneField;
 use BaksDev\Users\Address\Type\AddressField\AddressField;
 use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Repository\ExistTypeProfile\ExistTypeProfileInterface;
-use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\TypeProfileOrganization;
+use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\TypeProfileIndividual;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields\SectionFieldDTO;
 use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\Section\Fields\Trans\SectionFieldTransDTO;
@@ -49,10 +49,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsCommand(
-    name: 'baks:users-profile-type:organization',
-    description: 'Добавляет тип профилей пользователя «Юр. лицо (Организация)»',
+    name: 'baks:users-profile-type:individual',
+    description: 'Добавляет тип профилей пользователя «Индивидуальный предприниматель»',
 )]
-class UpgradeProfileTypeOrganizationCommand extends Command
+class UpgradeProfileTypeIndividualCommand extends Command
 {
     private ExistTypeProfileInterface $existTypeProfile;
     private TranslatorInterface $translator;
@@ -74,7 +74,7 @@ class UpgradeProfileTypeOrganizationCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
 
-        $TypeProfileUid = new TypeProfileUid(TypeProfileOrganization::class);
+        $TypeProfileUid = new TypeProfileUid(TypeProfileIndividual::class);
 
         /** Проверяем наличие типа Юр. лицо */
         $exists = $this->existTypeProfile->isExistTypeProfile($TypeProfileUid);
@@ -82,10 +82,10 @@ class UpgradeProfileTypeOrganizationCommand extends Command
         if(!$exists)
         {
             $io = new SymfonyStyle($input, $output);
-            $io->text('Добавляем тип профиля «Юр. лицо (Организация)»');
+            $io->text('Добавляем тип профиля «Индивидуальный предприниматель»');
 
             $TypeProfileDTO = new TypeProfileDTO();
-            $TypeProfileDTO->setSort(TypeProfileOrganization::priority());
+            $TypeProfileDTO->setSort(TypeProfileIndividual::priority());
             $TypeProfileDTO->setProfile($TypeProfileUid);
 
             $TypeProfileTranslateDTO = $TypeProfileDTO->getTranslate();
@@ -98,8 +98,8 @@ class UpgradeProfileTypeOrganizationCommand extends Command
              */
             foreach($TypeProfileTranslateDTO as $ProfileTrans)
             {
-                $name = $this->translator->trans('name', domain: 'organization.type', locale: $ProfileTrans->getLocal()->getLocalValue());
-                $desc = $this->translator->trans('desc', domain: 'organization.type', locale: $ProfileTrans->getLocal()->getLocalValue());
+                $name = $this->translator->trans('name', domain: 'individual.type', locale: $ProfileTrans->getLocal()->getLocalValue());
+                $desc = $this->translator->trans('desc', domain: 'individual.type', locale: $ProfileTrans->getLocal()->getLocalValue());
 
                 $ProfileTrans->setName($name);
                 $ProfileTrans->setDescription($desc);
@@ -114,8 +114,8 @@ class UpgradeProfileTypeOrganizationCommand extends Command
             /** @var SectionTransDTO $SectionTrans */
             foreach($SectionDTO->getTranslate() as $SectionTrans)
             {
-                $name = $this->translator->trans('section.contact.name', domain: 'organization.type', locale: $SectionTrans->getLocal()->getLocalValue());
-                $desc = $this->translator->trans('section.contact.desc', domain: 'organization.type', locale: $SectionTrans->getLocal()->getLocalValue());
+                $name = $this->translator->trans('section.contact.name', domain: 'individual.type', locale: $SectionTrans->getLocal()->getLocalValue());
+                $desc = $this->translator->trans('section.contact.desc', domain: 'individual.type', locale: $SectionTrans->getLocal()->getLocalValue());
 
                 $SectionTrans->setName($name);
                 $SectionTrans->setDescription($desc);
@@ -123,7 +123,7 @@ class UpgradeProfileTypeOrganizationCommand extends Command
 
             /* Добавляем поля для заполнения */
 
-            $fields = ['organizations', 'address', 'contact', 'phone', 'mail'];
+            $fields = ['address', 'contact', 'phone', 'mail'];
 
             foreach($fields as $sort => $field)
             {
@@ -153,8 +153,8 @@ class UpgradeProfileTypeOrganizationCommand extends Command
                 /** @var SectionFieldTransDTO $SectionFieldTrans */
                 foreach($SectionFieldDTO->getTranslate() as $SectionFieldTrans)
                 {
-                    $name = $this->translator->trans('section.contact.field.'.$field.'.name', domain: 'organization.type', locale: $SectionFieldTrans->getLocal()->getLocalValue());
-                    $desc = $this->translator->trans('section.contact.field.'.$field.'.desc', domain: 'organization.type', locale: $SectionFieldTrans->getLocal()->getLocalValue());
+                    $name = $this->translator->trans('section.contact.field.'.$field.'.name', domain: 'individual.type', locale: $SectionFieldTrans->getLocal()->getLocalValue());
+                    $desc = $this->translator->trans('section.contact.field.'.$field.'.desc', domain: 'individual.type', locale: $SectionFieldTrans->getLocal()->getLocalValue());
 
                     $SectionFieldTrans->setName($name);
                     $SectionFieldTrans->setDescription($desc);
@@ -176,15 +176,15 @@ class UpgradeProfileTypeOrganizationCommand extends Command
             /** @var SectionTransDTO $SectionTrans */
             foreach($SectionDTO->getTranslate() as $SectionTrans)
             {
-                $name = $this->translator->trans('section.requisite.name', domain: 'organization.type', locale: $SectionTrans->getLocal()->getLocalValue());
-                $desc = $this->translator->trans('section.requisite.desc', domain: 'organization.type', locale: $SectionTrans->getLocal()->getLocalValue());
+                $name = $this->translator->trans('section.requisite.name', domain: 'individual.type', locale: $SectionTrans->getLocal()->getLocalValue());
+                $desc = $this->translator->trans('section.requisite.desc', domain: 'individual.type', locale: $SectionTrans->getLocal()->getLocalValue());
 
                 $SectionTrans->setName($name);
                 $SectionTrans->setDescription($desc);
             }
 
             /* Добавляем поля для заполнения */
-            $fields = ['inn', 'kpp', 'bik', 'invoice', 'correspondent'];
+            $fields = ['inn', 'kpp'];
 
             foreach($fields as $sort => $field)
             {
@@ -204,16 +204,12 @@ class UpgradeProfileTypeOrganizationCommand extends Command
                     $SectionFieldDTO->setType(new InputField(KppField::TYPE));
                 }
 
-                if($field === 'invoice')
-                {
-                    $SectionFieldDTO->setType(new InputField(InvoiceField::TYPE));
-                }
 
                 /** @var SectionFieldTransDTO $SectionFieldTrans */
                 foreach($SectionFieldDTO->getTranslate() as $SectionFieldTrans)
                 {
-                    $name = $this->translator->trans('section.requisite.field.'.$field.'.name', domain: 'organization.type', locale: $SectionFieldTrans->getLocal()->getLocalValue());
-                    $desc = $this->translator->trans('section.requisite.field.'.$field.'.desc', domain: 'organization.type', locale: $SectionFieldTrans->getLocal()->getLocalValue());
+                    $name = $this->translator->trans('section.requisite.field.'.$field.'.name', domain: 'individual.type', locale: $SectionFieldTrans->getLocal()->getLocalValue());
+                    $desc = $this->translator->trans('section.requisite.field.'.$field.'.desc', domain: 'individual.type', locale: $SectionFieldTrans->getLocal()->getLocalValue());
 
                     $SectionFieldTrans->setName($name);
                     $SectionFieldTrans->setDescription($desc);
@@ -230,7 +226,7 @@ class UpgradeProfileTypeOrganizationCommand extends Command
             if(!$handle instanceof TypeProfile)
             {
                 $io->success(
-                    sprintf('Ошибка %s при типа профиля', $handle)
+                    sprintf('Ошибка %s при типа профиля', $handle),
                 );
 
                 return Command::FAILURE;
