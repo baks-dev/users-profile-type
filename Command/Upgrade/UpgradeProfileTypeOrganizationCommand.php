@@ -28,6 +28,7 @@ use BaksDev\Core\Type\Field\InputField;
 use BaksDev\Field\Pack\Inn\Type\InnField;
 use BaksDev\Field\Pack\Invoice\Type\InvoiceField;
 use BaksDev\Field\Pack\Kpp\Type\KppField;
+use BaksDev\Field\Pack\Okpo\Type\OkpoField;
 use BaksDev\Field\Pack\Phone\Type\PhoneField;
 use BaksDev\Users\Address\Type\AddressField\AddressField;
 use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
@@ -184,7 +185,7 @@ class UpgradeProfileTypeOrganizationCommand extends Command
             }
 
             /* Добавляем поля для заполнения */
-            $fields = ['inn', 'kpp', 'bik', 'invoice', 'correspondent'];
+            $fields = ['inn', 'kpp', 'okpo', 'bik', 'invoice', 'correspondent'];
 
             foreach($fields as $sort => $field)
             {
@@ -202,6 +203,11 @@ class UpgradeProfileTypeOrganizationCommand extends Command
                 if($field === 'kpp')
                 {
                     $SectionFieldDTO->setType(new InputField(KppField::TYPE));
+                }
+
+                if($field === 'okpo')
+                {
+                    $SectionFieldDTO->setType(new InputField(OkpoField::TYPE));
                 }
 
                 if($field === 'invoice')
@@ -230,7 +236,7 @@ class UpgradeProfileTypeOrganizationCommand extends Command
             if(!$handle instanceof TypeProfile)
             {
                 $io->success(
-                    sprintf('Ошибка %s при типа профиля', $handle)
+                    sprintf('Ошибка %s при типа профиля', $handle),
                 );
 
                 return Command::FAILURE;
