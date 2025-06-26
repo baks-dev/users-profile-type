@@ -1,56 +1,63 @@
-name: 'Yur. face'
-desc: 'User with bank transfer option'
+name: 'Юр. лицо'
+desc: 'Пользователь с возможностью оплаты безналичным расчетом'
 
 section:
   contact:
-    name: 'Contact details'
-    desc: 'Data to contact the store managers with the customer.'
+    name: 'Контактные данные'
+    desc: 'Данные для связи менеджерами магазина с покупателем.'
 
     field:
 
       organizations:
-        name: 'Organization name'
+        name: 'Название организации'
         desc: ''
 
       address:
-        name: 'Yur. address'
+        name: 'Юр. адрес'
         desc: ''
 
       contact:
-        name: 'Contact person'
+        name: 'Контактное лицо'
         desc: ''
 
       phone:
-        name: 'Contact number'
+        name: 'Контактный телефон'
         desc: ''
 
       mail:
-        name: 'Contact Email'
+        name: 'Контактный E-mail'
         desc: ''
 
 
   requisite:
-    name: 'Official details'
-    desc: 'Requisites for paperwork'
+    name: 'Официальные реквизиты'
+    desc: 'Реквизиты для оформления документов'
+
 
     field:
 
       inn:
-        name: 'INN'
+        name: 'ИНН'
         desc: ''
 
       kpp:
-        name: 'KPP'
+        name: 'КПП'
         desc: ''
 
+      okpo:
+        name: 'ОКПО'
+        desc: 'бщероссийский классификатор предприятий и организаций'
+
+
+
       bik:
-        name: 'BIK bank'
+        name: 'BIK банка'
         desc: ''
 
       checking:
-        name: 'Checking account'
+        name: 'Расчетный счет'
         desc: ''
 
       correspondent:
-        name: 'Correspondent account'
+        name: 'Корреспондентский счёт'
         desc: ''
