@@ -28,6 +28,8 @@ namespace BaksDev\Users\Profile\TypeProfile\Type\Id\Choice;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
+/** Тип профиля «Индивидуальный предприниматель» */
+
 #[AutoconfigureTag('baks.users.profile.type')]
 final class TypeProfileIndividual implements TypeProfileInterface
 {

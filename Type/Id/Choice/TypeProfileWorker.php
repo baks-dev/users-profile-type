@@ -28,12 +28,12 @@ namespace BaksDev\Users\Profile\TypeProfile\Type\Id\Choice;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
-/** Тип профиля «Организация, юр. лицо» */
-
+/** Тип профиля «Рабочий» */
 #[AutoconfigureTag('baks.users.profile.type')]
-final class TypeProfileOrganization implements TypeProfileInterface
+final class TypeProfileWorker implements TypeProfileInterface
 {
-    public const string TYPE = '0189c5ba-4098-7ea6-a45a-1053b7087e44';
+    public const string TYPE = '7ecb8cc2-8a9e-7a56-9535-bb0574124d5e';
+
 
     public function __toString(): string
     {
@@ -49,7 +49,7 @@ final class TypeProfileOrganization implements TypeProfileInterface
     /** Сортировка */
     public static function priority(): int
     {
-        return 200;
+        return 110;
     }
 
     public static function equals(mixed $uid): bool
