@@ -25,6 +25,7 @@ namespace BaksDev\Users\Profile\TypeProfile\Command\Upgrade;
 
 use BaksDev\Auth\Email\Type\Email\AccountEmail;
 use BaksDev\Core\Type\Field\InputField;
+use BaksDev\Field\Pack\Contact\Type\ContactField;
 use BaksDev\Field\Pack\Inn\Type\InnField;
 use BaksDev\Field\Pack\Invoice\Type\InvoiceField;
 use BaksDev\Field\Pack\Kpp\Type\KppField;
@@ -136,6 +137,11 @@ class UpgradeProfileTypeIndividualCommand extends Command
 
                 /** По умолчанию все поля input */
                 $SectionFieldDTO->setType(new InputField('input_field'));
+
+                if($field === 'contact')
+                {
+                    $SectionFieldDTO->setType(new InputField(ContactField::TYPE));
+                }
 
                 if($field === 'phone')
                 {

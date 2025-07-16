@@ -26,6 +26,7 @@ namespace BaksDev\Users\Profile\TypeProfile\Command\Upgrade;
 use BaksDev\Auth\Email\Type\Email\AccountEmail;
 use BaksDev\Core\Command\Update\ProjectUpgradeInterface;
 use BaksDev\Core\Type\Field\InputField;
+use BaksDev\Field\Pack\Contact\Type\ContactField;
 use BaksDev\Field\Pack\Phone\Type\PhoneField;
 use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
 use BaksDev\Users\Profile\TypeProfile\Repository\ExistTypeProfile\ExistTypeProfileInterface;
@@ -137,6 +138,11 @@ class UpgradeProfileTypeUserCommand extends Command implements ProjectUpgradeInt
 
                 /** По умолчанию все поля input */
                 $SectionFieldDTO->setType(new InputField('input_field'));
+
+                if($field === 'name')
+                {
+                    $SectionFieldDTO->setType(new InputField(ContactField::TYPE));
+                }
 
                 if($field === 'phone')
                 {

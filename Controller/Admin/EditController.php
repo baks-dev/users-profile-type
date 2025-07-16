@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,7 @@ use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\TypeProfileDTO;
 use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\TypeProfileForm;
 use BaksDev\Users\Profile\TypeProfile\UseCase\Admin\NewEdit\TypeProfileHandler;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
@@ -41,25 +42,31 @@ use Symfony\Component\Routing\Attribute\Route;
 final class EditController extends AbstractController
 {
     #[Route('/admin/profile/edit/{id}', name: 'admin.newedit.edit', methods: ['GET', 'POST'])]
-    #[ParamConverter('Event', TypeProfileEvent::class)]
     public function edit(
         Request $request,
-        TypeProfileEvent $Event,
+        #[MapEntity] TypeProfileEvent $Event,
         TypeProfileHandler $handler,
     ): Response
     {
-        $profile = new TypeProfileDTO();
-        $Event->getDto($profile);
+        $TypeProfileDTO = new TypeProfileDTO();
+        $Event->getDto($TypeProfileDTO);
 
         // Форма добавления
-        $form = $this->createForm(TypeProfileForm::class, $profile);
-        $form->handleRequest($request);
+        $form = $this
+            ->createForm(
+                type: TypeProfileForm::class,
+                data: $TypeProfileDTO,
+                options: ['action' => $this->generateUrl(
+                    'users-profile-type:admin.newedit.edit', ['id' => $Event->getId()],
+                )],
+            )
+            ->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
             $this->refreshTokenForm($form);
 
-            $TypeProfile = $handler->handle($profile);
+            $TypeProfile = $handler->handle($TypeProfileDTO);
 
             if($TypeProfile instanceof TypeProfile)
             {
