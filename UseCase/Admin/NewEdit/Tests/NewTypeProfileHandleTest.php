@@ -44,6 +44,7 @@ use Symfony\Component\DependencyInjection\Attribute\When;
 /**
  * @group users-profile-type
  * @group users-profile-type-usecase
+ * @group orders-order-controller
  */
 #[When(env: 'test')]
 final class NewTypeProfileHandleTest extends KernelTestCase
