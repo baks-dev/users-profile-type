@@ -8,6 +8,10 @@ section:
 
     field:
 
+      organizations:
+        name: 'Индивидуальный предприниматель'
+        desc: ''
+
       address:
         name: 'Юр. адрес'
         desc: ''

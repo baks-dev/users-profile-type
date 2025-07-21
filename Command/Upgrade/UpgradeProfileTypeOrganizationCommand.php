@@ -30,6 +30,7 @@ use BaksDev\Field\Pack\Inn\Type\InnField;
 use BaksDev\Field\Pack\Invoice\Type\InvoiceField;
 use BaksDev\Field\Pack\Kpp\Type\KppField;
 use BaksDev\Field\Pack\Okpo\Type\OkpoField;
+use BaksDev\Field\Pack\Organization\Type\OrganizationField;
 use BaksDev\Field\Pack\Phone\Type\PhoneField;
 use BaksDev\Users\Address\Type\AddressField\AddressField;
 use BaksDev\Users\Profile\TypeProfile\Entity\TypeProfile;
@@ -136,6 +137,11 @@ class UpgradeProfileTypeOrganizationCommand extends Command
 
                 /** По умолчанию все поля input */
                 $SectionFieldDTO->setType(new InputField('input_field'));
+
+                if($field === 'organizations')
+                {
+                    $SectionFieldDTO->setType(new InputField(OrganizationField::TYPE));
+                }
 
                 if($field === 'contact')
                 {

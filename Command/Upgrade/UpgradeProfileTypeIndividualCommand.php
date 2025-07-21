@@ -30,6 +30,7 @@ use BaksDev\Field\Pack\Inn\Type\InnField;
 use BaksDev\Field\Pack\Invoice\Type\InvoiceField;
 use BaksDev\Field\Pack\Kpp\Type\KppField;
 use BaksDev\Field\Pack\Okpo\Type\OkpoField;
+use BaksDev\Field\Pack\Organization\Type\OrganizationField;
 use BaksDev\Field\Pack\Orgn\Type\OrgnField;
 use BaksDev\Field\Pack\Phone\Type\PhoneField;
 use BaksDev\Users\Address\Type\AddressField\AddressField;
@@ -126,7 +127,7 @@ class UpgradeProfileTypeIndividualCommand extends Command
 
             /* Добавляем поля для заполнения */
 
-            $fields = ['address', 'contact', 'phone', 'mail'];
+            $fields = ['organizations', 'contact', 'address', 'phone', 'mail'];
 
             foreach($fields as $sort => $field)
             {
@@ -134,6 +135,11 @@ class UpgradeProfileTypeIndividualCommand extends Command
                 $SectionFieldDTO->setSort($sort);
                 $SectionFieldDTO->setPublic(true);
                 $SectionFieldDTO->setRequired(true);
+
+                if($field === 'organizations')
+                {
+                    $SectionFieldDTO->setType(new InputField(OrganizationField::TYPE));
+                }
 
                 /** По умолчанию все поля input */
                 $SectionFieldDTO->setType(new InputField('input_field'));
