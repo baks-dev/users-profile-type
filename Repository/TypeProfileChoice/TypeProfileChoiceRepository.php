@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -37,6 +37,7 @@ final readonly class TypeProfileChoiceRepository implements TypeProfileChoiceInt
 {
     public function __construct(private DBALQueryBuilder $DBALQueryBuilder) {}
 
+    /** @return Generator<TypeProfileUid> */
     public function getAllTypeProfileChoice(): Generator
     {
         $dbal = $this->getQueryBuilder();
@@ -52,6 +53,7 @@ final readonly class TypeProfileChoiceRepository implements TypeProfileChoiceInt
             ->fetchAllHydrate(TypeProfileUid::class);
     }
 
+    /** @return Generator<TypeProfileUid> */
     public function getActiveTypeProfileChoice(): Generator
     {
         $dbal = $this->getQueryBuilder();
@@ -68,6 +70,7 @@ final readonly class TypeProfileChoiceRepository implements TypeProfileChoiceInt
 
     }
 
+    /** @return Generator<TypeProfileUid> */
     public function getPublicTypeProfileChoice(): Generator
     {
         $dbal = $this->getQueryBuilder();
@@ -84,6 +87,7 @@ final readonly class TypeProfileChoiceRepository implements TypeProfileChoiceInt
 
     }
 
+    /** @return Generator<TypeProfileUid> */
     public function getUsersTypeProfileChoice(): Generator
     {
         $dbal = $this->getQueryBuilder();
