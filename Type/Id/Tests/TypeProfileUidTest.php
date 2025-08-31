@@ -30,12 +30,11 @@ use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInter
 use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileType;
 use BaksDev\Users\Profile\TypeProfile\Type\Id\TypeProfileUid;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/**
- * @group users-profile-type
- */
+#[Group('users-profile-type')]
 #[When(env: 'test')]
 final class TypeProfileUidTest extends KernelTestCase
 {

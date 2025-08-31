@@ -24,10 +24,11 @@
 namespace BaksDev\Users\Profile\TypeProfile\Controller\Admin\Tests;
 
 use BaksDev\Users\User\Tests\TestUserAccount;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/** @group users-profile-type */
+#[Group('users-profile-type')]
 #[When(env: 'test')]
 final class NewControllerTest extends WebTestCase
 {
