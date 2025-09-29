@@ -1,0 +1,21 @@
+name: 'Partner'
+desc: ''
+
+section:
+  contact:
+    name: 'Contact details'
+    desc: 'Data to contact the store managers with the customer.'
+
+    field:
+
+      name:
+        name: 'Contact person'
+        desc: 'User name'
+
+      phone:
+        name: 'Contact number'
+        desc: 'Contact number for communication'
+
+      mail:
+        name: 'Contact Email'
+        desc: 'Contact Email'
