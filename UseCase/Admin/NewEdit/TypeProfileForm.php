@@ -48,7 +48,7 @@ final class TypeProfileForm extends AbstractType
             [
                 'label' => false,
                 'attr' => ['min' => 0, 'max' => 999],
-            ]
+            ],
         );
 
         /* CollectionType */
@@ -92,7 +92,7 @@ final class TypeProfileForm extends AbstractType
             [
                 'label' => 'Save', 'label_html' => true,
                 'attr' => ['class' => 'btn-primary'],
-            ]
+            ],
         );
     }
 
@@ -104,7 +104,7 @@ final class TypeProfileForm extends AbstractType
                 'data_class' => TypeProfileDTO::class,
                 'method' => 'POST',
                 'attr' => ['class' => 'd-flex flex-column'],
-            ]
+            ],
         );
     }
 

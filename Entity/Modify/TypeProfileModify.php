@@ -57,26 +57,21 @@ class TypeProfileModify extends EntityEvent
     #[Assert\NotBlank]
     #[ORM\Column(type: ModifyAction::TYPE)]
     protected ModifyAction $action;
-
-    /** Дата */
-    #[Assert\NotBlank]
-    #[ORM\Column(name: 'mod_date', type: Types::DATETIME_IMMUTABLE)]
-    private DateTimeImmutable $modDate;
-
     /** ID пользователя  */
     #[ORM\Column(type: UserUid::TYPE, nullable: true)]
     protected ?UserUid $usr = null;
-
     /** Ip адрес */
     #[Assert\NotBlank]
     #[ORM\Column(type: IpAddress::TYPE)]
     protected IpAddress $ip;
-
     /** User-agent */
     #[Assert\NotBlank]
     #[ORM\Column(type: Types::TEXT)]
     protected string $agent;
-
+    /** Дата */
+    #[Assert\NotBlank]
+    #[ORM\Column(name: 'mod_date', type: Types::DATETIME_IMMUTABLE)]
+    private DateTimeImmutable $modDate;
 
     public function __construct(TypeProfileEvent $event)
     {

@@ -45,7 +45,7 @@ final class SectionForm extends AbstractType
             [
                 'label' => false,
                 'attr' => ['min' => 0, 'max' => 999],
-            ]
+            ],
         );
 
         /* CollectionType */
@@ -75,7 +75,7 @@ final class SectionForm extends AbstractType
             ButtonType::class,
             [
                 'label_html' => true,
-            ]
+            ],
         );
     }
 
@@ -85,7 +85,7 @@ final class SectionForm extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => SectionDTO::class,
-            ]
+            ],
         );
     }
 

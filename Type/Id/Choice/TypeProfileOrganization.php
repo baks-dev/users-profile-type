@@ -29,22 +29,10 @@ use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInter
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 /** Тип профиля «Организация, юр. лицо» */
-
 #[AutoconfigureTag('baks.users.profile.type')]
 final class TypeProfileOrganization implements TypeProfileInterface
 {
     public const string TYPE = '0189c5ba-4098-7ea6-a45a-1053b7087e44';
-
-    public function __toString(): string
-    {
-        return self::TYPE;
-    }
-
-    /** Возвращает значение (value) */
-    public function getValue(): string
-    {
-        return self::TYPE;
-    }
 
     /** Сортировка */
     public static function priority(): int
@@ -55,5 +43,16 @@ final class TypeProfileOrganization implements TypeProfileInterface
     public static function equals(mixed $uid): bool
     {
         return self::TYPE === (string) $uid;
+    }
+
+    public function __toString(): string
+    {
+        return self::TYPE;
+    }
+
+    /** Возвращает значение (value) */
+    public function getValue(): string
+    {
+        return self::TYPE;
     }
 }

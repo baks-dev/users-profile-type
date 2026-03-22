@@ -65,16 +65,6 @@ class TypeProfile
         return $this->id;
     }
 
-    public function getId(): TypeProfileUid
-    {
-        return $this->id;
-    }
-
-    public function setId(TypeProfileUid $id): void
-    {
-        $this->id = $id;
-    }
-
     public function getEvent(): TypeProfileEventUid
     {
         return $this->event;
@@ -83,6 +73,16 @@ class TypeProfile
     public function setEvent(TypeProfileEventUid|TypeProfileEvent $event): void
     {
         $this->event = $event instanceof TypeProfileEvent ? $event->getId() : $event;
+    }
+
+    public function getId(): TypeProfileUid
+    {
+        return $this->id;
+    }
+
+    public function setId(TypeProfileUid $id): void
+    {
+        $this->id = $id;
     }
 
 }

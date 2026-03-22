@@ -72,14 +72,14 @@ class TypeProfileInfo extends EntityReadonly
         $this->profile = $event->getProfile();
     }
 
-    public function __toString(): string
-    {
-        return (string) $this->profile;
-    }
-
     public function getProfile(): TypeProfileUid
     {
         return $this->profile;
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->profile;
     }
 
     //    public function setEvent(ProductEvent $event): self

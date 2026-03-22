@@ -176,7 +176,7 @@ class UpgradeProfileTypeUserCommand extends Command implements ProjectUpgradeInt
             if(!$handle instanceof TypeProfile)
             {
                 $io->success(
-                    sprintf('Ошибка %s при типа профиля', $handle)
+                    sprintf('Ошибка %s при типа профиля', $handle),
                 );
 
                 return Command::FAILURE;

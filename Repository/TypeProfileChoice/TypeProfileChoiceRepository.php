@@ -45,12 +45,44 @@ final readonly class TypeProfileChoiceRepository implements TypeProfileChoiceInt
         $dbal->andWhereExists(
             TypeProfileInfo::class,
             'info',
-            'info.profile = profile.id'
+            'info.profile = profile.id',
         );
 
         return $dbal
             ->enableCache('users-profile-type', 86400)
             ->fetchAllHydrate(TypeProfileUid::class);
+    }
+
+    private function getQueryBuilder(): DBALQueryBuilder
+    {
+        $dbal = $this->DBALQueryBuilder
+            ->createQueryBuilder(self::class)
+            ->bindLocal();
+
+        $dbal->from(TypeProfile::class, 'profile');
+
+        $dbal->join(
+            'profile',
+            TypeProfileEvent::class,
+            'profile_event',
+            'profile_event.id = profile.event',
+        );
+
+        $dbal->join(
+            'profile',
+            TypeProfileTrans::class,
+            'profile_trans',
+            'profile_trans.event = profile.event AND profile_trans.local = :local',
+        );
+
+
+        $dbal->orderBy('profile_event.sort', 'ASC');
+
+        $dbal->addSelect('profile.id AS value');
+        $dbal->addSelect('profile_trans.name AS attr');
+        $dbal->addSelect('profile_trans.description AS option');
+
+        return $dbal;
     }
 
     /** @return Generator<TypeProfileUid> */
@@ -61,7 +93,7 @@ final readonly class TypeProfileChoiceRepository implements TypeProfileChoiceInt
         $dbal->andWhereExists(
             TypeProfileInfo::class,
             'info',
-            'info.profile = profile.id AND info.active = true'
+            'info.profile = profile.id AND info.active = true',
         );
 
         return $dbal
@@ -78,7 +110,7 @@ final readonly class TypeProfileChoiceRepository implements TypeProfileChoiceInt
         $dbal->andWhereExists(
             TypeProfileInfo::class,
             'info',
-            'info.profile = profile.id AND info.public = true'
+            'info.profile = profile.id AND info.public = true',
         );
 
         return $dbal
@@ -95,45 +127,12 @@ final readonly class TypeProfileChoiceRepository implements TypeProfileChoiceInt
         $dbal->andWhereExists(
             TypeProfileInfo::class,
             'info',
-            'info.profile = profile.id AND info.usr = true'
+            'info.profile = profile.id AND info.usr = true',
         );
 
         return $dbal
             //->enableCache('users-profile-type', 86400)
             ->fetchAllHydrate(TypeProfileUid::class);
-    }
-
-
-    private function getQueryBuilder(): DBALQueryBuilder
-    {
-        $dbal = $this->DBALQueryBuilder
-            ->createQueryBuilder(self::class)
-            ->bindLocal();
-
-        $dbal->from(TypeProfile::class, 'profile');
-
-        $dbal->join(
-            'profile',
-            TypeProfileEvent::class,
-            'profile_event',
-            'profile_event.id = profile.event'
-        );
-
-        $dbal->join(
-            'profile',
-            TypeProfileTrans::class,
-            'profile_trans',
-            'profile_trans.event = profile.event AND profile_trans.local = :local'
-        );
-
-
-        $dbal->orderBy('profile_event.sort', 'ASC');
-
-        $dbal->addSelect('profile.id AS value');
-        $dbal->addSelect('profile_trans.name AS attr');
-        $dbal->addSelect('profile_trans.description AS option');
-
-        return $dbal;
     }
 
 

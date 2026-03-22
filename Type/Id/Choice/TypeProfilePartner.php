@@ -34,6 +34,16 @@ final class TypeProfilePartner implements TypeProfileInterface
 {
     public const string TYPE = '39208161-ff79-7a08-ab81-1d486b9c6c88';
 
+    /** Сортировка */
+    public static function priority(): int
+    {
+        return 201;
+    }
+
+    public static function equals(mixed $uid): bool
+    {
+        return self::TYPE === (string) $uid;
+    }
 
     public function __toString(): string
     {
@@ -44,16 +54,5 @@ final class TypeProfilePartner implements TypeProfileInterface
     public function getValue(): string
     {
         return self::TYPE;
-    }
-
-    /** Сортировка */
-    public static function priority(): int
-    {
-        return 201;
-    }
-
-    public static function equals(mixed $uid): bool
-    {
-        return self::TYPE === (string) $uid;
     }
 }

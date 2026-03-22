@@ -43,7 +43,7 @@ final class SectionTransForm extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => SectionTransDTO::class,
-            ]
+            ],
         );
     }
 

@@ -51,7 +51,7 @@ return static function(ContainerConfigurator $configurator) {
     /* Типы профилей */
     $services->load(
         $NAMESPACE.'Type\Id\Choice\\',
-        $PATH.implode(DIRECTORY_SEPARATOR, ['Type', 'Id', 'Choice'])
+        $PATH.implode(DIRECTORY_SEPARATOR, ['Type', 'Id', 'Choice']),
     );
 
     /** @see https://symfony.com/doc/current/service_container/autowiring.html#dealing-with-multiple-implementations-of-the-same-type */

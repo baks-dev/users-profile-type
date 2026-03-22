@@ -47,7 +47,7 @@ final class TransForm extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => TransDTO::class,
-            ]
+            ],
         );
     }
 

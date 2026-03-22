@@ -78,7 +78,7 @@ final class DeleteController extends AbstractController
             [
                 'form' => $form->createView(),
                 'name' => $Event->getNameByLocale($this->getLocale()), // название согласно локали
-            ]
+            ],
         );
     }
 }

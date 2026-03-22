@@ -66,7 +66,7 @@ final class AllProfileTypeRepository implements AllProfileTypeInterface
             'profile',
             TypeProfileEvent::class,
             'profile_event',
-            'profile_event.id = profile.event'
+            'profile_event.id = profile.event',
         );
 
         /* TypeProfile Translate */
@@ -77,7 +77,7 @@ final class AllProfileTypeRepository implements AllProfileTypeInterface
                 'profile',
                 TypeProfileTrans::class,
                 'profile_trans',
-                'profile_trans.event = profile.event AND profile_trans.local = :local'
+                'profile_trans.event = profile.event AND profile_trans.local = :local',
             );
 
         $qb
@@ -88,7 +88,7 @@ final class AllProfileTypeRepository implements AllProfileTypeInterface
                 'profile',
                 TypeProfileInfo::class,
                 'info',
-                'info.profile = profile.id'
+                'info.profile = profile.id',
             );
 
 
@@ -131,7 +131,7 @@ final class AllProfileTypeRepository implements AllProfileTypeInterface
                 TypeProfileEvent::class,
                 'profile_event',
                 'WITH',
-                'profile_event.id = profile.event'
+                'profile_event.id = profile.event',
             );
 
         /* TypeProfile Translate */
@@ -142,7 +142,7 @@ final class AllProfileTypeRepository implements AllProfileTypeInterface
                 TypeProfileTrans::class,
                 'profile_trans',
                 'WITH',
-                'profile_trans.event = profile.event AND profile_trans.local = :local'
+                'profile_trans.event = profile.event AND profile_trans.local = :local',
             );
 
         $qb->orderBy('profile_event.sort', 'ASC');

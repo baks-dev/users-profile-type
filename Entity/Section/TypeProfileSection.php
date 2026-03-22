@@ -125,6 +125,10 @@ class TypeProfileSection extends EntityEvent
         throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
     }
 
+    public function removeElement(): void
+    {
+        $this->event = null;
+    }
 
     private function equals($dto): bool
     {
@@ -134,12 +138,6 @@ class TypeProfileSection extends EntityEvent
         }
 
         throw new InvalidArgumentException(sprintf('Class %s interface error', $dto::class));
-    }
-
-
-    public function removeElement(): void
-    {
-        $this->event = null;
     }
 
 }

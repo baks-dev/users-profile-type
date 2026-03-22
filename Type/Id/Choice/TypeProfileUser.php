@@ -29,23 +29,10 @@ use BaksDev\Users\Profile\TypeProfile\Type\Id\Choice\Collection\TypeProfileInter
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 /** Тип профиля «Пользователь» */
-
 #[AutoconfigureTag('baks.users.profile.type')]
 final class TypeProfileUser implements TypeProfileInterface
 {
     public const string TYPE = '0189c5ba-6ef8-7a75-94e8-4cec1ddaa3ff';
-
-
-    public function __toString(): string
-    {
-        return self::TYPE;
-    }
-
-    /** Возвращает значение (value) */
-    public function getValue(): string
-    {
-        return self::TYPE;
-    }
 
     /** Сортировка */
     public static function priority(): int
@@ -56,5 +43,16 @@ final class TypeProfileUser implements TypeProfileInterface
     public static function equals(mixed $uid): bool
     {
         return self::TYPE === (string) $uid;
+    }
+
+    public function __toString(): string
+    {
+        return self::TYPE;
+    }
+
+    /** Возвращает значение (value) */
+    public function getValue(): string
+    {
+        return self::TYPE;
     }
 }

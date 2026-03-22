@@ -69,7 +69,7 @@ final class SectionFieldForm extends AbstractType
             [
                 'label' => false,
                 'attr' => ['min' => 0, 'max' => 999],
-            ]
+            ],
         );
 
         /* CollectionType */
@@ -97,7 +97,7 @@ final class SectionFieldForm extends AbstractType
                 'choice_label' => function($choice) {
                     return $this->translator->trans('label', domain: $choice->domain());
                 },
-            ]
+            ],
         );
 
         $builder->get('type')->addModelTransformer(
@@ -107,8 +107,8 @@ final class SectionFieldForm extends AbstractType
                 },
                 function($type) {
                     return $type instanceof FieldsChoiceInterface ? new InputField($type) : null;
-                }
-            )
+                },
+            ),
         );
 
         /** Обязательное к заполнению */
@@ -134,7 +134,7 @@ final class SectionFieldForm extends AbstractType
             ButtonType::class,
             [
                 'label_html' => true,
-            ]
+            ],
         );
 
     }
@@ -145,7 +145,7 @@ final class SectionFieldForm extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => SectionFieldDTO::class,
-            ]
+            ],
         );
     }
 

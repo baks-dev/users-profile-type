@@ -104,24 +104,20 @@ class TypeProfileEvent extends EntityEvent
         return $this->id;
     }
 
-
-    public function getId(): TypeProfileEventUid
-    {
-        return $this->id;
-    }
-
-
     public function getProfile(): ?TypeProfileUid
     {
         return $this->profile;
     }
-
 
     public function setMain(TypeProfileUid|TypeProfile $profile): void
     {
         $this->profile = $profile instanceof TypeProfile ? $profile->getId() : $profile;
     }
 
+    public function getId(): TypeProfileEventUid
+    {
+        return $this->id;
+    }
 
     public function getDto($dto): mixed
     {

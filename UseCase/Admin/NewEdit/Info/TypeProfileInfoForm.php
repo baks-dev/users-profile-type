@@ -42,7 +42,7 @@ final class TypeProfileInfoForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => TypeProfileInfoDTO::class
+            'data_class' => TypeProfileInfoDTO::class,
         ]);
     }
 }
